@@ -1,0 +1,1 @@
+{{ $language := "" }}{{ with .Data }}{{ $language = printf "%v" .language }}{{ end }}MRMAA | {{ if eq $language "en" }}Your sign-in email has changed{{ else if eq $language "fr" }}Votre adresse e-mail de connexion a changé{{ else }}Su correo de acceso ha cambiado{{ end }}

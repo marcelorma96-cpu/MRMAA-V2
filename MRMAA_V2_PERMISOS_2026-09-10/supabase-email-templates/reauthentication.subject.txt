@@ -1,0 +1,1 @@
+{{ $language := "" }}{{ with .Data }}{{ $language = printf "%v" .language }}{{ end }}MRMAA | {{ if eq $language "en" }}Verification code{{ else if eq $language "fr" }}Code de vérification{{ else }}Código de verificación{{ end }}

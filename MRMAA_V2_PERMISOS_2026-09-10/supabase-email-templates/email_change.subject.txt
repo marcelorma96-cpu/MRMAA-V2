@@ -1,0 +1,1 @@
+{{ $language := "" }}{{ with .Data }}{{ $language = printf "%v" .language }}{{ end }}MRMAA | {{ if eq $language "en" }}Confirm your email change{{ else if eq $language "fr" }}Confirmez le changement d’adresse e-mail{{ else }}Confirme el cambio de correo{{ end }}
