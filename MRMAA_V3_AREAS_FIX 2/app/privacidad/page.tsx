@@ -1,0 +1,15 @@
+import { LegalPage, LegalSection } from "@/components/legal-page";
+
+export default function PrivacyPage() {
+  return <LegalPage title="Política de privacidad" intro="Cómo MYM S.A. recopila, utiliza, protege y conserva información al prestar MRMAA.">
+    <LegalSection title="1. Información tratada"><p>Podemos tratar datos de cuenta, contacto, restaurante, suscripción, soporte, seguridad y uso. Por cuenta del restaurante alojamos datos que este registra sobre clientes, reservaciones, cotizaciones, empleados y horarios.</p></LegalSection>
+    <LegalSection title="2. Finalidades"><p>Utilizamos la información para autenticar usuarios, prestar funciones, enviar comunicaciones necesarias, prevenir fraude, mantener auditorías, brindar soporte, cumplir obligaciones legales y mejorar seguridad y rendimiento.</p></LegalSection>
+    <LegalSection title="3. Roles de privacidad"><p>El restaurante determina los fines de los datos de sus clientes y empleados y actúa como responsable. MYM S.A. los procesa como proveedor conforme a instrucciones del restaurante, salvo datos propios de cuenta, facturación, seguridad y cumplimiento.</p></LegalSection>
+    <LegalSection title="4. Proveedores y transferencias"><p>Podemos utilizar proveedores de infraestructura, autenticación, alojamiento, correo, analítica y pagos, incluidos servicios ubicados fuera del país del usuario. Exigiremos medidas contractuales y técnicas apropiadas según el servicio y jurisdicción.</p></LegalSection>
+    <LegalSection title="5. Conservación"><p>Conservamos información mientras la cuenta esté activa y por períodos razonables posteriores para seguridad, respaldo, disputas y obligaciones legales. La papelera de la aplicación puede conservar registros hasta 365 días. Los respaldos técnicos siguen ciclos separados y no funcionan como archivo individual permanente.</p></LegalSection>
+    <LegalSection title="6. Seguridad"><p>Aplicamos controles de acceso, autenticación, separación por negocio, cifrado proporcionado por la infraestructura, registro de actividad y respaldos. Ningún sistema es invulnerable; el cliente debe usar contraseñas únicas, MFA cuando esté disponible y dispositivos protegidos.</p></LegalSection>
+    <LegalSection title="7. Derechos y solicitudes"><p>Según la jurisdicción, una persona puede solicitar acceso, corrección, eliminación, oposición o portabilidad. Las solicitudes relativas a datos cargados por un restaurante deben dirigirse primero al restaurante. También puede escribir a soporte@mrmaa.com.</p></LegalSection>
+    <LegalSection title="8. Incidentes"><p>Investigaremos incidentes confirmados y notificaremos al cliente afectado y, cuando corresponda, a autoridades o personas dentro de los plazos exigidos por la legislación aplicable.</p></LegalSection>
+    <LegalSection title="9. Menores"><p>MRMAA es un servicio empresarial y no está dirigido a menores de edad. El cliente no debe cargar datos de menores salvo que cuente con una base legal y sean necesarios para su operación legítima.</p></LegalSection>
+  </LegalPage>;
+}
