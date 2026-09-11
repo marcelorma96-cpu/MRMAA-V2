@@ -1,0 +1,1 @@
+{{ $language := "" }}{{ with .Data }}{{ $language = printf "%v" .language }}{{ end }}MRMAA | {{ if eq .RedirectTo "https://mrmaa.com/?invite=1" }}{{ if eq $language "en" }}Account invitation{{ else }}Invitación de acceso{{ end }}{{ else }}{{ if eq $language "en" }}Reset your password{{ else }}Restablecer contraseña{{ end }}{{ end }}
