@@ -3,3 +3,4 @@
     { "path": "/api/maintenance", "schedule": "0 6 * * *" }
   ]
 }
+
