@@ -1,0 +1,43 @@
+UNOMESA — Cotizaciones, reservaciones y configuración
+
+Incluido en esta actualización:
+- Configuración > General: Quitar imagen junto al logo. Pulse Guardar cambios
+  o Guardar configuración para dejarlo vacío también después de recargar.
+  Puede subir otra imagen después. No requiere SQL.
+- Avisos de próximas cotizaciones visibles directamente, con Revisar y Quitar.
+  Quitar descarta el aviso para el equipo y conserva la cotización. Para volver
+  a mostrar avisos antes quitados, pulse Recuperar avisos quitados. Se recuperan
+  hasta 50 por clic, solo de cotizaciones pendientes para hoy o los próximos
+  cinco días. Se usa la marca existente reminder_dismissed; no se añaden columnas.
+  La sección permanece visible y explica cuando no hay avisos pendientes.
+- Creada muestra fecha y hora, en la zona del dispositivo y formato 12/24 horas
+  del restaurante. No cambia la fecha de creación almacenada ni las horas de eventos.
+- Confirmaciones de guardado flotantes arriba, durante cinco segundos, con
+  cierre manual y pausa mientras el cursor o el foco estén sobre el aviso.
+  Los errores y mensajes que requieren acción permanecen visibles en su sección.
+- Al convertir una cotización, se abre y resalta la reservación creada con la
+  fecha devuelta al guardar. Desde allí se pueden ver las demás reservas de
+  esa fecha. Si falla la conversión, no se cambia de pantalla.
+- Configuración de menús y productos: cinco elementos completos visibles;
+  los demás siguen disponibles mediante desplazamiento dentro de la lista.
+- Buscador encima de los menús guardados: filtra por nombre o descripción,
+  sin distinguir mayúsculas ni acentos. Mantiene cinco resultados antes del scroll.
+- Botón Guardar cambios en la parte superior; se conserva el guardado inferior.
+- Configuración > Cotizaciones > Vista previa muestra un ejemplo con el diseño
+  y los cambios actuales, antes de guardar. No crea una cotización, no consume
+  numeración ni modifica clientes. Volver a configuración conserva el borrador.
+
+Instalación:
+NO HACE FALTA EJECUTAR SQL. Se retiró el SQL 42 y su dependencia. No ejecutar
+ese archivo de la descarga anterior. Actualizar los archivos de la aplicación
+y desplegar en el mismo proyecto Vercel, conservando las variables y el mismo
+Supabase. Se conserva la raíz MRMAA_PRUEBAS 26. Los SQL anteriores se incluyen
+como historial, no como pasos de esta corrección.
+
+Este ZIP conserva el acceso con Google e Inicio rápido de la versión anterior.
+Si ya funcionan, no hace falta repetir sus pasos de activación.
+
+Verificación:
+Compilación de producción y comprobaciones con datos simulados: avisos y descarte,
+conversión correcta y fallida, fecha de la reserva, scroll y búsqueda de menús, guardado
+superior e inferior, vista previa sin escrituras, escritorio y móvil/modo oscuro.
