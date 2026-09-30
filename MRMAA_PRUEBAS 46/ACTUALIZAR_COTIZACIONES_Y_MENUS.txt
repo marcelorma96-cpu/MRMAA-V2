@@ -1,0 +1,30 @@
+UNOMESA — Cotizaciones, reservaciones y configuración
+
+Incluido en esta actualización:
+- Avisos de próximas cotizaciones visibles directamente, con Revisar y Quitar.
+  Quitar descarta el aviso para el equipo; conserva la cotización. Los avisos
+  descartados anteriormente siguen descartados.
+- Al convertir una cotización, se abre y resalta la reservación creada con la
+  fecha devuelta al guardar. Desde allí se pueden ver las demás reservas de
+  esa fecha. Si falla la conversión, no se cambia de pantalla.
+- Configuración de menús y productos: cinco elementos completos visibles;
+  los demás siguen disponibles mediante desplazamiento dentro de la lista.
+- Buscador encima de los menús guardados: filtra por nombre o descripción,
+  sin distinguir mayúsculas ni acentos. Mantiene cinco resultados antes del scroll.
+- Botón Guardar cambios en la parte superior; se conserva el guardado inferior.
+- Configuración > Cotizaciones > Vista previa muestra un ejemplo con el diseño
+  y los cambios actuales, antes de guardar. No crea una cotización, no consume
+  numeración ni modifica clientes. Volver a configuración conserva el borrador.
+
+Instalación:
+Actualizar los archivos de la aplicación y desplegar en Vercel. Estos ajustes
+no necesitan SQL ni variables nuevas. Se conserva la raíz MRMAA_PRUEBAS 26.
+
+Este ZIP también conserva el acceso con Google preparado en la versión
+anterior. Su activación sigue requiriendo los pasos de ACTIVAR_GOOGLE_UNOMESA.md
+y 40_REGISTRO_GOOGLE.sql; no es necesario activarlo para usar estos ajustes.
+
+Verificación:
+Compilación de producción y comprobaciones con datos simulados: avisos y descarte,
+conversión correcta y fallida, fecha de la reserva, scroll y búsqueda de menús, guardado
+superior e inferior, vista previa sin escrituras, escritorio y móvil/modo oscuro.
