@@ -1,0 +1,264 @@
+"use client";
+import { useDataRefresh, useOnDataRefresh } from "@/components/restaurant-sync";
+
+import { ExcelExportControl } from "@/components/excel-permission";
+import { confirmApp, useAppPreferences } from "@/components/app-preferences";
+import { userMessage } from "@/lib/user-message";
+import { confirmDiscardChanges, useUnsavedChanges, useDraftBaseline } from "@/lib/unsaved-changes";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Pencil, Power, RotateCcw, Trash2, UserPlus, X } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { Pagination, pageItems } from "@/components/pagination";
+import { EMAIL_LANGUAGES, emailLanguage, type EmailLanguage } from "@/lib/email-language";
+type Member = {
+  user_id: string;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  invited_at?: string;
+  last_invited_at?: string;
+  is_owner?: boolean;
+  language: EmailLanguage;
+};
+type UserNotice = { kind: "success"; message: string } | { kind: "error"; error: unknown };
+
+export function UsersNotice({ notice }: { notice: UserNotice | null }) {
+  const { t } = useAppPreferences();
+  if (!notice) return null;
+  const failed = notice.kind === "error";
+  return (
+    <p className={`moduleNotice${failed ? " moduleError" : ""}`} role={failed ? "alert" : "status"}>
+      {t(failed ? userMessage(notice.error) : notice.message)}
+    </p>
+  );
+}
+
+export function UsersModule({ restaurantId, defaultLanguage = "es" }: { restaurantId: string; defaultLanguage?: EmailLanguage }) {
+  const remoteVersion = useDataRefresh(restaurantId, "v2_members,v2_restaurants");
+  const loadGeneration = useRef(0);
+  const [rows, setRows] = useState<Member[]>([]),
+    [currentUserId, setCurrentUserId] = useState(""),
+    [search, setSearch] = useState(""),
+    [page, setPage] = useState(1),
+    [notice, setNotice] = useState<UserNotice | null>(null),
+    [listError, setListError] = useState(false),
+    [form, setForm] = useState({ name: "", email: "", role: "operacion", language: defaultLanguage }),
+    [editing, setEditing] = useState<Member | null>(null),
+    [editForm, setEditForm] = useState({ name: "", role: "operacion", language: "es" as EmailLanguage }),
+    [inviting, setInviting] = useState(false);
+  const inviteDraft = useDraftBaseline(form);
+  const editDraft = useDraftBaseline(editForm, Boolean(editing));
+  useUnsavedChanges(inviteDraft.dirty || editDraft.dirty, () => {
+    setForm({ name: "", email: "", role: "operacion", language: defaultLanguage });
+    setEditing(null);
+  });
+  const request = useCallback(async (method = "GET", body?: unknown) => {
+    const { data } = await supabase.auth.getSession(),
+      r = await fetch("/api/users", {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${data.session?.access_token}`,
+        },
+        body: body ? JSON.stringify(body) : undefined,
+      }),
+      json = await r.json();
+    if (!r.ok)
+      throw new Error(json.error || "No se pudo completar la operación.");
+    return json;
+  }, []);
+  const load = useCallback(async () => {
+    const generation = ++loadGeneration.current;
+    try {
+      const rows = await request();
+      if (generation === loadGeneration.current) {
+        setRows(rows);
+        setListError(false);
+      }
+    } catch {
+      // Refresh failures must not overwrite a completed invitation or discard the last list.
+      if (generation === loadGeneration.current) setListError(true);
+    }
+  }, [request]);
+  useEffect(() => () => { loadGeneration.current++; }, [load]);
+  useOnDataRefresh(remoteVersion, () => { void load(); });
+  useEffect(() => {
+    load();
+    supabase.auth.getUser().then(({ data }) => setCurrentUserId(data.user?.id || ""));
+  }, [load]);
+  async function invite(e: React.FormEvent) {
+    e.preventDefault();
+    if (inviting) return;
+    setInviting(true);
+    setNotice(null);
+    try {
+      const result = await request("POST", { ...form, origin: window.location.origin });
+      setNotice({ kind: "success", message: result.existingUser
+        ? "El correo ya existía. Se vinculó al restaurante y se envió un enlace para crear o restablecer su contraseña."
+        : "Invitación enviada. Revise también spam o correo no deseado." });
+      setForm({ name: "", email: "", role: "operacion", language: defaultLanguage });
+      load();
+    } catch (error) {
+      setNotice({ kind: "error", error });
+    } finally { setInviting(false); }
+  }
+  async function remove(id: string) {
+    if (!confirmApp("¿Eliminar el acceso de este usuario?")) return;
+    setNotice(null);
+    try {
+      await request("DELETE", { user_id: id });
+      setNotice({ kind: "success", message: "Acceso eliminado." });
+      load();
+    } catch (error) {
+      setNotice({ kind: "error", error });
+    }
+  }
+  async function resend(id: string) {
+    setNotice(null);
+    try {
+      await request("PATCH", { user_id: id });
+      setNotice({ kind: "success", message: "Invitación reenviada correctamente." });
+      load();
+    } catch (error) { setNotice({ kind: "error", error }); }
+  }
+  async function toggleStatus(id: string) {
+    setNotice(null);
+    try {
+      const result = await request("PATCH", { user_id: id, action: "toggle_status" });
+      setNotice({ kind: "success", message: result.status === "activo" ? "Acceso activado." : "Acceso desactivado." });
+      load();
+    } catch (error) { setNotice({ kind: "error", error }); }
+  }
+  function startEdit(member: Member) {
+    setEditing(member);
+    setEditForm({ name: member.name || "", role: member.role, language: emailLanguage(member.language) });
+  }
+  async function saveEdit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!editing) return;
+    setNotice(null);
+    try {
+      await request("PATCH", {
+        user_id: editing.user_id,
+        action: "update_member",
+        name: editForm.name,
+        role: editForm.role,
+        ...(!editing.is_owner && { language: editForm.language }),
+      });
+      setNotice({ kind: "success", message: "Usuario actualizado correctamente." });
+      setEditing(null);
+      load();
+    } catch (error) { setNotice({ kind: "error", error }); }
+  }
+  const filtered = rows.filter(
+    (x) =>
+      !search ||
+      [x.name, x.email, x.role].some((v) =>
+        v?.toLowerCase().includes(search.toLowerCase()),
+      ),
+  );
+  useEffect(() => setPage(1), [search]);
+  return (
+    <div className="moduleStack">
+      <section className="moduleCard">
+        <div className="moduleTitle">
+          <div>
+            <h2>Usuarios</h2>
+            <p>Invite al equipo y controle el tipo de acceso.</p>
+          </div>
+        </div>
+        <ExcelExportControl key={restaurantId} restaurantId={restaurantId} />
+        <form className="userInviteForm" onSubmit={invite}>
+          <input
+            required
+            placeholder="Nombre"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+          />
+          <input
+            required
+            type="email"
+            placeholder="Correo electrónico"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
+          <select
+            aria-label="Rol del invitado"
+            value={form.role}
+            onChange={(e) => setForm({ ...form, role: e.target.value })}
+          >
+            <option value="administrador">Administrador</option>
+            <option value="gerente">Gerente</option>
+            <option value="operacion">Operación</option>
+            <option value="lectura">Solo lectura</option>
+          </select>
+          <label className="inviteLanguage">Idioma del correo
+            <select value={form.language} onChange={(e) => setForm({ ...form, language: e.target.value as EmailLanguage })}>
+              {EMAIL_LANGUAGES.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
+            </select>
+          </label>
+          <button className="primary" disabled={inviting}>
+            <UserPlus />
+            {inviting ? "Enviando…" : "Invitar"}
+          </button>
+        </form>
+        <small className="inviteHelp">
+          El colaborador recibirá un enlace por correo para crear y confirmar su
+          propia contraseña. El enlace no comparte la contraseña del
+          administrador.
+        </small>
+        <UsersNotice notice={notice} />
+      </section>
+      <input
+        className="moduleSearch moduleCard"
+        placeholder="Buscar usuario…"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <div className="compactList moduleCard">
+        {listError && <div>
+          <p className="moduleNotice moduleError" role="alert">No se pudo actualizar la lista de usuarios. Puede reintentar sin volver a enviar la invitación.</p>
+          <button type="button" onClick={() => { void load(); }}>Reintentar</button>
+        </div>}
+        {pageItems(filtered, page).map((x) => (
+          <article key={x.user_id}>
+            <div>
+              <b>{x.name || "Usuario"}</b>
+              <small>
+                {x.email || "Correo pendiente"} · {x.role} · {x.status} · {EMAIL_LANGUAGES.find((item) => item.value === x.language)?.label || "Español"}
+              </small>
+            </div>
+            <div className="rowActions">
+              <button title="Editar usuario" onClick={() => startEdit(x)}><Pencil /> Editar</button>
+              {x.status === "invitado" && <button title="Reenviar invitación" onClick={() => resend(x.user_id)}><RotateCcw /> Reenviar</button>}
+              {x.user_id !== currentUserId && x.status !== "invitado" && <button title={x.status === "inactivo" ? "Activar acceso" : "Desactivar acceso"} onClick={() => toggleStatus(x.user_id)}><Power /> {x.status === "inactivo" ? "Activar" : "Desactivar"}</button>}
+              {x.user_id !== currentUserId
+                ? <button title={x.status === "invitado" ? "Cancelar invitación" : "Eliminar acceso"} onClick={() => remove(x.user_id)}><Trash2 /> {x.status === "invitado" ? "Cancelar" : "Eliminar"}</button>
+                : <small className="protectedAdmin">Administrador principal</small>}
+            </div>
+          </article>
+        ))}
+      </div>
+      <Pagination total={filtered.length} page={page} onPage={setPage} />
+      {editing && (
+        <div className="modalBackdrop" onMouseDown={(e) => e.target === e.currentTarget && confirmDiscardChanges() && setEditing(null)}>
+          <section className="modal" role="dialog" aria-modal="true">
+            <header><h2>Editar usuario</h2><button className="icon" onClick={() => { if (confirmDiscardChanges()) setEditing(null); }}><X /></button></header>
+            <form className="form" onSubmit={saveEdit}>
+              <label className="field">Nombre<input required value={editForm.name} onChange={(e) => setEditForm({ ...editForm, name: e.target.value })} /></label>
+              {editing.is_owner ? <div className="field"><span>Rol</span><strong>Administrador principal</strong><small>Para cambiarlo use Configuración → Cuenta → Transferir administración.</small></div> : <label className="field">Rol<select value={editForm.role} onChange={(e) => setEditForm({ ...editForm, role: e.target.value })}>
+                <option value="administrador">Administrador</option><option value="gerente">Gerente</option><option value="operacion">Operación</option><option value="lectura">Solo lectura</option>
+              </select></label>}
+              {!editing.is_owner && <label className="field">Idioma de los correos<select value={editForm.language} onChange={(e) => setEditForm({ ...editForm, language: e.target.value as EmailLanguage })}>
+                {EMAIL_LANGUAGES.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
+              </select></label>}
+              <small>Correo: {editing.email}. Para proteger el acceso, el correo no se modifica desde aquí.</small>
+              <button className="primary">Guardar cambios</button>
+            </form>
+          </section>
+        </div>
+      )}
+    </div>
+  );
+}

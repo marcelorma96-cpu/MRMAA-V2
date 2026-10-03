@@ -1,0 +1,25 @@
+"use client";
+import {useEffect,useState} from 'react';
+import {BookOpen,ChevronLeft,ChevronRight,X} from 'lucide-react';
+import styles from './floor-setup-guide.module.css';
+
+export function FloorSetupGuide({restaurantId,en,busy,onView,onSave}:{restaurantId:string;en:boolean;busy:boolean;onView:(overview:boolean)=>void;onSave:()=>void}){
+ const [open,setOpen]=useState(false),[step,setStep]=useState(0),say=(es:string,eng:string)=>en?eng:es;
+ const key=`unomesa:${restaurantId}:floor-setup-guide-v1`;
+ useEffect(()=>{setStep(0);try{if(localStorage.getItem(key)==='seen'){setOpen(false);return;}localStorage.setItem(key,'seen');}catch{/* Guidance still works without browser storage. */}setOpen(true);},[key]);
+ const steps=[
+  {title:say('Elige tu área','Choose your area'),view:false,lines:[say('Las áreas de Configuración ya aparecen aquí. Selecciona Jardín, Salón o el espacio que quieras armar.','Areas from Settings already appear here. Select Garden, Dining room or the space you want to arrange.'),say('Si falta una, pulsa Agregar área y escribe su nombre. No necesitas volver a crear las que ya existen.','If one is missing, select Add area and enter its name. Existing areas do not need to be created again.')]},
+  {title:say('Ubícala en un nivel','Choose its level'),view:true,lines:[say('Si todo está en una planta, deja Nivel 1 y continúa. Para otra planta, pulsa Agregar nivel y cambia su nombre.','If everything is on one floor, keep Level 1 and continue. For another floor, select Add level and rename it.'),say('Selecciona el área y elige Nivel del área. Sus mesas y vínculos se trasladan juntos al guardar.','Select the area and choose Area level. Its tables and links move together when you save.')]},
+  {title:say('Coloca tus mesas','Place your tables'),view:false,lines:[say('Pulsa Agregar mesa. Selecciónala y ajusta nombre, capacidad, forma y tamaño en el panel de edición.','Select Add table. Select it and set its name, capacity, shape and size in the editing panel.'),say('Arrastra cada mesa hasta su lugar; usa Girar 90° cuando haga falta. El contorno se ajusta solo alrededor del grupo.','Drag each table into place; use Rotate 90° when needed. The outline fits around the group automatically.')]},
+  {title:say('Acomoda el restaurante','Arrange the restaurant'),view:true,lines:[say('En Mapa completo, elige un nivel y arrastra cada área a su lugar. Tira de la esquina para cambiar su tamaño.','In Complete map, choose a level and drag each area into place. Drag its corner to resize it.'),say('Fondo transparente permite acercarlas o superponerlas. Con zoom, activa Mover mapa para recorrerlo sin mover las áreas.','Transparent background lets areas sit together or overlap. When zoomed in, enable Pan map to explore without moving areas.')]},
+  {title:say('Revisa y guarda','Review and save'),view:true,lines:[say('Comprueba nombres, niveles, capacidad y ubicación. Puedes volver a cualquier paso antes de guardar.','Check names, levels, capacity and positions. You can return to any step before saving.'),say('Guardar plano confirma la distribución. Después selecciona una mesa y pulsa Reservar esta mesa para empezar.','Save floor plan confirms the layout. Then select a table and Book this table to get started.')]},
+ ];
+ function go(next:number){setStep(next);onView(steps[next].view);}
+ if(!open)return <div className={styles.launch}><button type="button" className="secondary" disabled={busy} onClick={()=>{setStep(0);setOpen(true)}}><BookOpen size={17}/>{say('Guía paso a paso','Step-by-step guide')}</button></div>;
+ return <section className={styles.guide} aria-label={say('Guía para armar el plano','Floor plan setup guide')}>
+  <header><span><BookOpen size={18}/>{say('Arma tu plano','Build your floor plan')} · {step+1}/5</span><button type="button" disabled={busy} aria-label={say('Cerrar guía','Close guide')} onClick={()=>setOpen(false)}><X size={18}/></button></header>
+  <nav aria-label={say('Pasos del plano','Floor plan steps')}>{steps.map((s,i)=><button key={i} type="button" disabled={busy} aria-current={i===step?'step':undefined} onClick={()=>go(i)} aria-label={`${i+1}. ${s.title}`}><span>{i+1}</span><b>{s.title}</b></button>)}</nav>
+  <div className={styles.body} aria-live="polite"><h3>{steps[step].title}</h3><ol>{steps[step].lines.map(line=><li key={line}>{line}</li>)}</ol></div>
+  <footer><button type="button" className="secondary" disabled={busy} onClick={()=>setOpen(false)}>{say('Seguir sin guía','Continue without guide')}</button><div>{step>0&&<button type="button" className="secondary" disabled={busy} onClick={()=>go(step-1)}><ChevronLeft size={16}/>{say('Atrás','Back')}</button>}<button type="button" className="primary" disabled={busy} onClick={()=>step===4?onSave():go(step+1)}>{step===4?say('Guardar plano y terminar','Save floor plan and finish'):say('Siguiente paso','Next step')}{step<4&&<ChevronRight size={16}/>}</button></div></footer>
+ </section>;
+}
