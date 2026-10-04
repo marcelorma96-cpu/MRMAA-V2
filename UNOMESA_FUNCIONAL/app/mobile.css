@@ -1,0 +1,46 @@
+/* App presentation: the desktop browser keeps its existing layout. */
+html[data-unomesa-app=true]{overscroll-behavior-y:none;--app-accent:#b84c24}
+html[data-unomesa-app=true] .landing{display:none}
+html[data-unomesa-app=true] body{background:#f4f5f6;-webkit-tap-highlight-color:transparent}
+html[data-unomesa-app=true] button,html[data-unomesa-app=true] input,html[data-unomesa-app=true] select{min-height:44px}
+html[data-unomesa-app=true] input,html[data-unomesa-app=true] select,html[data-unomesa-app=true] textarea{font-size:16px}
+html[data-unomesa-app=true] .auth{min-height:100dvh;display:flex;justify-content:center;padding:32px 20px;background:#f4f5f6}
+html[data-unomesa-app=true] .authBrand{display:none}
+html[data-unomesa-app=true] .authCard{width:100%;max-width:480px;margin:auto;padding:28px;border-radius:24px;box-shadow:0 12px 50px #18242b0b}
+.mobileAppFrame,.mobileAppFrame.sidebarHidden{display:block;min-height:100dvh;padding-bottom:calc(82px + env(safe-area-inset-bottom));}
+.mobileAppFrame>.workspace{max-width:none;width:100%;margin:0;padding:20px}
+.mobileAppFrame .dashboardMenuBar{position:sticky;top:0;z-index:20;padding:8px 0;background:var(--paper,#fff)}
+.mobileAppFrame>.dashboardSidebar{position:fixed;inset:0 auto 0 0;width:min(340px,calc(100vw - 48px));height:100dvh;max-height:100dvh;z-index:80;overflow-y:auto;overscroll-behavior:contain;padding:18px 18px calc(90px + env(safe-area-inset-bottom));box-shadow:12px 0 35px #0003;touch-action:pan-y}
+.mobileAppFrame>.dashboardSidebar nav{display:grid;grid-template-columns:1fr}
+.mobileAppFrame>.dashboardSidebar nav button{justify-content:flex-start}
+.mobileAppFrame>.dashboardSidebar .logout{position:static;width:100%;height:auto;justify-content:flex-start}
+.mobileAppFrame>.dashboardSidebar .logout span{display:inline}
+.mobileAppFrame .dashboardDrawerClose{display:flex;align-items:center;gap:12px;color:inherit;background:transparent;border:1px solid #ffffff40;padding:12px;margin-bottom:14px}
+.mobileAppFrame>.appTabBar{position:fixed;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e5e7eb;box-shadow:0 -6px 24px #162d3808;z-index:30;gap:4px}
+.mobileAppFrame>.appTabBar button{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;background:transparent;color:#626977;border:0;border-radius:15px;padding:8px 2px;font-size:11px;font-weight:650;min-width:0}
+.mobileAppFrame>.appTabBar button[aria-current=page],.mobileAppFrame>.appTabBar button[aria-expanded=true]{background:#fff0e7;color:#a23c19}
+html[data-unomesa-app=true] .modal{border-radius:24px;overscroll-behavior:contain}
+html[data-unomesa-app=true] .modal>header{position:sticky;top:0;background:var(--paper,#fff);z-index:3;padding-top:12px}
+@media(min-width:900px){.mobileAppFrame,.mobileAppFrame.sidebarHidden{padding-left:94px;padding-bottom:0}.mobileAppFrame>.appTabBar{right:auto;top:0;width:94px;grid-template-columns:1fr;grid-auto-rows:80px;align-content:center;border-top:0;border-right:1px solid #e5e7eb}.mobileAppFrame>.appTabBar button{font-size:11px}.mobileAppFrame>.workspace{padding:22px 28px}.mobileAppFrame .overviewWorkspace{grid-template-columns:minmax(0,1fr) minmax(270px,330px)}}
+@media(max-width:600px){.mobileAppFrame>.workspace{padding:12px}.mobileAppFrame .workspaceHeader h1{font-size:24px}html[data-unomesa-app=true] .overlay{padding:12px 0 0;place-items:end center}html[data-unomesa-app=true] .overlay>.modal{width:100%;max-height:calc(100dvh - 16px);margin:0;border-radius:24px 24px 0 0;padding:20px 18px calc(24px + env(safe-area-inset-bottom))}.mobileAppFrame .overviewCanvas{min-height:300px}.mobileAppFrame .overviewSidebar{max-height:none}.mobileAppFrame .dashboardMenuToggle span{font-size:13px}}
+[data-theme=dark] .mobileAppFrame>.appTabBar{background:#17201e;border-color:#34413c}[data-theme=dark] .mobileAppFrame>.appTabBar button{color:#d1dad6}[data-theme=dark] .mobileAppFrame>.appTabBar button[aria-current=page]{background:#593a2b;color:#ffd9ba}html[data-theme=dark][data-unomesa-app=true] body,html[data-theme=dark][data-unomesa-app=true] .auth{background:#101715}
+@media(prefers-reduced-motion:no-preference){html[data-unomesa-app=true] .overlay>.modal{animation:appSheetIn .18s ease-out}@keyframes appSheetIn{from{transform:translateY(24px);opacity:.5}to{transform:translateY(0);opacity:1}}}
+@media print{.mobileAppFrame>.appTabBar{display:none!important}.mobileAppFrame{padding:0!important}}
+html[data-unomesa-app=true] .accessPage{display:flex;flex-direction:column;min-height:100dvh;background:#f4f5f6;padding:32px 20px;gap:20px}
+html[data-unomesa-app=true] .accessAside{background:transparent;color:#17201e;padding:12px 0;min-height:0;width:100%;max-width:460px;margin:0 auto}
+html[data-unomesa-app=true] .accessAside .backLink{display:none}
+html[data-unomesa-app=true] .accessAside h1{font:750 28px/1.15 system-ui;margin:16px 0 8px}
+html[data-unomesa-app=true] .accessAside p{font-size:15px;color:#66736e}
+html[data-unomesa-app=true] .accessContent{padding:0;display:block;width:100%;max-width:460px;margin:0 auto}
+html[data-unomesa-app=true] .accessCard{width:100%;padding:24px;border-radius:24px;border:1px solid #e5e9e7;background:#fff;box-shadow:0 10px 40px #20312808}
+html[data-unomesa-app=true] .accessAside .brandLogo{filter:brightness(0)}
+.mobileAppFrame{touch-action:pan-y pinch-zoom}
+.appNativeTools{width:100%;margin-top:14px;display:flex;align-items:center;gap:10px;padding:12px;background:transparent;border:1px solid #ffffff40;color:inherit;border-radius:12px}
+[data-theme=dark][data-unomesa-app=true] .accessPage{background:#101715}[data-theme=dark][data-unomesa-app=true] .accessAside{color:#f5f5f5}[data-theme=dark][data-unomesa-app=true] .accessCard{background:#17201e;border-color:#34413c}
+
+html[data-unomesa-app=true] .themeToggle{bottom:calc(90px + env(safe-area-inset-bottom));right:12px;z-index:25;width:40px;height:40px;min-height:40px}
+@media(min-width:900px){html[data-unomesa-app=true] .themeToggle{bottom:16px}}
+html[data-unomesa-app=true] .accessAside .brandLogo{filter:none}html[data-unomesa-app=true] .accessAside .brandLogoLight{display:none}
+
+.mobileAppFrame .workspace h1{font:750 28px/1.2 system-ui;letter-spacing:-.6px}
+html[data-unomesa-app=true] .accessCard h2{font-family:system-ui;font-size:27px;letter-spacing:-.5px}
