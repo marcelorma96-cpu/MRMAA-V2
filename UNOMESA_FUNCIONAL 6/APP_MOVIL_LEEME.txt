@@ -1,0 +1,175 @@
+UNOMESA · ACTUALIZACIÓN 7 · INICIO Y CARGA COORDINADOS · 4 OCTUBRE 2026
+
+INSTALAR ESTA ACTUALIZACIÓN (AMBOS ZIP)
+1. Despliega UNOMESA_FUNCIONAL.zip en el mismo proyecto Vercel, conservando
+   dominio, variables de entorno y conexión al Supabase actual.
+2. Descomprime el nuevo UNOMESA_iOS.zip en una carpeta nueva y abre
+   UnoMesa-iOS/UnoMesa.xcodeproj. Selecciona tu Team y tu iPhone; Command + R.
+   Verifica CURRENT_PROJECT_VERSION / Build = 6. Conserva el Bundle Identifier
+   del proyecto actual para actualizar la misma app y su sesión.
+3. Actualiza primero Vercel y después instala iOS Build 6. El logo nativo espera
+   la confirmación de que acceso y módulo inicial están listos. Si falta la web
+   nueva, puede quedarse esperando. Los datos siguen en el mismo servicio.
+
+NUEVO: INICIO Y CARGA
+- Logo desde el arranque: la vista web queda cubierta hasta completar las
+  comprobaciones y la carga inicial. Salida con movimiento breve y luz suave.
+  Reducir movimiento mantiene solo una transición discreta. No omite seguridad.
+- Círculo de carga al entrar a los módulos; el contenido aparece tras cargar
+  datos iniciales y medir su distribución. Las lecturas posteriores no ocultan
+  formularios ni borran filtros. Un fallo muestra el error habitual para reintentar.
+- En iOS: Opciones del plano (⋯) > Ocultar nombres de áreas. Mostrar nombres
+  los recupera; se recuerda en este dispositivo, sin borrar nombres guardados.
+- En Mapa completo, la agenda del salón sigue la selección explícita del área.
+  Ya no aparece la primera área, como Aguacatal, sin haberla seleccionado.
+- Si el arranque tarda más de 25 segundos, iOS ofrece Reintentar con confirmación;
+  no recarga automáticamente una vista con posibles formularios pendientes.
+
+MEJORAS ANTERIORES CONSERVADAS
+- iOS Build 6 extiende el fondo a toda la pantalla y conserva los espacios de
+  seguridad para controles. Los paneles y formularios tienen esquinas redondeadas.
+- Los formularios no desplazan la página hacia los lados. Se ocultan barras de
+  desplazamiento; los campos siguen permitiendo escribir y seleccionar texto.
+- Zoom de mapa hasta 12× con dos dedos en app y web; Ajustar vuelve al plano entero.
+  El mini plano del formulario también admite zoom. En navegadores compatibles,
+  el gesto de trackpad Ctrl+rueda acerca el mapa manteniendo el punto bajo el cursor.
+- Abrir una mesa o localizar una reserva centra su ubicación. La agenda se superpone
+  al mapa sin cambiar el tamaño del lienzo. Cerrar conserva el zoom y la posición.
+- Los nombres quedan junto al área; cuando hay áreas muy juntas se prioriza la
+  seleccionada. El selector Área permite consultar todos sus nombres completos.
+  No se cambian posiciones ni tamaños guardados. La impresión conserva sus nombres.
+- Listado siempre visible en el encabezado del plano. Reservaciones abre la agenda
+  general; las modificaciones pendientes conservan su confirmación.
+- Fecha visible, Anterior, Siguiente y Hoy en el listado. Rango y todas las fechas
+  siguen en Fecha y filtros. El plano también tiene flechas de fecha visibles.
+
+CAMBIOS DE LA REVISIÓN 5 CONSERVADOS
+- Reservaciones, cotizaciones, clientes y usuarios: tarjetas compactas. Toque una
+  para ver datos y acciones según permisos. No hay una fila de botones por registro.
+- Panel desde abajo en teléfono y desde la derecha en tablet. Cierre con X, tocando
+  fuera o deslizando el encabezado. Los filtros y borradores de opciones se conservan
+  mientras permanezca en el módulo; cerrar no equivale a guardar.
+- Importar, exportar, imprimir, ordenar y seleccionar varios quedan en Opciones.
+  La selección múltiple muestra casillas solo cuando se activa.
+- Reservaciones mantiene la fecha elegida visible en Fecha y filtros; el detalle
+  incluye fecha, hora, área/mesas, personas, estado, teléfono, menú y anticipo.
+- Configuración: selector de sección y grupos desplegables. Guardar cambios aparece
+  cuando hay cambios pendientes. Se conserva la confirmación al cambiar de sección.
+- Horarios: toque una casilla para asignar o editar. Copiar/generar y las descargas
+  se consultan en paneles. Reportes: filtros y exportación agrupados; toque una fila
+  para consultar todas sus columnas.
+- Plano: toque la mesa y después la reserva para ver sus acciones. Se conserva
+  el flujo de asignación, vinculación, edición y papelera.
+- Guía, tutorial corto y referencia del asistente actualizados en español e inglés.
+- La presentación de escritorio web conserva sus listas, tablas y controles.
+
+DATOS
+Esta actualización no añade ni modifica SQL. Los 15 archivos SQL del ZIP anterior
+se conservan byte por byte. No ejecutes SQL para estos cambios de interfaz.
+No se accedió ni se escribió en la base de producción. Se mantienen la conexión,
+los identificadores, permisos, planes y operaciones compartidas del sistema.
+Lo que guardes o elimines desde la app sí afecta los mismos registros que la web.
+
+ACCESO
+- Primer inicio: correo/contraseña, recuperar contraseña, Google y crear cuenta.
+  Sin landing comercial. Registro por correo en dos pasos: acceso y restaurante.
+- Una única prueba de Advanced por 10 días para cuentas nuevas. Las cuentas
+  existentes recuperan su plan/prueba original; volver a registrarse no la reinicia.
+- Aviso Prueba gratuita / Free trial con tiempo restante. El propietario puede
+  elegir plan; al vencer se conserva el bloqueo de acceso del servicio existente.
+  Cuentas pagadas y exentas no reciben el aviso de prueba.
+- Turnstile usa apariencia de interacción solamente dentro de la app: normalmente
+  verifica en segundo plano, sin casilla permanente. Se conserva la validación
+  del servidor y los tokens de un solo uso. Si exige intervención o falla la
+  conexión, se muestra el desafío o Reintentar. No desactives la protección.
+- Google vuelve al modo app y usa su almacenamiento de sesión; cancelar Google
+  desbloquea el botón sin recargar el formulario. No se guarda la contraseña.
+
+GOOGLE: DIRECCIÓN DE RETORNO
+En Supabase > Authentication > URL Configuration > Redirect URLs debe existir:
+com.unomesa.app://auth/google
+Conserva las demás direcciones; no cambies Site URL, Client Secret ni Google Console.
+Si Google sigue mostrando una ventana de navegador con unomesa.com al terminar,
+revisa esta dirección. No se pudo verificar ese ajuste en tu cuenta desde aquí.
+El código de retorno se canjea dentro de la app, se retira del historial y conserva
+las comprobaciones de identidad, PKCE y acceso del servidor.
+
+PLANO
+- Abre Mapa completo al entrar en la app. Niveles accesibles arriba; espacio central
+  para el mapa, sin una columna inicial de botones ni selector de mano/cursor.
+- Fecha/hora compactas arriba. Tocarlas abre filtros. Tres puntos abre opciones:
+  cambiar vista, listado, editar plano, imprimir/PDF y las operaciones existentes.
+- Toque una mesa: panel desde abajo en teléfono o a la derecha en tablet, dejando
+  espacio al mapa. Cambie de mesa sin salir de Mapa completo.
+- Reservar esta mesa lleva la mesa elegida al formulario. La agenda incluye las
+  reservas correspondientes y acceso a datos completos y asignación.
+- Toque una reserva de la agenda para desplegar sus acciones. Más agrupa cotización y eliminar,
+  según los permisos y la vinculación existente. Más de la mesa permite vincular
+  una reserva o editar la mesa/área cuando el rol lo permite.
+- Amplíe/reduzca el panel con el botón o deslizando su encabezado. X vuelve al plano.
+  Los bordes permiten abrir filtros o agenda; los paneles también tienen botones.
+- Dos dedos acercan/alejan y recorren el mapa. Ajustar aparece después de ampliar.
+  Estos gestos no guardan posiciones ni hacen reservas.
+- Elegir mesas cierra el panel y conserva el borrador. Guardar asignación confirma
+  el cambio. Editar plano sigue reservado a Administrador/Gerente.
+- Navegación inferior en teléfono y barra compacta lateral en tablet grande.
+  Formularios desde abajo y confirmación de cambios pendientes conservadas.
+- Guía, ayuda y fuente del asistente actualizadas en español e inglés.
+
+SESIÓN Y ALCANCE
+La app híbrida usa la misma cuenta y datos de la web y requiere conexión.
+Recuerda la sesión hasta 30 días sin actividad, sujeta a las políticas del servicio.
+MFA, revocación, vencimiento y cierre de sesión se mantienen. La actualización
+SQL de sesiones pertenece a una entrega anterior; no se modifica en esta revisión.
+El diseño táctil funciona en iOS y navegadores Android. El ZIP nativo es para iOS;
+no contiene APK/AAB ni proyecto nativo Android y no se publicó en tiendas.
+
+VALIDACIÓN DE ESTA REVISIÓN
+- Arranque con logo, cambio directo de fecha, zoom 12× con gestos en app/web,
+  lienzo y viewBox estables al seleccionar, centrado de mesa/reserva, Ajustar y Listado.
+- Formularios reales compartidos en pantallas de 320, 390 y 768 px; zoom del mini
+  plano sin desborde lateral. Tableta 1024 × 768 con agenda superpuesta.
+- Pruebas de sesión/MFA: acceso revocado, cierre de sesión, errores y cuenta nueva.
+- Compilación de producción web y TypeScript.
+- Componentes reales con datos ficticios en Chromium: 8 módulos; abrir/cerrar,
+  filtros, borradores, selección múltiple, IDs enviados a editar/convertir/papelera,
+  paneles anidados, rol de solo lectura, español/inglés y presentación de escritorio.
+- Pantallas 320 × 568, 390 × 844, 844 × 390 y 1024 × 768 sin desborde horizontal.
+- Comparación byte por byte de los 15 SQL contra la entrega anterior.
+- Sin pruebas físicas de iPhone/iPad ni nuevas pruebas de Google/pagos reales.
+
+CONTROLES REGISTRADOS EN LA ENTREGA ANTERIOR (BUILD 4)
+- Build web de producción con webpack y TypeScript.
+- Pruebas de cuenta existente, Google, trial único y conservación de cuentas exentas.
+- Retorno Google hacia app antes de guardar la sesión, retorno web separado y fallos.
+- Pruebas del plano y conservación de datos con base temporal ficticia.
+- Acceso real ES/EN y ambos pasos del formulario en Chromium: seguridad en segundo
+  plano, desafío, error/reintento y conservación de campos al volver de paso.
+- FloorPlan real con datos ficticios: selección para reservar, edición/cotización/
+  eliminar dirigidos al registro correcto, vínculo por encima del panel, selección
+  conservada, pinch, ajuste, gesto del borde y bloqueo de operaciones de solo lectura.
+- Pantallas 320 × 568, 390 × 844, 844 × 390 y 1024 × 768; escritorio web conservado.
+- Sintaxis Swift revisada. Aquí no hay Xcode ni dispositivo físico.
+
+PRUEBA FINAL EN TU iPHONE/iPAD
+0. Verificar Build 6: logo al abrir/reabrir; contenido y controles respetan notch,
+   isla y barra inferior. Probar teclado y girar el teléfono con formulario abierto.
+1. Correo y Google deben abrir la misma cuenta, sin landing. Cerrar/reabrir conserva
+   la sesión. Cancelar Google permite reintentar sin perder los campos del formulario.
+2. Tocar mesa, reservar y comprobar la ubicación en la web con una reserva de prueba.
+3. Abrir agenda, ampliar/reducir panel, cambiar mesa, usar dos dedos y Ajustar.
+4. Verificar el aviso de prueba con una cuenta de prueba, no con la cuenta exenta.
+5. En cada módulo, toque una tarjeta y compruebe sus datos/acciones. Abra y cierre
+   Opciones, cambie un filtro y vuelva a abrir para verificar que se conserva.
+6. Comprobar descarga PDF, impresión, teclado y orientación horizontal en el equipo.
+No se ha probado Google real, Safari/WKWebView físico, Xcode ni una compra real.
+
+REFERENCIAS DE DISEÑO Y COMPORTAMIENTO
+OpenTable: plano móvil y gestión de reservas contextual.
+https://www.opentable.com/restaurant-solutions/resources/nowserving-iphone-app/
+SevenRooms: detalles y acciones en paneles de la experiencia móvil.
+https://sevenrooms.com/blog/mobile-4-1/
+Apple: paneles y presentación de contenido secundario.
+https://developer.apple.com/design/human-interface-guidelines/sheets
+Cloudflare: appearance=interaction-only conserva desafíos cuando son necesarios.
+https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/
