@@ -1,0 +1,62 @@
+UNOMESA · INTERFAZ DE APP · 4 OCTUBRE 2026
+
+ORDEN DE INSTALACIÓN
+1. En Supabase, ejecutar únicamente el nuevo 48_SESION_APP.sql.
+   No volver a ejecutar los SQL anteriores. El archivo crea una función;
+   no cambia tablas ni registros de clientes, cotizaciones, reservas o planes.
+   Al usar la app, esa función amplía solo la sesión autenticada de ese dispositivo.
+2. Desplegar este proyecto UNOMESA_FUNCIONAL en el mismo Vercel de UnoMesa,
+   conservando variables de entorno, dominio y proyecto Supabase.
+3. Actualizar el proyecto iOS con UNOMESA_iOS.zip y ejecutarlo desde Xcode.
+
+QUÉ CAMBIA
+- /mobile entra al acceso o a la cuenta; no muestra la landing comercial.
+- Teléfono: Reservas / Cotizaciones / Clientes / Más en la barra inferior.
+- Tablet de al menos 900 píxeles CSS: barra compacta a la izquierda y plano/agenda
+  lado a lado cuando el espacio lo permite. En tablet estrecha se usa el formato teléfono.
+- Menú desde Más o deslizando desde el borde izquierdo. Cierre con X o deslizando
+  a la izquierda. No se aplican esos gestos sobre el mapa ni los formularios.
+- Formularios desde abajo en teléfono, campos de 16 px, controles táctiles y
+  desplazamiento interno. Cerrar un formulario conserva la confirmación existente.
+- El mapa conserva sus gestos de dos dedos y la lógica compartida de reservas.
+- La web normal de escritorio conserva su presentación. No se duplicaron las
+  operaciones de negocio: app y web usan los mismos permisos y funciones.
+- Ayuda y fuente del asistente actualizadas con el modo app.
+
+SESIÓN
+Almacenamiento persistente del acceso en el contexto de la app; no se almacena
+la contraseña. Credenciales de sesión separadas de las pestañas web normales.
+Plazo de inactividad: hasta 30 días. El servidor decide si la sesión sigue válida;
+MFA, revocación, vencimiento de Auth y cierre de sesión se mantienen.
+Desinstalar, borrar almacenamiento o políticas más restrictivas de Supabase
+pueden exigir ingresar otra vez. En equipos compartidos, cerrar sesión al salir.
+La app sigue necesitando conexión. No se añadió almacenamiento offline de reservas.
+
+ANDROID
+La presentación /mobile y el manifiesto standalone están preparados también
+para teléfonos y tablets Android. Este paquete NO incluye un APK/AAB firmado
+ni un proyecto nativo Android. La entrega nativa adjunta actualmente es iOS.
+La publicación en Google Play y las integraciones nativas Android requieren
+su propio empaquetado y pruebas. No se ha publicado en ninguna tienda.
+
+VALIDACIÓN
+Build de producción Next con webpack y TypeScript: correcto.
+Pruebas de sesión/MFA/revocación y aislamiento de almacenamiento: correctas.
+SQL probado en una base temporal con datos ficticios: no reactiva una sesión
+caducada/revocada, no omite MFA y conserva el plazo de otras sesiones web.
+No se ejecutó el SQL en producción ni se modificaron clientes reales.
+Navegador Chromium con emulación táctil: acceso sin landing a 390 px; componentes
+reales de navegación y gestos montados con datos ficticios a 390/1024 px. Sin
+desbordamiento horizontal; barra inferior/rail, menú deslizable, confirmación de
+borradores y aislamiento del gesto de dos dedos comprobados. No es una prueba
+integral con cuenta real ni sustituye Safari/WKWebView/Android físicos.
+Pendiente: comprobación visual y táctil en iPhone/iPad/Android, compilación Xcode,
+Google real, PDF e impresión. La sintaxis Swift no garantiza compilación iOS.
+
+PRUEBA EN EL TELÉFONO
+1. Entrar y cerrar/reabrir la app. Debe recuperar la misma cuenta.
+2. Abrir Más; arrastrar el menú. Probar que un formulario con cambios pide confirmación.
+3. Mapa: elegir mesa, ampliar con dos dedos, mover y abrir su reserva.
+4. Guardar una reserva de prueba y comprobarla en la web; luego usar la papelera.
+5. Probar Google, compartir PDF e imprimir. Repetir en tablet horizontal.
+6. Desde otra sesión autorizada, revocar este dispositivo: debe bloquear el acceso.
