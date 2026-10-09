@@ -1,0 +1,142 @@
+UNOMESA FUNCIONAL · ACTUALIZACIÓN · 9 OCTUBRE 2026
+
+ACCESO MÁS SIMPLE Y GOOGLE EN IOS · BUILD 12
+El acceso en modo app tiene Google como opción principal, correo → Siguiente
+→ contraseña y Crear cuenta al pie. Conserva recuperación, registro en dos
+pasos, validación de contraseña y una única prueba por cuenta nueva.
+En Build 12, Google completa el intercambio dentro de la pantalla que inició
+el acceso, sin cargar un documento intermedio. Después abre el dashboard
+solo si la sesión, los permisos y la cuenta pasan sus validaciones.
+Si seguridad cierra la sesión, se muestra un aviso en el ingreso.
+
+Esta entrega requiere publicar esta web E instalar el nuevo proyecto iOS.
+1. En Supabase → Authentication → URL Configuration → Redirect URLs, agregue
+   com.unomesa.app://auth/google y guarde. Si ya existe, consérvelo.
+   No cambie Site URL, las demás URLs ni el callback de Google Cloud.
+2. Publique este ZIP en el proyecto Vercel existente (pasos abajo).
+3. Abra el nuevo UNOMESA_iOS.zip → UnoMesa-iOS → UnoMesa.xcodeproj.
+   Use su Team e identificador actuales, confirme Build 12 y ejecute en
+   el iPhone con Command + R. No hace falta borrar la app anterior.
+4. Pruebe Continuar con Google. iOS muestra su ventana segura para elegir
+   cuenta; al terminar debe cerrarla y continuar en la aplicación.
+   Cancelar permite reintentar; la sesión conserva las reglas existentes.
+El host de Supabase de AppConfig.swift debe coincidir con el proyecto
+Supabase usado en Vercel. Se conserva el host que ya tenía el proyecto.
+El acceso y registro en modo app tienen diseño renovado, correo y contraseña
+en pasos separados, Crear cuenta al pie y Google sobre el formulario. Conservan validaciones y prueba
+única para cuentas nuevas. No hay un registro o base de datos separados.
+
+CORRECCIÓN DE APARIENCIA EN APP
+En iOS/Android, abra Más → Apariencia → Cambiar. El botón ya no flota
+sobre Siguiente, formularios o plano. Conserva la preferencia del dispositivo.
+La web mantiene su control. Este ajuste de apariencia se sirve desde Vercel;
+el nuevo retorno de Google en iOS sí requiere instalar Build 12.
+
+SI PENDIENTES MUESTRA QUE NO ESTÁ HABILITADO
+Publicar en Vercel no instala el servicio en Supabase. En el proyecto Supabase
+que usa UnoMesa, abra SQL Editor → New query, copie TODO el contenido de
+49_SEGUIMIENTO_EVENTOS.sql y pulse Run. Tras Success, recargue UnoMesa.
+Ejecute únicamente ese archivo; no los SQL históricos. Ya venía en el ZIP,
+sin cambios. Crea su tabla y funciones de pendientes; no reescribe reservas,
+clientes, cotizaciones, planes ni exenciones. Instalación y reinstalación
+comprobadas con datos sintéticos. Si aparece un error, conserve el texto
+completo para revisarlo; no intente resolverlo ejecutando los demás SQL.
+
+PUBLICAR EN VERCEL
+1. Descomprima UNOMESA_FUNCIONAL.zip. La carpeta UNOMESA_FUNCIONAL contiene
+   package.json y el proyecto completo. Use el MISMO proyecto Vercel de UnoMesa.
+2. Conserve las variables de entorno, dominio y conexión Supabase actuales.
+   No cree otra base de datos. No copie valores de prueba de documentación.
+3. Compruebe en Production:
+   NEXT_PUBLIC_SITE_URL=https://www.unomesa.com
+   Use ese valor si www.unomesa.com sigue siendo el dominio público principal.
+   NEXT_PUBLIC_SEARCH_INDEXING no debe ser false en producción.
+4. Publique la carpeta y espere a que el despliegue de Production esté listo.
+5. Abra la web y pruebe Google, Cotizaciones → Pendientes y Seguridad.
+
+IOS Y ANDROID
+Las apps cargan https://www.unomesa.com/mobile. Para iOS instale Build 12
+además de publicar la web y autorizar el retorno en Supabase. Android recibe
+el nuevo diseño desde la web compartida; no se modifica su proyecto nativo.
+No se ha compilado ni firmado el proyecto iOS desde este entorno.
+
+DATOS Y SQL
+Los 16 SQL son idénticos byte a byte a la versión base 113. No ejecute todos
+los SQL de nuevo. Los ajustes de carga, cuenta y acceso no requieren SQL.
+Pendientes reutiliza el servicio de seguimiento del SQL 49. Si ya se instaló,
+no requiere otra ejecución. Si nunca se instaló, la función informa que aún
+no está habilitada; revise LEEME_SEGUIMIENTO.txt antes de cualquier instalación.
+No se ha accedido ni modificado la base de producción, permisos, planes,
+exenciones del piloto o datos de clientes durante esta preparación.
+
+CAMBIOS INCLUIDOS
+- Cotizaciones: 25 por página. Seguridad: 10 modificaciones/eliminaciones
+  por página, con consultas independientes y sin cargar todo el historial.
+- Pendientes simples: escribir y guardar; Recordatorios visibles arriba de
+  Cotizaciones en web/app. Modificar, quitar y recuperar, sin borrar el evento.
+- Acceso Google web mediante /login y cubierta de marca, sin HTML de landing
+  en esa ruta. Se conserva /auth/google; en iOS Build 12, el botón llama
+  directamente al diálogo nativo y el resultado vuelve al mismo modo app.
+- Cuenta restringida, planes, sesiones y seguridad con distribución adaptable
+  y mensajes de vencimiento coherentes con fechas y permisos.
+- UnoMesa LLC en la identidad del operador de páginas legales, pie público,
+  metadatos y correos. No modifica perfiles externos de Apple/Google/bancos.
+- Instructivo, tutorial corto y referencia del asistente actualizados.
+
+GOOGLE SEARCH CONSOLE — DESPUÉS DE PUBLICAR
+1. Abra https://search.google.com/search-console
+2. Si ya existe unomesa.com, use esa propiedad. De lo contrario, Agregar
+   propiedad → Dominio → unomesa.com (sin https ni www).
+3. Complete la verificación DNS con el registro exacto que entregue Google,
+   en el proveedor que administra el DNS del dominio. Conserve ese registro.
+4. Abra https://www.unomesa.com/sitemap.xml y compruebe que incluya las URLs
+   públicas. Luego, en Sitemaps, envíe esa dirección completa.
+5. En Inspección de URLs, pruebe la URL publicada y solicite indexación de:
+   https://www.unomesa.com/
+   https://www.unomesa.com/es
+6. Revise los estados en Search Console. La solicitud ayuda a descubrir las
+   páginas, pero no garantiza la indexación ni una posición específica.
+   El rastreo puede tardar días o semanas. No es necesario enviar diariamente.
+Consulte SEO_PUBLICACION.txt para detalles y comprobaciones.
+
+AJUSTE DE RECORDATORIOS
+Modificar en Recordatorios abre la edición de la cotización vinculada.
+Para agregar un pendiente, pulsa Pendientes en una cotización ya guardada.
+Para cambiar su texto, entra a Pendientes y pulsa Modificar junto al texto.
+Quitar sigue retirando únicamente el aviso, sin borrar la cotización.
+
+ESTADO Y VALIDACIÓN
+ZIP preparado, no publicado. Compilación de producción y 51 pruebas aprobadas.
+Navegador local con datos sintéticos: Google PKCE, diseño adaptable, paginación,
+crear/modificar/quitar/restaurar pendientes, conflictos y usuarios solo lectura.
+No se probó Google real ni se verificó la indexación de producción.
+
+Fuentes oficiales de Google:
+https://support.google.com/webmasters/answer/34592?hl=es
+https://support.google.com/webmasters/answer/9008080?hl=es
+https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl
+
+VALIDACIÓN DE ESTOS ÚLTIMOS AJUSTES
+Compilación correcta y 18 pruebas relevantes aprobadas nuevamente. Navegador
+local: Modificar abre la cotización exacta en web/app; el texto del pendiente
+se edita desde su panel y el rol de lectura no recibe acciones de modificación.
+Apariencia dentro de Más, preferencia persistente y Siguiente accesible a
+320, 390, 768 y 1024 píxeles. No se ha publicado esta corrección en producción.
+
+VALIDACIÓN DE GOOGLE IOS Y ACCESO · 9 OCTUBRE
+Compilación web de producción y 30 pruebas relevantes aprobadas. Navegador
+local: URL PKCE real del SDK con respuestas simuladas; retorno, cancelación,
+reintento y persistencia de sesión. Login/registro revisados en claro/oscuro
+a 320, 390 y 768 píxeles, sin desbordamiento horizontal. El proyecto nativo
+requiere compilación y prueba real en Xcode; este entorno no tiene el SDK iOS.
+No se ha accedido a producción ni probado una autorización real de Google.
+
+VALIDACIÓN BUILD 12
+Compilación web correcta y 33 pruebas relevantes aprobadas. Navegador local:
+ingreso en dos pasos, registro, recuperación, Google cancelado/reintentado,
+retorno ligado a la solicitud correcta y verificación real del par PKCE con
+respuestas sintéticas. Un solo intercambio, dashboard y sesión persistente.
+Denegación de sesión conserva el bloqueo y muestra aviso. SQL sin cambios.
+La causa exacta observada en el iPhone no se pudo inspeccionar directamente;
+este nuevo recorrido debe probarse con Google real en su dispositivo.
