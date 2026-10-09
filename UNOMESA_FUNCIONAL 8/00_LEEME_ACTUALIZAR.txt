@@ -1,0 +1,70 @@
+UNOMESA FUNCIONAL · ACTUALIZACIÓN · 8 OCTUBRE 2026
+
+PUBLICAR EN VERCEL
+1. Descomprima UNOMESA_FUNCIONAL.zip. La carpeta UNOMESA_FUNCIONAL contiene
+   package.json y el proyecto completo. Use el MISMO proyecto Vercel de UnoMesa.
+2. Conserve las variables de entorno, dominio y conexión Supabase actuales.
+   No cree otra base de datos. No copie valores de prueba de documentación.
+3. Compruebe en Production:
+   NEXT_PUBLIC_SITE_URL=https://www.unomesa.com
+   Use ese valor si www.unomesa.com sigue siendo el dominio público principal.
+   NEXT_PUBLIC_SEARCH_INDEXING no debe ser false en producción.
+4. Publique la carpeta y espere a que el despliegue de Production esté listo.
+5. Abra la web y pruebe Google, Cotizaciones → Pendientes y Seguridad.
+
+IOS Y ANDROID
+Las apps existentes cargan https://www.unomesa.com/mobile. Estos cambios
+pertenecen a esa web compartida: no requieren otro ZIP iOS/Android, compilación
+Xcode/Android Studio ni instalar nuevamente la app. Publique primero la web;
+después cierre por completo y vuelva a abrir la app para cargar esta versión.
+Conserve el proyecto nativo actual. No se ha cambiado ni firmado un binario.
+
+DATOS Y SQL
+Los 16 SQL son idénticos byte a byte a la versión base 113. No ejecute todos
+los SQL de nuevo. Los ajustes de carga, cuenta y acceso no requieren SQL.
+Pendientes reutiliza el servicio de seguimiento del SQL 49. Si ya se instaló,
+no requiere otra ejecución. Si nunca se instaló, la función informa que aún
+no está habilitada; revise LEEME_SEGUIMIENTO.txt antes de cualquier instalación.
+No se ha accedido ni modificado la base de producción, permisos, planes,
+exenciones del piloto o datos de clientes durante esta preparación.
+
+CAMBIOS INCLUIDOS
+- Cotizaciones: 25 por página. Seguridad: 10 modificaciones/eliminaciones
+  por página, con consultas independientes y sin cargar todo el historial.
+- Pendientes simples: escribir y guardar; Recordatorios visibles arriba de
+  Cotizaciones en web/app. Modificar, quitar y recuperar, sin borrar el evento.
+- Acceso Google web mediante /login y cubierta de marca, sin HTML de landing
+  en esa ruta. Se conserva /auth/google y el retorno nativo existente.
+- Cuenta restringida, planes, sesiones y seguridad con distribución adaptable
+  y mensajes de vencimiento coherentes con fechas y permisos.
+- UnoMesa LLC en la identidad del operador de páginas legales, pie público,
+  metadatos y correos. No modifica perfiles externos de Apple/Google/bancos.
+- Instructivo, tutorial corto y referencia del asistente actualizados.
+
+GOOGLE SEARCH CONSOLE — DESPUÉS DE PUBLICAR
+1. Abra https://search.google.com/search-console
+2. Si ya existe unomesa.com, use esa propiedad. De lo contrario, Agregar
+   propiedad → Dominio → unomesa.com (sin https ni www).
+3. Complete la verificación DNS con el registro exacto que entregue Google,
+   en el proveedor que administra el DNS del dominio. Conserve ese registro.
+4. Abra https://www.unomesa.com/sitemap.xml y compruebe que incluya las URLs
+   públicas. Luego, en Sitemaps, envíe esa dirección completa.
+5. En Inspección de URLs, pruebe la URL publicada y solicite indexación de:
+   https://www.unomesa.com/
+   https://www.unomesa.com/es
+6. Revise los estados en Search Console. La solicitud ayuda a descubrir las
+   páginas, pero no garantiza la indexación ni una posición específica.
+   El rastreo puede tardar días o semanas. No es necesario enviar diariamente.
+Consulte SEO_PUBLICACION.txt para detalles y comprobaciones.
+
+ESTADO Y VALIDACIÓN
+ZIP preparado, no publicado. Compilación de producción y 51 pruebas aprobadas.
+Navegador local con datos sintéticos: Google PKCE, diseño adaptable, paginación,
+crear/modificar/quitar/restaurar pendientes, conflictos y usuarios solo lectura.
+No se probó Google real ni se verificó la indexación de producción.
+
+Fuentes oficiales de Google:
+https://support.google.com/webmasters/answer/34592?hl=es
+https://support.google.com/webmasters/answer/9008080?hl=es
+https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl

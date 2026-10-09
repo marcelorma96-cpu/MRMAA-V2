@@ -1,0 +1,45 @@
+UNOMESA · PENDIENTES Y RECORDATORIOS · 8 OCTUBRE 2026
+
+ESTADO DE ESTA ENTREGA
+Preparado y comprobado localmente, incluido en este ZIP. Publicación pendiente.
+
+USO
+1. En una cotización guardada, pulse Pendientes. Escriba, por ejemplo,
+   Falta confirmar menú y pulse Agregar pendiente. Solo el texto es obligatorio.
+2. Se muestra arriba de Cotizaciones en Recordatorios, tanto en web como app.
+   Muestra cinco avisos por página. Cambiar entre páginas del mismo bloque
+   aprovecha la consulta ya cargada, sin descargar todo el historial.
+3. Modificar abre el texto exacto. Tocar el número abre la cotización.
+   Quitar retira ese recordatorio para todo el equipo.
+4. Quitados y resueltos conserva el registro. Volver a mostrar lo reactiva.
+
+CONSERVACIÓN Y SINCRONIZACIÓN
+- No crea automáticamente una lista de confirmación, anticipo, menú, etc.
+  Cada nuevo pendiente lo escribe el usuario.
+- Editar el texto conserva responsable, fecha límite y notas anteriores.
+- Quitar no borra la cotización, reserva, anticipo, asignación ni tarea.
+- Los pendientes siguen visibles aunque pase la fecha del evento, hasta
+  que se quiten. No se confunden con los avisos automáticos de próximos eventos.
+- Una cotización y reserva vinculadas comparten los pendientes existentes.
+  Los accesos Pendientes están en listado, documento y detalles de reserva/plano.
+- No abre avisos emergentes automáticos ni activa sonidos, mensajes o cobros.
+- Los cambios refrescan los paneles abiertos de esta pestaña y otras pestañas
+  del mismo navegador. Otros dispositivos consultan al volver, actualizar o
+  cada 30 segundos mientras el panel está visible y hay conexión.
+- Si otra persona modifica el pendiente durante la edición, conserva el
+  borrador y exige revisar la versión actual. No se sobrescribe silenciosamente.
+- Se conservan los permisos. Solo lectura puede consultar; no modificar/quitar.
+
+SERVICIO EXISTENTE
+Se reutilizan v2_event_read, v2_event_inbox y v2_event_save_task del SQL 49.
+Los 16 archivos SQL son idénticos a la versión 113. No hay migración nueva.
+Si Seguimiento ya estaba instalado, esta actualización no requiere ejecutar
+SQL. Si nunca se instaló, se muestra que aún no está habilitado. No se guarda
+una copia local fingiendo sincronización ni se ejecuta SQL automáticamente.
+
+PRUEBAS
+51 pruebas automatizadas aprobadas. Compilación de producción correcta.
+Prueba de navegador con datos sintéticos: crear, modificar, quitar y recuperar,
+recordatorios visibles en web/app, cinco por página sin consulta repetida,
+notas antiguas conservadas, conflicto entre ediciones y rol solo lectura.
+No se ha publicado ni probado contra datos de producción.

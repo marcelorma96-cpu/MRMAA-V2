@@ -1,0 +1,58 @@
+UNOMESA · CAMBIOS PREPARADOS · 8 OCTUBRE 2026
+
+ESTADO
+Trabajo preparado, comprobado localmente e incluido en este ZIP. No se ha
+publicado en Vercel ni accedido a la base de producción. Lea primero
+00_LEEME_ACTUALIZAR.txt para instalar y configurar Google Search Console.
+
+PREPARADO
+- Cotizaciones: 25 resultados por página, solo campos del listado; búsqueda
+  sobre todos los registros, orden estable y navegación mediante cursores.
+- Seguridad: historial de modificaciones y papelera a 10 por página.
+  Consultas independientes, sin descargar 200 modificaciones de una vez.
+  La vista restringida de respaldos no consulta papelera ni modificaciones.
+- Pantallas de cuenta restringida, planes, sesiones y seguridad adaptables.
+  Mensajes de vencimiento ajustados a fechas y permisos reales de la cuenta.
+- Retorno web de Google a /login con pantalla de marca; esa ruta no incluye
+  la landing. Se conservan controles de sesión, MFA y registro existentes.
+- Identidad del operador: UnoMesa LLC en páginas legales, pie público,
+  metadatos de organización y correos de marca.
+
+PENDIENTES SIMPLIFICADOS — PREPARADO
+El propietario definió un flujo sencillo: abrir Pendientes, escribir el texto
+(p. ej. Falta confirmar menú), guardar y verlo en Recordatorios arriba de
+Cotizaciones, con Modificar y Quitar. Se implementó en web y modo app.
+Cinco avisos por página; conserva los demás, incluso eventos pasados.
+Quitar archiva el aviso para el equipo; Volver a mostrar permite recuperarlo.
+Conserva los datos anteriores y la vinculación cotización/reserva, sin cobros,
+notificaciones automáticas ni listas de tareas generadas automáticamente.
+Se reutiliza el servicio SQL 49 existente, sin cambiarlo. Si no fue instalado,
+la función muestra que no está habilitada. El resto de ajustes no requiere SQL.
+Ver LEEME_SEGUIMIENTO.txt para detalles.
+
+CONSERVACIÓN
+Los 16 SQL originales son idénticos byte a byte. No se requiere ejecutar SQL
+para los demás ajustes. Planes, permisos y lógica de acceso sin cambios.
+Los datos históricos y consentimientos no se reescriben. El identificador
+interno de consentimiento mantiene la compatibilidad con el SQL instalado.
+La actualización de nombre legal no cambia contratos externos, perfiles de
+Apple/Google, bancos ni procesadores; la cláusula territorial previa sigue
+pendiente de revisión jurídica. No se afirma un traspaso legal de contratos.
+
+VERIFICACIÓN
+- npm run build completado correctamente.
+- 51 pruebas automatizadas aprobadas, incluidas paginación con fechas nulas,
+  empates, orden ascendente/descendente, filtros y separación de restaurantes.
+- Navegador local: retorno PKCE de Google simulado, una sola ejecución, sin
+  frames de landing; comprobado a 320, 390, 768, 1024 y 1440 píxeles.
+- Seguridad: 10 registros por panel, siguiente/anterior y consultas separadas;
+  no se consultan historial/papelera en modo exclusivo de respaldos.
+- Pendientes: creación, modificación, quitar, recuperar, conflicto de edición
+  y solo lectura comprobados en navegador. Visibilidad en web y modo app.
+- No se probó un ingreso real con Google ni un despliegue en producción.
+
+PUBLICAR
+Publique este ZIP web en el mismo proyecto
+Vercel existente conservando entorno y Supabase. Las apps iOS/Android cargan
+la web compartida; estas pantallas no requieren cambiar su proyecto nativo.
+No reemplazar la base ni ejecutar migraciones históricas.
