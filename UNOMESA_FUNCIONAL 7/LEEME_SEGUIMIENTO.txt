@@ -1,0 +1,61 @@
+UNOMESA FUNCIONAL — SEGUIMIENTO INTERNO DE EVENTOS
+Entrega: 5 octubre 2026 · Web + iOS Build 8
+
+QUÉ SE AGREGA
+- Seguimiento por evento: confirmación, anticipo, menú, montaje/detalles y
+  responsable. Agregar pasos del evento crea la lista inicial una sola vez.
+- Pasos propios, responsable por nombre, fecha límite y acuerdos privados.
+- Estados: Pendiente, Esperando al cliente, Listo y No aplica.
+- Pendientes del equipo: listado de pasos abiertos de todas las fechas.
+- Acceso desde cotizaciones, vista de cotización, reservas y detalles del plano.
+- Mensaje de WhatsApp revisable antes de abrir la conversación. No se envía
+  automáticamente. Use Ver cotización → PDF para adjuntar/compartir el PDF.
+- Instructivo, tutorial corto y referencia del asistente actualizados ES/EN.
+
+ACTUALIZAR LA INSTALACIÓN EXISTENTE
+1. En el MISMO proyecto de Supabase de su restaurante, abra SQL Editor,
+   cree una consulta nueva, pegue el contenido completo de
+   49_SEGUIMIENTO_EVENTOS.sql y ejecute ese archivo una vez.
+   Este archivo solo crea objetos nuevos v2_event_*; no reescribe clientes,
+   reservas, cotizaciones, mesas, columnas, permisos existentes ni importes.
+   Es repetible y transaccional. No ejecute archivos de instalación o SQL
+   anteriores nuevamente para esta actualización.
+2. Descomprima este ZIP y publique el proyecto web en su proyecto ACTUAL
+   de Vercel, conservando dominio y variables de entorno de Supabase.
+   No cree otra base de datos. El build se genera con npm run build.
+3. Abra una cotización guardada → Seguimiento → Agregar pasos del evento.
+   Asigne encargado, acuerdos y fechas. Guarde cada paso.
+4. Convierta o vincule con una reserva. Abra su Seguimiento desde listado
+   o desde datos de la reserva en el plano: encontrará los mismos pasos.
+5. En la app, cierre y vuelva a abrir UnoMesa. Carga /mobile de la misma web.
+   El iOS ZIP incluye Build 8 para Xcode; instalarlo por sí solo no publica
+   los cambios de la web ni instala el SQL.
+
+Sin el SQL nuevo, el resto de la app funciona como antes; Seguimiento muestra
+que aún no está habilitado. No hay guardado local que sustituya al servidor.
+Esta entrega NO se ha publicado ni ha ejecutado SQL en su base de producción.
+
+COMPORTAMIENTO Y CONSERVACIÓN
+- Consultar no crea pasos ni modifica reservas. Todo seguimiento es interno.
+- Marcar Listo no cobra dinero, registra anticipos, cambia la confirmación,
+  bloquea mesas o envía mensajes. Esos cambios siguen en formularios existentes.
+- Al convertir/vincular se consultan los pasos de ambos orígenes sin copiar,
+  borrar ni sobrescribirlos. Los pasos previos de una reserva independiente
+  siguen ligados a esa reserva. Los pasos nuevos de una reserva vinculada
+  pertenecen a su cotización. Si se desvinculan, cada registro conserva los
+  pasos de su origen. Pasos similares creados por separado se conservan.
+- Los pasos de un origen enviado a papelera se ocultan y vuelven al restaurar.
+  No aplica conserva un paso que ya no necesita; no lo elimina.
+- Los paneles visibles recargan cada 20 segundos y al volver a la ventana.
+  Actualizar consulta en ese momento; otra pestaña recibe el aviso local.
+  La sincronización entre dispositivos requiere conexión y actualización.
+- Los borradores no se sobrescriben al recargar. Si otra persona guardó el
+  mismo paso, se exige revisar la versión actual antes de guardar.
+- El responsable es un nombre interno; asignarlo no envía una notificación.
+- No se activan solicitudes públicas, chat con clientes ni pagos online.
+- Administrador/Gerente/Operación/Soporte editor pueden editar según acceso
+  vigente. Lectura y Soporte lectura consultan; la base valida cada acción.
+
+VALIDACIÓN
+Consulte VALIDACION_SEGUIMIENTO.txt. La compilación iOS firmada y la apertura
+real de WhatsApp se deben comprobar desde Xcode/iPhone; no hay SDK iOS aquí.

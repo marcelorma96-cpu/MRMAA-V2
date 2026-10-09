@@ -1,0 +1,27 @@
+UNOMESA FUNCIONAL · OPTIMIZACIÓN WEB E iOS · 8 OCTUBRE 2026
+
+1. Descomprime este ZIP y publica la carpeta UNOMESA_FUNCIONAL en el MISMO
+   proyecto Vercel que ya utilizas. Conserva todas las variables de entorno.
+2. Mantén el mismo Supabase. Esta actualización NO requiere SQL: los 16 SQL
+   históricos se conservan tal como estaban. No hay que volver a ejecutarlos.
+3. Publica la web antes de instalar el ZIP iOS Build 9. La app carga /mobile.
+   Instalar solamente el proyecto Xcode no actualiza el servidor web.
+4. Abre Configuración > Seguridad; prueba paneles ⋯, cotizaciones y plano.
+
+NOVEDADES
+- Seguridad adaptable: columnas y acciones caben en el teléfono; nombres y
+  correos largos se ajustan. Explicación de sesiones en sección desplegable.
+- Paneles de opciones redondeados con desplazamiento propio y ajuste a la
+  parte visible de la pantalla, también al mostrar el teclado.
+- Plano móvil: "Todas las reservas del día" visible, usando el mismo estado
+  y datos del selector ya existente en web. Al desactivarlo vuelve al horario.
+- Imprimir y Descargar PDF visibles directamente en el panel de opciones.
+- Estados de cotización compartidos en tarjetas iOS, detalles y listado web:
+  Convertida (violeta), Confirmada (verde), Pendiente (ámbar). Los avisos
+  Contactar y No realizada conservan sus reglas existentes.
+- Enlace público de reservaciones y pagos de anticipos fuera de esta entrega.
+
+Conserva tus credenciales y proyecto existente. No recrees el restaurante
+ni la base de datos. Los cambios de esta entrega son de presentación.
+El historial de instrucciones anterior sigue incluido como referencia.
+Consulta VALIDACION_INTERFAZ_2026-10-08.txt para pruebas y límites.
