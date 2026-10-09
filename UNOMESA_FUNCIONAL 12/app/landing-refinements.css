@@ -1,0 +1,52 @@
+/* Public presentation is scoped away from the operational modules. */
+.landingRefined{background:#101a17;color:#f8f7f1}
+.landingRefined .landingNav{max-width:1240px;min-height:88px;height:auto;padding:22px 32px;background:transparent!important;border-bottom:1px solid #ffffff12}
+.landingRefined .landingNav>div{gap:22px}
+.landingRefined .landingLanguages{display:flex;align-items:center;gap:3px;padding:4px;border:1px solid #ffffff26;border-radius:100px}
+.landingRefined .landingLanguages a{display:flex!important;padding:7px 9px;border-radius:100px;font-size:12px;font-weight:700;line-height:1;color:#c9d7d0}
+.landingRefined .landingLanguages a[aria-current=page]{background:#f7f5ea;color:#16392b}
+.landingRefined .hero{max-width:1240px;min-height:650px;gap:64px;padding:76px 32px 70px;grid-template-columns:1.16fr .94fr}
+.landingRefined .hero h1{font-size:clamp(2.8rem,4.35vw,4.35rem);line-height:1.06;letter-spacing:-.04em;max-width:660px;margin:24px 0}
+.landingRefined .hero h1 em{color:#ffab6a}
+.landingRefined .hero>div>p{color:#c1cdc6;font-size:1.06rem;line-height:1.7}
+.landingRefined .hero .heroActions{gap:12px;margin-top:28px}
+.landingRefined .hero .heroActions button{font-size:14px;padding:14px 18px;border-radius:12px}
+.landingRefined .hero .trialReassurance{font-size:13px;color:#bcd0c4;margin-top:18px}
+.landingRefined .landingPriceAnchor{display:inline-flex;align-items:center;gap:8px;color:#ffc497;font-size:13px;line-height:1.5;text-underline-offset:4px;margin-top:7px}
+.landingRefined .heroPanel{min-width:0;transform:rotate(1deg);padding:24px;background:#22362d;border:1px solid #43594d;box-shadow:0 28px 70px #0005;border-radius:24px}
+.landingRefined .previewContent{border-radius:17px;margin-top:20px;padding:26px}
+.landingRefined .landingBenefits{background:transparent;color:#cdd9d0;border-block:1px solid #ffffff15;max-width:1176px;margin:auto;padding-block:22px}
+.landingRefined .landingWorkflow{padding:70px 32px 40px;max-width:1240px;margin:auto}
+.landingRefined .landingWorkflow h2{font:700 clamp(2rem,3vw,2.9rem)/1.15 Georgia,serif;letter-spacing:-.025em;margin:14px 0 30px;color:#f8f7f1}
+.landingRefined .landingWorkflow ol{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:0;margin:0;gap:18px}
+.landingRefined .landingWorkflow li{border:1px solid #ffffff20;background:#ffffff04;border-radius:20px;padding:26px}
+.landingRefined .landingWorkflow li>span{display:block;color:#ffb47d;font-size:13px;font-weight:800;letter-spacing:.1em;margin-bottom:28px}
+.landingRefined .landingWorkflow h3{font-size:19px;margin:0 0 12px;color:#f8f7f1}
+.landingRefined .landingWorkflow p{font-size:14px;line-height:1.7;margin:0;color:#bfcec5}
+.landingRefined .plansSection{scroll-margin-top:20px}
+.landingRefined .planGrid article{border-radius:22px}
+.landingRefined .planGrid article:last-child{border:2px solid #df783d;box-shadow:0 14px 40px #a4471014}
+.landingRefined :is(button,a,summary):focus-visible{outline:3px solid #ffa869;outline-offset:4px}
+#entryBootCover{display:none}
+html[data-unomesa-entry-pending=true] #entryBootCover{display:grid;position:fixed;inset:0;z-index:2147483000;overflow:hidden;background:#f7faf7}
+html[data-unomesa-entry-pending=true] .landing{visibility:hidden}
+.accessLoading{padding:0;min-height:100dvh;background:#f7faf7}
+.accessLoading .appLoadingBrand{position:relative}
+.accessLoadingText{position:absolute;top:calc(50% + 132px);left:24px;right:24px;margin:0;text-align:center;font:13px/1.5 system-ui;color:#55695e}
+.accessLoadingText.visuallyHidden{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+[data-theme=dark] .accessLoadingText{color:#bdcbc2}
+.appLaunchOverlay.isLeaving .appBrandMark:after{content:"";position:absolute;inset:0;z-index:2;border-radius:26px;background:linear-gradient(115deg,transparent 25%,#fff8 49%,transparent 72%);background-size:250% 100%;animation:brandSheen .65s ease-in-out forwards}
+@keyframes brandSheen{from{background-position:200% 0}to{background-position:-100% 0}}
+@media(max-width:1050px){.landingRefined .hero{gap:28px}.landingRefined .landingNav>div{gap:14px}.landingRefined .hero h1{font-size:3.3rem}.landingRefined .landingNav .brandLogo{width:160px}.landingRefined .landingNav>div>a{font-size:13px}}
+@media(max-width:800px){.landingRefined .hero{grid-template-columns:1fr;max-width:680px;padding:44px 24px 54px;gap:38px}.landingRefined .hero h1{font-size:clamp(2.6rem,7vw,3.8rem)}.landingRefined .heroPanel{transform:none}.landingRefined .landingNav{padding:18px 24px;gap:16px;flex-wrap:wrap}.landingRefined .landingNav>div{flex-basis:100%;justify-content:space-between}.landingRefined .landingWorkflow{padding:50px 24px 28px}.landingRefined .landingWorkflow ol{grid-template-columns:1fr}.landingRefined .landingWorkflow li{padding:24px}.landingRefined .landingWorkflow li>span{margin-bottom:16px}.landingRefined .landingWorkflow p{max-width:620px}}
+@media(max-width:480px){.landingRefined .landingNav{padding:18px}.landingRefined .landingNav>div{gap:10px;flex-wrap:wrap}.landingRefined .landingNav .landingAuthActions{flex:1;justify-content:flex-end}.landingRefined .hero{padding:36px 20px 44px}.landingRefined .hero h1{font-size:2.7rem}.landingRefined .hero .heroActions{align-items:stretch;flex-direction:column}.landingRefined .heroPanel{padding:18px}.landingRefined .previewContent{padding:20px}.landingRefined .landingWorkflow{padding-inline:20px}.landingRefined .landingPriceAnchor{font-size:12px}.landingRefined .heroTag{font-size:10px;letter-spacing:.12em}}
+@media(prefers-reduced-motion:reduce){.appLaunchOverlay.isLeaving .appBrandMark:after{display:none}}
+@media print{#entryBootCover{display:none!important}}
+/* Override the previous workflow's two-column layout, including small screens. */
+.landingRefined .landingWorkflow{display:block}
+@media(max-width:480px){
+ .landingRefined .landingNav{display:grid;grid-template-columns:1fr auto;gap:14px}
+ .landingRefined .landingNav>div{display:contents}
+ .landingRefined .landingNav .landingLanguages{grid-column:2;grid-row:1}
+ .landingRefined .landingNav .landingAuthActions{grid-column:1/-1;grid-row:2;justify-content:flex-end}
+}
