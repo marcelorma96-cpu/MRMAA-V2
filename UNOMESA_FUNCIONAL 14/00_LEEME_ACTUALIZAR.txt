@@ -1,0 +1,147 @@
+ACTUALIZACIÓN DE PAGOS · 10 OCTUBRE 2026
+- Actualizar estado ahora consulta Lemon Squeezy desde el servidor, valida
+  suscripción, precio, comprobantes y restaurante, y sincroniza el estado.
+  Solo anuncia éxito después de comprobar el resultado guardado.
+- Consulta autenticada para el propietario. No hace cargos, no reactiva
+  automáticamente y conserva las exenciones. Un fallo muestra error.
+- Suscripción finalizada: elija plan y Pagar ahora. También se reconoce una
+  cancelación cuya fecha final verificada ya pasó. Si UnoMesa conserva un
+  estado anterior, Actualizar estado permite sincronizarlo antes de pagar.
+- Suscripción vigente, pendiente o pausada: se conserva su gestión para
+  evitar cobros duplicados. Un reembolso por sí solo no prueba la expiración.
+- Las cuentas sin suscripción vinculada aún dependen de recibir el primer
+  webhook firmado; Actualizar estado explica que falta esa confirmación.
+- Regreso iOS Build 14 conservado. Web conserva su pestaña de UnoMesa y
+  explica cómo cerrar la pestaña de pagos para volver.
+- Instructivo, tutorial y asistente actualizados en ambos idiomas.
+- No necesita SQL nuevo ni otro ZIP iOS. Los SQL existentes permanecen
+  idénticos. Esta actualización usa el servicio de pagos ya instalado.
+- La verificación manual actualiza únicamente registros de facturación.
+  No modifica clientes, cotizaciones, reservaciones ni áreas.
+
+ENLACE PARA CLIENTES
+Administrador → Configuración → Página pública → Contenido / Contacto /
+Publicar. En iOS: Más → Configuración. Si no aparece, publique este ZIP
+web y vuelva a abrir la aplicación. El módulo requiere acceso activo.
+Si SQL 50 sigue pendiente, aplique ese archivo antes de guardar la página.
+
+UNOMESA FUNCIONAL · VERSIÓN UNIFICADA · 10 OCTUBRE 2026
+UN SOLO ZIP WEB: LANDING + SEO + PÁGINA PÚBLICA + AYUDA ACTUALIZADA
+
+QUÉ INCLUYE
+- La landing y las páginas SEO para eventos en español e inglés de la
+  actualización de «Optimizar primer post», con sitemap, canonical,
+  enlaces entre idiomas y datos estructurados.
+- Página opcional por restaurante: enlace personalizado, QR, menús,
+  salones, fotos, PDF y contacto por WhatsApp, correo o teléfono.
+- Buzón de solicitudes de cotización, con revisión y creación de propuesta.
+- Recordatorios que se ocultan al pasar la fecha del evento, conservando
+  el pendiente y su historial.
+- Las correcciones anteriores de Google y del regreso desde Lemon Squeezy.
+- Instructivo y Asistente UnoMesa actualizados en español e inglés, usando
+  la misma referencia. Ayuda permite filtrar también por Buzón.
+- Tutorial corto de hasta 7 pasos según plan y permisos, con publicación,
+  solicitudes, pendientes y regreso desde pagos. La explicación completa
+  permanece en Instructivo; no hace falta recorrer un tutorial largo.
+
+1. ACTUALIZAR LA WEB
+Publique este ZIP en el MISMO proyecto Vercel y conserve la conexión al
+MISMO Supabase, dominio, variables, credenciales y configuración de pagos.
+Este ZIP reúne las entregas: no necesita subir aparte el ZIP de SEO.
+No contiene node_modules ni archivos de prueba con credenciales.
+
+2. SQL: SOLO EL 50 SI TODAVÍA ESTÁ PENDIENTE
+Los cambios de SEO, ayuda y regreso de pagos no necesitan SQL adicional.
+Si aún no instaló la página pública, ejecute 50_PAGINA_PUBLICA.sql en su
+proyecto Supabase actual. Si ya lo ejecutó, no lo repita para esta entrega.
+No vuelva a ejecutar las migraciones históricas. SQL 49 sigue siendo el
+requisito previo de Pendientes, como en la versión anterior.
+
+Los 17 archivos SQL incluidos son idénticos a la entrega anterior.
+SQL 50 agrega tablas y funciones; no borra ni reescribe clientes,
+cotizaciones, reservas, cuentas, planes ni exenciones existentes.
+Las solicitudes solo generan una cotización cuando un usuario autorizado
+revisa el formulario y guarda. Los datos internos y las solicitudes se
+separan por restaurante y permisos; el contenido publicado es público.
+
+3. VARIABLES EXISTENTES
+Conserve SUPABASE_SECRET_KEY o SUPABASE_SERVICE_ROLE_KEY en el servidor.
+Nunca anteponga NEXT_PUBLIC_ a una clave secreta ni la comparta con usuarios.
+Turnstile ya estaba integrado en el acceso. Para el formulario público,
+revise TURNSTILE_SECRET_KEY en Vercel: debe corresponder al mismo widget de
+NEXT_PUBLIC_TURNSTILE_SITE_KEY. Si la clave solo estaba en Supabase Auth,
+agregue la misma clave secreta en Vercel y vuelva a desplegar. Si ya existe,
+consérvela. Cada restaurante no necesita configurar Turnstile.
+Mantenga autorizado el widget para www.unomesa.com / unomesa.com.
+
+Para producción:
+NEXT_PUBLIC_SITE_URL=https://www.unomesa.com
+NEXT_PUBLIC_SEARCH_INDEXING no debe estar en false si quiere indexación.
+Conserve las claves de Lemon Squeezy y su webhook. El retorno de pagos no
+se agrega a las direcciones de retorno de Google/Supabase.
+No se inspeccionaron los valores reales de sus variables desde esta revisión.
+
+4. IOS Y ANDROID
+El instructivo, tutorial, asistente, buzón y demás cambios web se cargan
+desde Vercel. Esta unificación no requiere otro proyecto nativo ni cambia
+los archivos de iOS. Si ya instaló Build 14, conserve esa aplicación.
+Si sigue en una versión anterior, el ZIP iOS Build 14 entregado previamente
+es el que incorpora el regreso desde pagos: ábralo en Xcode, conserve el
+Team y bundle ID y use Command + R. No necesita desinstalar la app.
+
+En la web, Lemon Squeezy abre otra pestaña: ciérrela para regresar a UnoMesa.
+Si el navegador bloquea la apertura, use Abrir pagos seguros.
+En iOS Build 14, use Listo en la ventana segura para volver a la app.
+Android y iOS anteriores conservan la apertura externa.
+Los nuevos pagos y recibos enlazan /billing/return. Los enlaces anteriores
+pueden conservar su retorno hasta vencer (15 minutos).
+Al volver se consulta la suscripción; volver nunca demuestra que pagó.
+La activación depende de la confirmación verificada del proveedor.
+No se compiló ni firmó una nueva aplicación en Xcode en esta revisión.
+
+5. PONER EN MARCHA LA PÁGINA DEL RESTAURANTE
+Administrador → Configuración → Página pública:
+- Contenido: agregue o copie menús y salones, con fotos o PDF si desea.
+  Las copias públicas no modifican precios internos ni cotizaciones.
+- Contacto: habilite los canales que atenderá y revise sus datos.
+- Publicar: elija un nombre disponible para su enlace, revise la vista
+  previa, active la página, guarde y comparta el enlace o el QR.
+
+Pruebe una solicitud en una ventana privada. Ábrala en Buzón de solicitudes
+(en teléfono: Más → Buzón de solicitudes), revise sus datos y cree la
+cotización. Compruebe precios y cantidades antes de guardar.
+El visitante elige su medio de comunicación entre los canales habilitados.
+La propuesta se envía manualmente por ese medio, adjuntando el PDF.
+Las consultas y solicitudes de reserva abren el canal de contacto;
+solo el formulario de cotización crea una solicitud en el buzón.
+No se cobran anticipos ni se confirman reservas automáticamente.
+
+6. AYUDA Y RECORDATORIOS
+Ayuda → Instructivo: busque página pública, buzón, PDF o pagos.
+Ayuda → Tutorial: recorrido breve adaptado al rol y plan.
+Asistente UnoMesa: explica los pasos usando la misma referencia, sin ver
+ni modificar registros, consultar cobros reales o enviar mensajes.
+
+Para agregar un pendiente, pulse Pendientes en una cotización guardada.
+En Recordatorios, Modificar abre la cotización; para cambiar el texto,
+abra Pendientes dentro de esa cotización. Quitar retira el aviso.
+El día del evento permanece visible; después se oculta sin borrar historial.
+Reprogramarlo para hoy o una fecha futura lo muestra otra vez si sigue
+pendiente. Usa la fecha local del dispositivo y consulta al volver a la
+app y cada 30 segundos mientras está visible.
+
+7. SEO DESPUÉS DE PUBLICAR
+Compruebe las páginas:
+https://www.unomesa.com/es/software-eventos-restaurantes
+https://www.unomesa.com/restaurant-event-management
+https://www.unomesa.com/sitemap.xml
+
+En Google Search Console, inspeccione /es y las dos páginas nuevas,
+pruebe la URL publicada y solicite indexación. Envíe sitemap.xml.
+La actualización prepara el contenido, pero no garantiza aparecer primero
+ni que Google indexe inmediatamente. Publicar este ZIP no envía por sí solo
+una solicitud a Search Console ni configura campañas de publicidad.
+
+Esta revisión no ejecutó SQL, no cambió datos reales y no publicó en Vercel.
+Consulte LEEME_SEO_EVENTOS.txt y LEEME_PAGINA_PUBLICA.txt para más detalles.
+HISTORIAL_GOOGLE_BUILD13.txt conserva las instrucciones previas de Google.

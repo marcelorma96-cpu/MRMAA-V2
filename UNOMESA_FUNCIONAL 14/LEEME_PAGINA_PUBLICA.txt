@@ -1,0 +1,84 @@
+UNOMESA · PÁGINA PÚBLICA Y SOLICITUDES · 9 OCTUBRE 2026
+
+Para instalar: lea primero 00_LEEME_ACTUALIZAR.txt.
+
+CONFIGURACIÓN PARA CADA RESTAURANTE
+Solo el administrador publica y administra los archivos públicos.
+1. Contenido: nombre, descripción, dirección, logo e imagen principal.
+   Copie menús y áreas de su catálogo o agregue elementos manuales. La carta
+   digital puede separarse por categoría. Los precios públicos son copias
+   editables independientes: no cambian cotizaciones ya guardadas ni precios
+   del catálogo interno. Si cambia el catálogo, revise la copia pública.
+   El selector ofrece los primeros 200 elementos activos; puede agregar uno
+   manualmente. Hasta 60 elementos de menú y 60 salones en la página.
+   Ningún salón ni dato privado se publica automáticamente.
+2. Contacto: habilite WhatsApp, correo y/o llamada. Para WhatsApp solo ingrese
+   el número con código de país; UnoMesa genera el enlace y permite probarlo.
+   No necesita una contraseña de WhatsApp ni pagar/integrar una API.
+   El formulario ofrece solo los medios habilitados por ese restaurante.
+3. Publicar: elija un nombre de enlace único, revise la vista previa, marque
+   Habilitar página pública y guarde. Comparta el enlace o descargue el QR.
+   Ejemplo de formato: https://www.unomesa.com/r/nombre-restaurante
+   Cambiar el nombre conserva los enlaces anteriores. Desactivar la página
+   oculta el contenido y bloquea solicitudes nuevas. Los archivos públicos
+   ya compartidos pueden seguir disponibles hasta eliminarlos; las copias
+   descargadas por terceros no pueden revocarse.
+
+QUÉ VE EL VISITANTE
+- Ver menú: carta digital y/o enlaces PDF. No necesita cuenta.
+- Cotizar evento: nombre, fecha, hora LOCAL DEL RESTAURANTE, personas,
+  teléfono con código de país, correo, menú o Necesito asesoría, salón opcional,
+  detalles y método de comunicación preferido.
+- Solicitar reserva / Consultas: abre el canal si solo hay uno; si hay varios,
+  el visitante elige. WhatsApp inicia un mensaje preparado que debe enviar
+  la persona. El restaurante confirma y registra la reserva manualmente.
+- No hay mapa de disponibilidad pública, pagos ni confirmación automática.
+
+BUZÓN INTERNO (WEB Y APP)
+- Nuevas, En atención, Cotizadas, Archivadas y Todas. 25 por página.
+- El aviso de nuevas permanece hasta atender/cotizar/archivar. Cuenta
+  hasta 99+. Revisa hasta cada minuto cuando la página está visible;
+  también se puede actualizar manualmente o deslizando en la app.
+- No hay notificación push ni sonido, ni sincronización de conversaciones.
+- Usuarios con acceso de lectura pueden consultar; administrar solicitudes
+  y crear cotizaciones requiere permisos operativos existentes.
+- Crear cotización completa los datos y usa el precio vigente del catálogo
+  interno si encuentra el menú por nombre. Revise siempre precio, cantidad,
+  área y condiciones. Si el visitante pidió asesoría, agregue los productos.
+- Guardar crea y vincula la cotización en una transacción; reintentos no
+  duplican la cotización. No crea reservación hasta la conversión existente.
+- Ver cotización abre el documento. Descargue el PDF y adjúntelo en WhatsApp
+  o en su correo. Escribir correo abre el programa de correo del dispositivo.
+  Ningún botón registra un mensaje como enviado ni lo envía automáticamente.
+- Las consultas y solicitudes de reserva que abren WhatsApp/correo/teléfono
+  NO entran por sí solas al buzón. Solo el formulario de cotización lo hace.
+
+ARCHIVOS Y RENDIMIENTO
+- Hasta 5 PDF; 3 MB por archivo; 20 MB y 30 archivos en total por restaurante.
+- PNG/JPEG/WebP para imágenes; no SVG. Comprima antes de subir.
+- Archivos en un bucket nuevo de Supabase; el visitante descarga directamente
+  desde Storage. Los PDF no se incrustan ni descargan al entrar al dashboard.
+- Menús y fotos visibles usan carga diferida donde corresponde. El buzón está
+  paginado y los avisos solo consultan un contador limitado mientras es visible.
+- Quitar un archivo del contenido no lo borra. Guarde y elimínelo desde
+  Archivos almacenados para liberar espacio. No se permite borrar un archivo
+  aún referenciado por la página guardada.
+- Más visitas y descargas consumen almacenamiento/transferencia; no es gratis
+  ni ilimitado. La arquitectura evita cargar todos los PDF en cada pantalla;
+  no constituye una prueba de carga de miles de restaurantes simultáneos.
+- Límites de solicitudes por IP y comprobación de campos en el servidor;
+  Turnstile se valida si está configurado. Los errores de seguridad bloquean
+  el envío; no se eluden para simular una solicitud guardada.
+
+RECORDATORIOS EXISTENTES
+SQL 50 también agrega el filtro por fecha del evento: hoy/futuro permanecen;
+ayer y anteriores dejan de aparecer en Recordatorios, sin borrar historial.
+No confundir estos pendientes internos con el nuevo buzón de solicitudes.
+
+VALIDACIÓN
+Compilación Next/TypeScript; pruebas PostgreSQL local de aislamiento, roles,
+instalación repetida, conservación, publicación, límites, paginación y creación
+atómica; navegador con datos ficticios para formulario, buzón, precarga de
+cotización, configuración, PDF, QR y presentación iOS en tamaños móviles.
+No se usaron datos de producción ni se hizo un envío real a WhatsApp/correo.
+La apertura nativa final debe probarse en el iPhone instalado.
