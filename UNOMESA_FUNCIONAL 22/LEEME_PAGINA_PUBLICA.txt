@@ -1,0 +1,150 @@
+MENÚ EN LIBRO Y LOGO COMPARTIDO — INCLUIDOS EN ESTA VERSIÓN
+
+Comprobado con PDF ficticios de varias páginas: computadora (1280 px),
+tablet (768 px) y móviles (390 y 320 px). Se verificaron páginas completas,
+sin desbordamiento horizontal, cambio de menú, navegación, deslizamiento
+y zoom. El archivo de cada menú no se solicita hasta seleccionarlo.
+Compilación de producción y TypeScript correctos; 33 pruebas específicas
+pasaron (libro, logo, errores de solicitud, uso público, idiomas y ayuda).
+Estas verificaciones no equivalen a una prueba en un iPhone instalado.
+Los archivos SQL y los datos de producción permanecen intactos.
+
+ENVÍO DE SOLICITUDES — DIAGNÓSTICO
+
+Si falla un envío, los datos permanecen en el formulario. La verificación se
+reinicia porque sus tokens son de un solo uso; verla sin marcar después del
+fallo no identifica la causa original. Complete la nueva verificación antes
+de reintentar. El mismo formulario conserva el identificador para evitar
+solicitudes duplicadas cuando se repite un envío.
+
+Se distinguen errores de datos, verificación, límite de solicitudes, origen,
+enlace no disponible y servicio temporalmente no disponible. Un fallo de
+Supabase ya no se presenta automáticamente como datos incorrectos.
+Si aparece Referencia, búsquela en Vercel → Logs: el registro
+[public-restaurant] incluye la etapa y código, sin datos personales ni claves.
+Etapas: service-config, rate-limit, input, verification, intake.
+En verification, el objeto verification detalla el motivo sin exponer claves.
+Consulte LEEME_CORRECCION_SOLICITUDES_Y_CARGA.txt.
+La captura original no permite confirmar la causa en producción; falta la
+respuesta HTTP o el registro del intento fallido. No se ha enviado ninguna
+solicitud de prueba a producción. No requiere SQL nuevo.
+
+UNOMESA · PÁGINA PÚBLICA Y SOLICITUDES · 10 OCTUBRE 2026
+
+Para instalar: lea primero 00_LEEME_ACTUALIZAR.txt.
+
+CONFIGURACIÓN PARA CADA RESTAURANTE
+Solo el administrador publica y administra los archivos públicos.
+1. Contenido: nombre, descripción, dirección e imagen principal.
+   El logo se usa desde Configuración → General. Cámbielo o quítelo allí y
+   guarde: se reflejará al volver a abrir la página pública, sin otra subida.
+   Copie menús y áreas de su catálogo o agregue elementos manuales. La carta
+   digital puede separarse por categoría. Los precios públicos son copias
+   editables independientes: no cambian cotizaciones ya guardadas ni precios
+   del catálogo interno. Si cambia el catálogo, revise la copia pública.
+   El selector ofrece los primeros 200 elementos activos; puede agregar uno
+   manualmente. Hasta 60 elementos de menú y 60 salones en la página.
+   Los seleccionados no se repiten debajo: Editar detalles abre los campos en
+  la misma fila. Complete Capacidad máxima (personas) en cada salón seleccionado.
+  Ningún salón ni dato privado se publica automáticamente.
+2. Contacto: habilite WhatsApp, correo y/o llamada. Pegue en Enlace de WhatsApp
+   su enlace oficial wa.me con nombre de usuario o número, o el enlace corto
+   de WhatsApp Business. HTTP se convierte a HTTPS. SQL 52 permite los nombres
+   de usuario y no modifica información guardada.
+   Probar WhatsApp abre ese mismo enlace, también en vista previa. SQL 51
+   permite guardarlo sin un número adicional; conserva los contactos existentes.
+   No necesita una contraseña de WhatsApp ni pagar/integrar una API.
+   El formulario ofrece solo los medios habilitados por ese restaurante.
+3. Publicar: elija un nombre de enlace único, revise la vista previa, marque
+   Habilitar página pública y guarde. Comparta el enlace o descargue el QR.
+   Ejemplo de formato: https://www.unomesa.com/r/nombre-restaurante
+   Cambiar el nombre conserva los enlaces anteriores. Desactivar la página
+   oculta el contenido y bloquea solicitudes nuevas. Los archivos públicos
+   ya compartidos pueden seguir disponibles hasta eliminarlos; las copias
+   descargadas por terceros no pueden revocarse.
+
+QUÉ VE EL VISITANTE
+- Ver menú: elija Menú principal, Menú de eventos u otro nombre configurado.
+  Abre un libro con dos páginas si hay espacio y una en teléfono. Flechas
+  y deslizamiento cambian de página; los controles amplían hasta 300%.
+  Ajustar muestra la página completa. Cambiar menú elige otro PDF.
+  Los PDF no se repiten con su nombre de archivo debajo de la carta.
+  Si falla la carga, muestra Reintentar. Abrir archivo usa el visor del dispositivo.
+  Si no hay PDF, abre la carta digital. No necesita cuenta.
+- Cada salón muestra Capacidad máxima: X personas. Si no se completó, muestra
+  Capacidad por confirmar. No se infiere de las mesas.
+- Cotizar evento: nombre, fecha, hora LOCAL DEL RESTAURANTE, personas,
+  teléfono con código de país, correo, menú o Necesito asesoría, salón opcional,
+  detalles y método de comunicación preferido.
+- Solicitar reserva / Consultas: abre el canal si solo hay uno; si hay varios,
+  el visitante elige. Se conserva el mensaje incluido en el enlace de WhatsApp;
+  la persona debe enviarlo. El restaurante confirma y registra la reserva manualmente.
+- No hay mapa de disponibilidad pública, pagos ni confirmación automática.
+
+BUZÓN INTERNO (WEB Y APP)
+- Nuevas, En atención, Cotizadas, Archivadas y Todas. 25 por página.
+- El aviso de nuevas permanece hasta atender/cotizar/archivar. Cuenta
+  hasta 99+. Revisa hasta cada minuto cuando la página está visible;
+  también se puede actualizar manualmente o deslizando en la app.
+- No hay notificación push ni sonido, ni sincronización de conversaciones.
+- Usuarios con acceso de lectura pueden consultar; administrar solicitudes
+  y crear cotizaciones requiere permisos operativos existentes.
+- Crear cotización completa los datos y usa el precio vigente del catálogo
+  interno si encuentra el menú por nombre. Revise siempre precio, cantidad,
+  área y condiciones. Si el visitante pidió asesoría, agregue los productos.
+- Guardar crea y vincula la cotización en una transacción; reintentos no
+  duplican la cotización. No crea reservación hasta la conversión existente.
+- Ver cotización abre el documento. Descargue el PDF y adjúntelo en WhatsApp
+  o en su correo. Escribir correo abre el programa de correo del dispositivo.
+  Ningún botón registra un mensaje como enviado ni lo envía automáticamente.
+- Las consultas y solicitudes de reserva que abren WhatsApp/correo/teléfono
+  NO entran por sí solas al buzón. Solo el formulario de cotización lo hace.
+
+ARCHIVOS Y RENDIMIENTO
+- En Contenido → Menús PDF, pulse Agregar otro menú PDF, adjunte un archivo
+  y escriba un nombre claro, por ejemplo Menú principal o Menú de eventos.
+  Repita por cada menú y guarde. Hasta 5 PDF; 3 MB por archivo; 20 MB y
+  30 archivos en total por restaurante.
+- PNG/JPEG/WebP para imágenes; no SVG. Comprima antes de subir.
+- Archivos en un bucket nuevo de Supabase; el visitante descarga directamente
+  desde Storage para imágenes y por /menus/ de UnoMesa para PDF.
+  El visor PDF y su archivo solo se cargan al abrir el menú; no al entrar al dashboard.
+  Solo se dibujan las páginas del libro que están a la vista.
+  El logo público se sirve desde /r/su-enlace/logo con el logo actual de General.
+  Esta ruta solo admite restaurantes publicados y su propia imagen; no expone
+  sus ajustes privados. No crea archivos duplicados ni cambia registros.
+  Usa la clave de servicio del servidor ya requerida por las solicitudes.
+  Si General nunca tuvo el campo de logo, conserva el logo público anterior;
+  si se quitó explícitamente desde General, la página queda sin logo.
+- Menús y fotos visibles usan carga diferida donde corresponde. El buzón está
+  paginado y los avisos solo consultan un contador limitado mientras es visible.
+- Quitar un archivo del contenido no lo borra. Guarde y elimínelo desde
+  Archivos almacenados para liberar espacio. No se permite borrar un archivo
+  aún referenciado por la página guardada.
+- Más visitas y descargas consumen almacenamiento/transferencia; no es gratis
+  ni ilimitado. La arquitectura evita cargar todos los PDF en cada pantalla;
+  no constituye una prueba de carga de miles de restaurantes simultáneos.
+- Límites de solicitudes por IP y comprobación de campos en el servidor;
+  Turnstile se valida si está configurado. Los errores de seguridad bloquean
+  el envío; no se eluden para simular una solicitud guardada.
+
+RECORDATORIOS EXISTENTES
+SQL 50 también agrega el filtro por fecha del evento: hoy/futuro permanecen;
+ayer y anteriores dejan de aparecer en Recordatorios, sin borrar historial.
+No confundir estos pendientes internos con el nuevo buzón de solicitudes.
+
+VALIDACIÓN
+Compilación Next/TypeScript; pruebas PostgreSQL local de aislamiento, roles,
+instalación repetida, conservación, publicación, límites, paginación y creación
+atómica; navegador con datos ficticios para formulario, buzón, precarga de
+cotización, configuración, PDF, QR y presentación iOS en tamaños móviles.
+No se usaron datos de producción ni se hizo un envío real a WhatsApp/correo.
+La apertura nativa final debe probarse en el iPhone instalado.
+
+
+ALERTAS Y PREFIJO TELEFÓNICO
+El aviso de solicitudes tiene nueva presentación. En Configuración → General → Alertas de solicitudes puede activar/desactivar sonido, volumen y frecuencia (5/10/20/30 segundos); pulse Guardar cambios. Son preferencias del restaurante.
+El sonido se repite mientras haya solicitudes Nuevas. Marcar en atención, guardar una cotización vinculada o archivar elimina esa solicitud del contador. Abrir el buzón no la atiende. Otros dispositivos comprueban el contador cada 30 segundos mientras están visibles.
+Mantenga UnoMesa abierto. El navegador puede exigir un toque inicial: Activar sonido. Se respeta el volumen del equipo. No son notificaciones push; el sistema puede suspender audio en segundo plano.
+El formulario de evento sugiere el prefijo telefónico por el país del visitante detectado por Vercel; es editable y no exige ubicación GPS. Si no hay país detectado, el visitante lo selecciona. Una VPN puede cambiar la sugerencia. Solicitar reserva conserva el flujo de contacto existente.
+Esta actualización no requiere SQL adicional ni cambia solicitudes, cotizaciones, reservas o clientes guardados.

@@ -1,0 +1,128 @@
+ACTUALIZACIÓN VIGENTE: IOS BUILD 13 + WEB EMPAREJADA
+GOOGLE IOS · BUILD 13 — LEA ESTO PRIMERO
+Se corrigieron dos rutas que podían perder el regreso: apertura directa del
+esquema iOS sin controlador y entrega del resultado a una pantalla que ya no
+estaba escuchando. Ahora el enlace y la ventana de autenticación comparten
+el mismo manejo; la pantalla confirma recepción o se usa /auth/google en
+el mismo origen. El verificador temporal sobrevive a recrear la vista iOS.
+Solo se abre el dashboard después de instalar la sesión y pasar las mismas
+verificaciones de cuenta, permisos y seguridad.
+
+La web publicada fue revisada y contenía el arreglo anterior. Un diagnóstico
+público cancelado, sin ingresar una cuenta Google, confirmó que Supabase ya
+acepta com.unomesa.app://auth/google. Conserve esa URL; no hace falta volver
+a crear el cliente Google, cambiar Site URL ni modificar sus secretos.
+No se ha observado directamente el fallo en su iPhone ni confirmado su
+Build instalado. Esta corrección requiere la prueba real del paso 4.
+
+VALIDACIÓN BUILD 13
+Compilación Next.js correcta. 39 pruebas relevantes aprobadas, más pruebas
+API/SQL locales de registro, permisos, prueba única y MFA. Navegador con SDK
+Supabase real y respuestas sintéticas: PKCE, cancelación/reintento, entrega
+confirmada, un intercambio, dashboard, sesión persistente y rechazo de sesión.
+También se probó destruir la pantalla y sessionStorage durante Google: la
+ruta de respaldo recupera el verificador correcto y completa el ingreso.
+Un verificador ausente produce un error claro, sin crear una sesión.
+No hay Xcode ni SDK iOS aquí: el código nativo no está compilado, firmado ni
+probado con Google real en iPhone. Esta es la validación pendiente en su Mac.
+
+Fuentes oficiales consultadas:
+https://supabase.com/docs/guides/auth/sessions/pkce-flow
+https://supabase.com/docs/guides/auth/native-mobile-deep-linking
+https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession
+https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app
+
+HISTORIAL DE LOS CAMBIOS CONSERVADOS
+UNOMESA · CAMBIOS PREPARADOS · 9 OCTUBRE 2026
+
+ESTADO
+Trabajo preparado, comprobado localmente e incluido en este ZIP. No se ha
+publicado en Vercel ni accedido a la base de producción. Lea primero
+00_LEEME_ACTUALIZAR.txt para instalar y configurar Google Search Console.
+
+PREPARADO
+- Acceso app inspirado en un flujo social simple: Google primero; correo
+  y contraseña en pasos separados, recuperación y Crear cuenta al pie.
+- Build 12 termina Google en el documento que inició la solicitud, usando
+  el verificador del mismo intento y esperando la sesión antes de navegar.
+- Un rechazo de seguridad conserva el cierre y muestra un aviso al regresar.
+- Google iOS Build 12: llamada directa al diálogo seguro nativo, retorno a
+  la misma vista app, validación PKCE y cancelación/reintento sin abrir Safari.
+- Ingreso y registro en modo app: Google primero, selector Ingresar / Crear
+  cuenta, espacios adaptables y colores claros/oscuros.
+- App iOS/Android: apariencia dentro de Más → Apariencia → Cambiar;
+  se retira el botón flotante de los módulos, conservando la preferencia.
+- Cotizaciones: 25 resultados por página, solo campos del listado; búsqueda
+  sobre todos los registros, orden estable y navegación mediante cursores.
+- Seguridad: historial de modificaciones y papelera a 10 por página.
+  Consultas independientes, sin descargar 200 modificaciones de una vez.
+  La vista restringida de respaldos no consulta papelera ni modificaciones.
+- Pantallas de cuenta restringida, planes, sesiones y seguridad adaptables.
+  Mensajes de vencimiento ajustados a fechas y permisos reales de la cuenta.
+- Retorno web de Google a /login con pantalla de marca; esa ruta no incluye
+  la landing. Se conservan controles de sesión, MFA y registro existentes.
+- Identidad del operador: UnoMesa LLC en páginas legales, pie público,
+  metadatos de organización y correos de marca.
+
+PENDIENTES SIMPLIFICADOS — PREPARADO
+El propietario definió un flujo sencillo: abrir Pendientes, escribir el texto
+(p. ej. Falta confirmar menú), guardar y verlo en Recordatorios arriba de
+Cotizaciones, con Modificar y Quitar. Se implementó en web y modo app.
+Cinco avisos por página; conserva los demás, incluso eventos pasados.
+Modificar en Recordatorios abre la edición de la cotización vinculada.
+Para agregar un pendiente, use Pendientes en una cotización ya guardada.
+Para editar su texto, use Modificar dentro del panel Pendientes.
+Quitar archiva el aviso para el equipo; Volver a mostrar permite recuperarlo.
+Conserva los datos anteriores y la vinculación cotización/reserva, sin cobros,
+notificaciones automáticas ni listas de tareas generadas automáticamente.
+Se reutiliza el servicio SQL 49 existente, sin cambiarlo. Si no fue instalado,
+la función muestra que no está habilitada. El resto de ajustes no requiere SQL.
+Ver LEEME_SEGUIMIENTO.txt para detalles.
+
+CONSERVACIÓN
+Los 16 SQL originales son idénticos byte a byte. No se requiere ejecutar SQL
+para los demás ajustes. Planes, permisos y lógica de acceso sin cambios.
+Los datos históricos y consentimientos no se reescriben. El identificador
+interno de consentimiento mantiene la compatibilidad con el SQL instalado.
+La actualización de nombre legal no cambia contratos externos, perfiles de
+Apple/Google, bancos ni procesadores; la cláusula territorial previa sigue
+pendiente de revisión jurídica. No se afirma un traspaso legal de contratos.
+
+VERIFICACIÓN
+- npm run build completado correctamente.
+- 51 pruebas automatizadas aprobadas, incluidas paginación con fechas nulas,
+  empates, orden ascendente/descendente, filtros y separación de restaurantes.
+- Navegador local: retorno PKCE de Google simulado, una sola ejecución, sin
+  frames de landing; comprobado a 320, 390, 768, 1024 y 1440 píxeles.
+- Seguridad: 10 registros por panel, siguiente/anterior y consultas separadas;
+  no se consultan historial/papelera en modo exclusivo de respaldos.
+- Pendientes: creación, modificación, quitar, recuperar, conflicto de edición
+  y solo lectura comprobados en navegador. Visibilidad en web y modo app.
+- No se probó un ingreso real con Google ni un despliegue en producción.
+
+PUBLICAR
+Publique este ZIP web en el mismo proyecto
+Vercel existente conservando entorno y Supabase. Instale también el nuevo
+iOS Build 12 y agregue com.unomesa.app://auth/google a Redirect URLs de
+Supabase. Android recibe el diseño desde la web compartida sin nuevo build.
+Siga 00_LEEME_ACTUALIZAR.txt; no cambie Site URL ni Google Cloud.
+No reemplazar la base ni ejecutar migraciones históricas.
+
+VALIDACIÓN DE ESTOS ÚLTIMOS AJUSTES
+Compilación correcta y 18 pruebas relevantes aprobadas nuevamente. Navegador
+local: Modificar abre la cotización exacta en web/app; el texto del pendiente
+se edita desde su panel y el rol de lectura no recibe acciones de modificación.
+Apariencia dentro de Más, preferencia persistente y Siguiente accesible a
+320, 390, 768 y 1024 píxeles. No se ha publicado esta corrección en producción.
+
+VALIDACIÓN DEL ACCESO · 9 OCTUBRE
+Compilación web y 30 pruebas relevantes aprobadas; retorno nativo simulado,
+cancelación/reintento, sesión persistente y diseño adaptable comprobados.
+No se ha compilado el proyecto iOS ni probado Google real en un dispositivo.
+
+VALIDACIÓN BUILD 12
+33 pruebas aprobadas y compilación de producción correcta. Retorno simulado
+con comprobación estricta del verificador PKCE, dashboard y sesión guardada.
+Las validaciones de permisos, MFA, vigencia y planes siguen activas.
+Falta compilar en Xcode y probar Google real en iPhone.
+
