@@ -1,0 +1,21 @@
+VALIDACIÓN · 8 OCTUBRE 2026
+
+- Build de producción Next.js completado con webpack; TypeScript sin errores.
+- Pruebas con componentes reales y respuestas de prueba aisladas en Chromium:
+  320x568, 390x844, 430x932, 820x1180 y 1180x820; español e inglés.
+  Cotizaciones, Seguridad y plano: sin desbordamiento horizontal ni errores JS.
+- Paneles abiertos revisados; desplazamiento hasta el final en pantalla pequeña.
+- Toggle de todas las reservas activado y desactivado. Dos reservas en la misma
+  mesa aparecen dentro de ella en el modo de día completo (13:00 y 19:00).
+- Capturas adicionales de teléfono y tablet en 440x956 y 1024x1366.
+- 3 pruebas existentes de agendas, impresión y confirmaciones pasan.
+- Los 16 SQL del archivo original siguen idénticos byte por byte.
+- No se modificaron RPC, consultas de guardado, políticas, esquema ni datos.
+- Plist y catálogos de recursos iOS parseados. Build 9 y UA 1.0.9 coherentes.
+- La ruta temporal de pruebas y la autenticación ficticia NO están en la entrega.
+
+LÍMITES
+No se ejecutó Xcode, simulador iOS ni dispositivo físico. Las pruebas de tamaños
+usan Chromium y no sustituyen la prueba final del teclado, zonas seguras,
+VoiceOver y rotación en WKWebView. No se probó OAuth o facturación reales.
+No se ejecutó SQL ni se publicó nada en producción, Vercel o App Store.
