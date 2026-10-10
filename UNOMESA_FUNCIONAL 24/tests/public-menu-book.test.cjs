@@ -1,0 +1,6 @@
+const test=require('node:test'),assert=require('node:assert/strict'),ts=require('typescript'),vm=require('node:vm'),fs=require('node:fs');
+const m={exports:{}};vm.runInNewContext(ts.transpileModule(fs.readFileSync('lib/pdf-book.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText,{exports:m.exports,module:m});
+const {pdfBookSpread:spread,pdfSwipeDirection:swipe}=m.exports;
+test('all odd and even PDF pages remain reachable on phones and larger screens',()=>{for(const count of [1,2,3,6,7])for(const width of [320,390,768,1100]){let index=0,seen=[];for(;;){const s=spread(count,index,width);seen.push(...s.pages);if(!s.next)break;index=s.start+s.columns;}assert.deepEqual(seen,Array.from({length:count},(_,i)=>i+1));assert.equal(spread(count,0,width).previous,false);assert.equal(spread(count,999,width).next,false)}});
+test('resizing keeps the selected page inside its spread',()=>{for(let i=0;i<7;i++){assert(spread(7,i,900).pages.includes(i+1));assert.deepEqual([...spread(7,i,390).pages],[i+1]);}});
+test('swipes turn fitted pages but never hijack zoomed panning or vertical scrolling',()=>{assert.equal(swipe(-90,5,250,1),1);assert.equal(swipe(90,5,250,1),-1);for(const input of [[-90,5,250,2],[-30,1,250,1],[-90,110,250,1],[-90,5,950,1]])assert.equal(swipe(...input),0)});
