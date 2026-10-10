@@ -1,0 +1,49 @@
+UNOMESA — VALIDACIÓN DEL SEGUIMIENTO INTERNO
+5 octubre 2026
+
+BASE
+- Proyecto web obtenido de UNOMESA_FUNCIONAL.zip, versión 110.
+- Proyecto iOS obtenido de UNOMESA_iOS.zip, versión 7 (Build 7).
+- No se conectó ni escribió en la base de datos real del restaurante.
+
+DATOS Y PERMISOS
+- 27 pruebas automáticas aprobadas: seguimiento nuevo, integración real
+  de las funciones de plano/cotización/reserva en una base de prueba,
+  retorno Google en app y tutorial/asistente.
+- PostgreSQL de prueba PGlite: instalar/reinstalar SQL 49 preserva filas,
+  columnas y funciones originales. Consultar no crea pasos.
+- Plantilla idempotente; conversión y vinculación comparten IDs existentes.
+  Desvinculación, papelera y restauración conservan los pasos de su origen.
+- Las notas y estados de seguimiento no modifican importes, anticipos,
+  notas originales, estado de reserva, clientes ni asignaciones de mesas.
+- Versiones de paso impiden sobrescrituras concurrentes; reintentos de
+  creación con el mismo ID no duplican ni sobrescriben registros.
+- Rechazados acceso entre restaurantes, anónimo, sesión caducada, escritura
+  de roles de lectura, cuenta sin permiso de escritura y acceso directo
+  a la tabla o funciones auxiliares.
+- 15 SQL anteriores comparados byte por byte: ninguno modificado.
+
+INTERFAZ
+- Compilación Next.js de producción y TypeScript aprobados.
+- Chromium con componentes reales y servidor simulado, sin datos reales:
+  teléfono 390 y 320 px, tablet 820 px, escritorio 1280 px, español/inglés.
+- Guardado y consulta de pasos, responsable, fecha y notas; consulta
+  desde cotización y reserva vinculada, lista de pendientes y resueltos.
+- Paneles contextuales, confirmación al descartar borrador, preservación
+  frente a actualizaciones, aviso de conflicto y carga de versión actual.
+- Caída de conexión/reintento, acceso de lectura y aviso de SQL no instalado.
+- WhatsApp: teléfono internacional, mensaje revisable, salón completo,
+  exclusión de notas privadas y cero envíos durante las pruebas.
+- Sin desbordamiento horizontal; sin errores JavaScript.
+- Instructivo y asistente comparten referencia; tutorial continúa con
+  máximo 7 pasos y se adapta al rol.
+
+IOS
+- Build 8 en Debug/Release y UA UnoMesa-iOS/1.0.8.
+- Único cambio de código Swift respecto a Build 7: número del User-Agent.
+  Se conservan sesiones, Google, splash, descargas, impresión y navegación.
+- Plist, Assets JSON, storyboard y archivos del proyecto verificados.
+- No se ejecutó xcodebuild: este entorno no dispone del SDK iOS/macOS.
+  Validar firma/compilación y apertura real de WhatsApp en Xcode/iPhone.
+- Instalar el ZIP iOS no publica la web ni aplica el SQL de seguimiento.
+- No se publicó en Vercel, App Store ni Google Play.
