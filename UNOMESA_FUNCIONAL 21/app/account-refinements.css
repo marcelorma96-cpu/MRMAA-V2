@@ -1,0 +1,60 @@
+/* Account panels adapt to their available width, including the restricted screen. */
+.expired.restrictedAccount{padding:clamp(12px,3vw,36px);align-items:start;background:var(--soft);min-height:100dvh}
+.expired>.restrictedAccountShell{width:100%;max-width:1200px;min-width:0;padding:clamp(16px,3vw,36px);background:var(--paper);text-align:left;border:1px solid var(--line);box-shadow:var(--shadow-md)}
+.restrictedAccountHeader{text-align:center;max-width:780px;margin:0 auto 28px}
+.restrictedAccountHeader .brandLogo{margin:0 auto 24px}
+.restrictedAccountHeader h1{font:750 clamp(26px,4vw,40px)/1.15 system-ui,sans-serif;letter-spacing:-.035em;text-wrap:balance}
+.restrictedAccountHeader>p{font-size:15px;line-height:1.6;color:var(--muted)}
+.restrictedAccountShell>.billingPanel,.restrictedAccountShell>.securityCenter{margin-top:24px}
+.restrictedAccountShell .moduleCard{width:100%;min-width:0;max-width:100%;text-align:left;background:var(--paper);border-color:var(--line)}
+.restrictedAccountShell .moduleCard h2{font-family:inherit;line-height:1.25;letter-spacing:-.025em;font-size:23px}
+.billingPlans{min-width:0;width:100%}
+.billingPlans .planGrid{grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:16px;align-items:stretch}
+.billingPlans .planGrid article{min-width:0;padding:22px;border-color:var(--line);background:var(--paper);border-radius:18px;text-align:left}
+.billingPlans .planGrid h3{font:750 22px/1.25 system-ui,sans-serif;letter-spacing:-.035em;overflow-wrap:anywhere}
+.billingPlans .price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;margin:18px 0 8px;min-width:0}
+.billingPlans .price strong{font:780 36px/1.15 system-ui,sans-serif;letter-spacing:-.045em;white-space:nowrap}
+.billingPlans .price span{font-size:14px;margin:0;color:var(--muted)}
+.billingPlans .planGrid p,.billingPanel>p{color:var(--muted);font-size:14px;line-height:1.6}
+.billingPlans .planGrid li{align-items:flex-start;font-size:14px;line-height:1.5;min-width:0}
+.billingPlans .planGrid li svg{flex:0 0 17px;margin-top:3px}
+.billingPlans .planGrid li span{min-width:0;overflow-wrap:anywhere}
+.billingPlans .planGrid button{width:100%;min-height:44px;white-space:normal}
+.billingInterval button{min-height:44px;white-space:normal}
+.billingHelp{margin:16px 0;color:var(--muted);font-size:14px;line-height:1.6}
+.billingHelp summary{cursor:pointer;font-weight:600;color:var(--ink);padding:8px 0}
+.securityHero{flex-wrap:wrap;min-width:0}
+.securityHero>div:first-child{flex:1 1 220px;min-width:0}
+.securityHero>.rowActions{flex:1 1 380px;flex-wrap:wrap;min-width:0;max-width:100%}
+.securityHero .rowActions button{flex:1 1 210px;max-width:100%;min-width:0;min-height:44px;white-space:normal;text-align:center}
+.securityHero button svg{flex-shrink:0}
+.sessionManager .rowActions{flex-wrap:wrap;align-items:end;justify-content:flex-start;min-width:0;gap:10px}
+.sessionManager .rowActions label{display:grid;gap:6px;flex:1 1 180px;min-width:0;max-width:100%;font-size:14px;font-weight:600}
+.sessionManager select{width:100%;min-width:0;min-height:44px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.sessionManager .rowActions button,.sessionList button{min-height:44px;white-space:normal;max-width:100%}
+.sessionList article{flex-wrap:wrap;min-width:0;gap:12px}
+.sessionList article>div{flex:1 1 220px;min-width:0;overflow-wrap:anywhere}
+.sessionList article>button{flex:0 1 auto}
+.sessionExplanation{min-width:0;overflow-wrap:anywhere}
+.sessionManager>input,.securityCenter>.moduleCard>input[type="search"]{width:100%;min-width:0;min-height:44px;margin:12px 0;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:inherit;box-sizing:border-box}
+.restrictedAccountShell .securityEmpty{min-height:0;padding:20px}
+.googleHandoffOverlay{position:fixed;inset:0;z-index:2147482900;background:#f7faf7;overflow:hidden}
+@media(max-width:600px){
+ .restrictedAccountShell .moduleCard{padding:18px;border-radius:18px}
+ .restrictedAccountHeader{margin-bottom:20px}
+ .restrictedAccountShell .moduleCard h2{font-size:21px}
+ .billingPlans .planGrid{grid-template-columns:minmax(0,1fr)}
+ .sessionManager .rowActions>label{flex-basis:100%}
+ .sessionManager .rowActions>button{flex:1 1 160px}
+ .sessionList article>div{flex-basis:auto}
+}
+
+.securityCenter .auditTable article{grid-template-columns:minmax(0,1fr) auto minmax(120px,180px);overflow-wrap:anywhere}
+.securityCenter .compactList article{min-width:0;flex-wrap:wrap}.securityCenter .compactList article>div{min-width:0;max-width:100%;overflow-wrap:anywhere}.securityCenter .rowActions{flex-wrap:wrap}
+.securityCenter .pagination{flex-wrap:wrap}
+@media(max-width:700px){.securityCenter .auditTable article{grid-template-columns:minmax(0,1fr);gap:8px}.securityCenter .auditTable .status{max-width:100%;white-space:normal}}
+
+.billingRestart{margin:18px 0;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--orange-soft)}
+.billingRestart p{margin:0 0 12px;line-height:1.5}
+.billingRestart p:last-child{margin:12px 0 0;color:var(--muted);font-size:14px}
+.billingRestart .primary{min-height:44px}
