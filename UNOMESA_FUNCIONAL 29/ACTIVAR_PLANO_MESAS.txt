@@ -1,0 +1,57 @@
+RESERVAS CON ÁREA YA GUARDADA
+Se muestran como salón completo reservado durante su hora y duración predeterminada, incluso sin mesas configuradas. Las asignaciones individuales existentes se conservan. Las canceladas o sin área no bloquean; se necesita una hora válida. La sincronización es de consulta y no modifica registros existentes ni necesita otro SQL.
+
+ACTUALIZACIÓN DE PERMISOS — SQL 47
+Editar plano: solo Administrador y Gerente. Incluye mesas, posiciones, tamaños, niveles y duración compartida. Operador conserva la asignación de reservas; Solo lectura consulta. Soporte temporal no edita la distribución.
+Si el plano 43–46 ya está instalado, aplique únicamente 47_PERMISOS_EDITAR_PLANO.sql. Si falta su activación, aplique los pendientes de 43 → 44 → 45 → 46 y luego 47. Este último solo cambia una función de autorización, sin modificar registros ni tablas.
+Los formularios nuevos también permiten Sin mesa ni área por defecto, sin SQL adicional. Puede asignar ubicación después; los eventos existentes mantienen su selección al abrirse.
+
+UNOMESA FUNCIONAL — ACTIVAR EL PLANO DE MESAS
+Actualización autorizada el 2 de octubre de 2026.
+
+1. ACTIVACIÓN EN EL PROYECTO EXISTENTE
+Use el mismo Supabase que utiliza UnoMesa activo. No cree otra base ni reemplace su instalación.
+Ejecute completos únicamente los archivos que falten, en este orden:
+  43_PLANO_MESAS.sql
+  44_PLANO_FORMULARIOS_COTIZACIONES.sql
+  45_CRUCES_HORARIO_CONFIRMADOS.sql
+  46_ASIENTOS_ADICIONALES.sql
+  47_PERMISOS_EDITAR_PLANO.sql
+Si ya aplicó los cuatro en ESE MISMO proyecto, no los repita. Haberlos aplicado en el Supabase de pruebas no los instala en el activo. No ejecute todos los SQL del ZIP ni repita los de Google, pagos o instalación inicial.
+
+43 crea el diseño y las asignaciones en tablas nuevas v2_floor_* y sus funciones. 44 añade las propuestas de mesas de cotizaciones y la integración de guardado. 45 permite confirmar cruces de horario y 46 asientos adicionales. Los archivos se conservaron byte por byte; sus comentarios históricos de exclusividad de prueba corresponden a la evaluación anterior, ya aprobada por Marcelo para el funcional.
+La instalación no reescribe los registros existentes de clientes, áreas, reservas, cotizaciones, pagos ni suscripciones, ni altera sus columnas. Solo habilita los objetos del plano. Al guardar después una reserva o cotización, se actualiza el evento elegido con las validaciones correspondientes.
+
+2. ACTUALIZAR LA APLICACIÓN
+Suba el contenido de este paquete al mismo proyecto de Vercel/repo existente. Conserve las variables, el dominio, las claves, la conexión Supabase, Google, Lemon Squeezy, Pixel y analítica. La carpeta interna MRMAA_PRUEBAS 26 se conserva por compatibilidad de ruta; no anide una copia extra. El ZIP no ejecuta SQL ni publica por sí mismo.
+
+3. ÁREAS EXISTENTES Y RESERVAS ANTERIORES
+Abra Reservaciones → Plano de mesas → Mapa completo.
+• Las áreas activas de Configuración → Reservaciones aparecen automáticamente, con sus nombres y vínculos actuales, sin duplicarse y sin mesas inventadas. Las áreas de Horarios del personal son un catálogo distinto.
+• Las áreas del plano ya vinculadas o reconocidas por nombre conservan sus identificadores, mesas y posiciones. Las áreas nuevas empiezan en el primer nivel; puede moverlas a otros niveles después.
+• Abrir el mapa es una consulta: no escribe áreas, reservas ni asignaciones. Guardar plano conserva la distribución en su espacio separado.
+• Las reservas anteriores conservan fecha, hora, cliente, área, importes, estado, notas y vínculo a cotización. Se muestran en la agenda aunque no tengan mesas. Con área y sin asignación individual se muestran como Salón completo reservado durante su horario. Las mesas que agregue al área quedan incluidas; no se escriben asignaciones nuevas al consultar.
+• En un área vacía, pulse Configurar mesas o Editar plano, agregue las mesas y guarde. Las mismas áreas y selecciones se usan en Configuración, plano, lista, reservas y cotizaciones. El formulario permite guardar con área y sin mesas.
+
+4. USO
+• Azul intenso con texto blanco = reservada; verde = disponible; ámbar = en mesa; rojo = revisar. Los colores reflejan el intervalo elegido. Al seleccionar una reservada conserva el azul y añade contorno dorado.
+• Reservar esta mesa abre el formulario con esa mesa y área elegidas. Puede editar, vincular reserva, ver/crear/vincular cotización desde el plano. Las propuestas de cotización no bloquean mesas hasta confirmarse.
+• Usar salón completo selecciona todas las mesas del área. Deseleccionar mesas las desmarca y conserva el área; el cambio solo se guarda al confirmar el formulario.
+• Cambie la duración predeterminada desde Configuración o el formulario. Empieza en 180 minutos; un cambio guardado se usa en nuevos eventos sin alterar la duración de los anteriores.
+• Un cruce de horario o asientos adicionales requiere confirmación explícita para ese guardado. Revisar mantiene el borrador. Los permisos y controles de cambios simultáneos siguen activos.
+• Mapa completo mantiene su vista al seleccionar mesas. La agenda va al lado en pantallas grandes y debajo en móvil. Use +/− y arrastre para recorrer; 100% ajusta la vista.
+• Más opciones → Descargar PDF o Imprimir: solo plano, plano y reservaciones, solo reservaciones o datos completos. Áreas y niveles permite mapa completo (una página por nivel), un nivel o el área/nivel visible. Puede filtrar las reservaciones incluidas. PDF listo ofrece Descargar archivo y Abrir PDF.
+• Ocultar menú amplía el espacio y recuerda la preferencia. En inglés, las mesas M1/M2 se muestran como T1/T2, conservando los nombres personalizados.
+• El instructivo, tutorial breve y asistente incluyen las funciones del plano. La landing tiene un ejemplo con datos ficticios. El plano está disponible en todas las suscripciones; se respetan los roles y exenciones existentes.
+• Fondos por imagen y modelos 3D siguen pendientes. Actualmente está disponible Fondo transparente por área.
+
+5. ALCANCE DE LA VERIFICACIÓN
+Se comprueba localmente la instalación y la preservación de registros con una base de prueba, y las pantallas con servicios simulados. Esto no certifica qué SQL está instalado en su Supabase real. No se accedió a su base real ni se desplegó en Vercel desde esta entrega.
+
+CONTORNO Y NIVEL DEL ÁREA
+Mesas por área ajusta el contorno al grupo de mesas sin cambiar posiciones. En Editar plano, elija el área → Nivel del área → Guardar plano. Conserva mesas y vínculos de eventos. Mapa completo también permite cambiar el nivel y crear otros niveles. Estas opciones visuales no necesitan SQL adicional.
+
+GUÍA PASO A PASO
+Al abrir Editar plano por primera vez, siga los cinco pasos: área, nivel, mesas, distribución y guardar. Puede cerrarla y reabrirla con Guía paso a paso. No requiere SQL adicional.
+
+El ajuste de contorno también se aplica a Mapa completo y sus PDF por nivel: reduce los márgenes vacíos alrededor de las mesas sin moverlas ni guardar cambios al abrir. El arrastre y la esquina de tamaño siguen el cuadro visible. Las áreas que realmente se superponen conservan su posición hasta que usted las reubique y guarde.
