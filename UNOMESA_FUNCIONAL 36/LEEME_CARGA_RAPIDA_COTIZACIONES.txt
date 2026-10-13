@@ -1,0 +1,70 @@
+UNOMESA — CARGA INICIAL DE COTIZACIONES
+11 de octubre de 2026
+
+QUÉ SE CORRIGIÓ
+
+El listado ya pedía solo 25 cotizaciones, pero para mostrar sus mesas podía
+descargar planos y agendas por fecha, además de consultar cada cotización
+sin reserva vinculada. Con 25 fechas separadas y 25 cotizaciones sin reserva,
+eso podía añadir hasta 50 llamadas SOLO para sus etiquetas de área/mesas.
+
+La nueva lectura agrupa las 25 cotizaciones en una sola llamada y devuelve
+únicamente nombres de áreas/mesas y las asignaciones necesarias. No devuelve
+fondos, fotos, geometría ni las agendas completas del día. Las otras consultas
+del módulo siguen existiendo: no se afirma que todo el módulo use una llamada.
+
+Los contadores secundarios (total guardado y avisos quitados) se actualizan
+sin bloquear la primera aparición del listado. Los datos principales y sus
+mesas siguen teniendo carga controlada; no se desmontan formularios al
+terminar una consulta secundaria.
+
+DATOS Y COMPATIBILIDAD
+
+- Conserva filtros, orden, 25 resultados por página, acciones y estados.
+- Conserva la indicación de salón completo para registros antiguos con área.
+- Todas las mesas de una misma área se muestran como salón completo.
+- En una cotización convertida se prioriza la asignación de la reserva
+  vinculada, incluso si la fecha de la reserva se cambió después.
+- Los listados e impresiones de reservas comparten esta lectura compacta.
+  Las exportaciones grandes se dividen en grupos de hasta 50 identificadores,
+  con un máximo de 3 consultas simultáneas después del primer grupo.
+- La función usa la autorización existente del plano y filtra cada relación
+  por restaurante. El rol anon no puede ejecutarla; no crea acceso público.
+- SQL 54 solo añade la función y su permiso de ejecución para authenticated.
+  No cambia datos guardados, tablas, RLS, funciones anteriores ni pagos.
+- Si falta SQL 54, la interfaz vuelve a la lectura previa. Los errores de
+  autorización o de red no se ocultan utilizando esa compatibilidad.
+
+INSTALACIÓN
+
+1. Ejecute 54_LECTURA_RAPIDA_ETIQUETAS_MESAS.sql en el mismo Supabase.
+   Requiere los SQL 43 y 44 del plano ya instalado. No repita SQL antiguos.
+   Si SQL 53 de sincronización aún está pendiente, aplíquelo por separado
+   según 00_LEEME_ACTUALIZAR.txt; no es sustituido por SQL 54.
+2. Despliegue este proyecto completo en el mismo Vercel, conservando variables
+   y base de datos. No cambie NEXT_PUBLIC_MRMAA_REALTIME=true.
+3. Abra Cotizaciones y compare su carga inicial con la versión anterior.
+   Revise una cotización antigua, una con mesas y una con reserva vinculada.
+   Puede comprobar las etiquetas con registros existentes sin modificarlos.
+
+La corrección se enfoca en consultas redundantes; no requiere ampliar RAM.
+El dimensionamiento de infraestructura se decide con métricas de uso real.
+Este ZIP contiene la web y su interfaz móvil, no un proyecto nativo nuevo.
+
+VERIFICACIÓN LOCAL
+
+- npm run build: correcto, incluida comprobación TypeScript.
+- node --test --test-concurrency=3 tests/*.test.cjs: 274 pruebas aprobadas,
+  0 fallidas y 0 omitidas.
+- Las nuevas pruebas ejecutan SQL 54 dos veces con datos sintéticos y
+  verifican que las filas, los permisos de tablas y las funciones anteriores
+  permanezcan iguales. La lectura funciona en una transacción READ ONLY.
+- Se comprueban separación entre restaurantes, roles, sesión, papelera,
+  idioma, salón completo, mesas, reservas vinculadas y división de lotes.
+- La prueba de 25 cotizaciones con fechas separadas verifica una sola
+  llamada de etiquetas y ausencia de datos personales e imágenes en ella.
+- Comprobación React de carga: el listado espera la lectura principal,
+  no espera el contador secundario y conserva el campo montado al terminarlo.
+
+No se ha aplicado SQL ni desplegado desde esta revisión. Las pruebas locales
+no establecen una latencia de producción ni certifican 50,000 restaurantes.
