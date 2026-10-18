@@ -1,0 +1,8 @@
+.card { margin: 28px 0; padding: clamp(20px, 4vw, 32px); border: 1px solid #d7e5dd; border-radius: 24px; background: linear-gradient(135deg, #f1f8f4, #fff8ee); color: #172d25; }
+.eyebrow { color: #456454; font-size: .72rem; font-weight: 750; letter-spacing: .12em; }
+.card h2 { margin-top: 10px; }
+.action { display: flex; align-items: center; justify-content: space-between; gap: 18px; width: fit-content; max-width: 100%; min-height: 48px; padding: 14px 22px; border-radius: 16px; background: #193f33; color: #fff; text-decoration: none; font-weight: 700; line-height: 1.4; box-sizing: border-box; }
+.action:hover { background: #285a49; }
+.hint { font-size: .88rem; color: #4c5c54; }
+.email { color: #193f33; font-weight: 650; overflow-wrap: anywhere; text-underline-offset: 4px; }
+@media (max-width: 480px) { .action { width: 100%; } }
