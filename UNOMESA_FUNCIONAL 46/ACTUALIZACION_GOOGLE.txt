@@ -1,0 +1,15 @@
+UNOMESA FUNCIONAL · LANDING ACCESIBLE PARA BUSCADORES
+
+La página pública ahora entrega beneficios, planes, precios y preguntas frecuentes en el HTML inicial. Los visitantes y buscadores no dependen de la comprobación de sesión para leerla. Los usuarios con sesión siguen entrando a la aplicación después de verificar acceso y seguridad.
+
+Se incluyen metadatos descriptivos, enlaces de ingreso/registro, robots.txt y sitemap.xml. Las rutas de acceso y recuperación tienen una indicación de no indexar. El diseño, la demo, el idioma por país/preferencia y la prueba de 10 días se conservan.
+
+No requiere ejecutar SQL. Esta actualización no cambia tablas ni datos existentes, cuentas o exenciones de suscripción. UnoMesa funcional no incluye el plano de mesas.
+
+PARA PUBLICAR
+1. Actualice únicamente el proyecto Vercel funcional con este ZIP.
+2. Conserve sus variables actuales. NEXT_PUBLIC_SITE_URL debe contener el dominio público definitivo con https:// y sin rutas; también se utiliza para los enlaces de autenticación. Esta variable permite generar canonical y sitemap con su dominio, sin inventar uno. Si ya es correcta, no debe cambiarla.
+3. Puede comprobar /robots.txt y /sitemap.xml después de desplegar. El contenido de la landing debe poder leerse también con JavaScript desactivado.
+4. En Google Search Console puede solicitar indexación de la portada y enviar /sitemap.xml. El tiempo de rastreo, la indexación y el posicionamiento dependen de Google; no son instantáneos ni garantizados.
+
+Los despliegues Preview de Vercel y NEXT_PUBLIC_SEARCH_INDEXING=false no se indexan. Proyecto nuevo prueba también mantiene la indexación desactivada por defecto; no use su ZIP para sustituir UnoMesa funcional.
