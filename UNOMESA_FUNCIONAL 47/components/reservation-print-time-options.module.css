@@ -1,0 +1,12 @@
+.timeFilter{min-width:0;margin:0}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.choices label{margin:0;min-width:0}
+.range{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:8px}
+.timeFilter .rangeLabel{display:flex;flex-direction:column;align-items:stretch;gap:6px;min-width:0;min-height:0;margin:0;padding:0;border:0;background:transparent;font-weight:600}
+.timeFilter .rangeLabel input{box-sizing:border-box;display:block;width:100%;min-width:0;max-width:100%;min-height:44px;padding:10px 8px;border:1px solid var(--um-line,var(--line,#ccd4d0));border-radius:9px;background:var(--um-surface,var(--paper,#fff));color:var(--um-ink,var(--ink,#182a35));font:inherit}
+.timeFilter small{display:block;line-height:1.5;color:var(--muted,#65756d)}
+.error{color:var(--danger,#b42318);margin:0;line-height:1.5}
+.cancelled{display:flex;align-items:center;gap:10px;min-width:0;line-height:1.5;cursor:pointer}
+.cancelled input[type=checkbox]{width:20px;height:20px;min-height:20px;flex:0 0 20px;margin:0}
+.cancelled span{min-width:0;overflow-wrap:anywhere}
+@media(max-width:360px){.range{grid-template-columns:minmax(0,1fr)}}
