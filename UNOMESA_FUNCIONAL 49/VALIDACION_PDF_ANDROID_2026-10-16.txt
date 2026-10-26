@@ -1,0 +1,40 @@
+VALIDACIÓN — PDF ANDROID — 16 OCTUBRE 2026
+
+RESULTADO
+Corregido el bloqueo de lectura de documentos generados localmente por
+la política CSP. Solo se añadió blob: data: a connect-src en next.config.mjs.
+No se añadieron servidores externos, permisos de almacenamiento, claves,
+consultas o migraciones. No se tocó el código de Android ni iOS.
+
+REPRODUCCIÓN Y PRUEBA
+Prueba Chromium con el CSP completo extraído de next.config.mjs, jsPDF
+4.2.1 real y el native-bridge.js intacto del Android 1.0.3 (versionCode 4).
+El receptor Java del dispositivo se simuló con sus acuses por bloque.
+Antes del ajuste: pdf.save crea el PDF, pero fetch(blob:) dispara una
+violación connect-src y el puente envía fileError, sin completar la entrega.
+Después del ajuste:
+REPRODUCED: original production CSP blocks the actual jsPDF save -> Android blob transfer.
+PASS: existing Android 1.0.3 bridge receives the complete two-page PDF (3730 bytes); SHA-256 matches generated document.
+PASS: 33 ordered chunks, >2 MB, all bytes preserved.
+PASS: local data: export also completes.
+PASS: foreign blob origins and files above 50 MB remain rejected.
+PASS: unapproved remote connections, embedded objects and blob/data scripts remain blocked.
+
+Compilación npm run build correcta: Next.js, TypeScript y 46 rutas.
+El manifiesto de rutas compilado contiene la política corregida.
+
+LÍMITES DE VALIDACIÓN
+No se desplegó en Vercel ni se ejecutó en un Android físico desde aquí.
+La prueba simula el receptor nativo, no el selector de Archivos instalado
+ni el visor PDF del teléfono. Confirmar Guardar, Abrir y Compartir después
+del despliegue con la app que tienen los testers. No hay garantía de que
+otros problemas independientes del dispositivo queden resueltos.
+
+INTEGRIDAD Y DATOS
+Base: UNOMESA_FUNCIONAL.zip, versión 152. Se conserva íntegro el resto.
+Puente Android utilizado (sin modificar), SHA-256:
+d5cc17fec136b1efea1f61485d6dc3fffa1e6462522d485c2ec5e657e221f5c8
+
+Todos los registros del ensayo son ficticios. No se consultaron datos de
+producción. Los SQL del ZIP son idénticos a los de la versión anterior.
+No es necesario ejecutar SQL para esta corrección ni generar otro AAB.

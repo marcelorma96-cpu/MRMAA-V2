@@ -1,0 +1,44 @@
+/* A section opens from its control; live data fills a quiet, shaped placeholder. */
+.appModuleBoundary.isPreparing{min-height:min(62dvh,560px)}
+.appModuleLoading.appModuleSkeleton{position:absolute;inset:0;z-index:1;display:block;min-height:0;background:transparent;padding:4px 0;overflow:hidden;pointer-events:none}
+.appModuleSkeleton>.visuallyHidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.moduleSkeletonLayout{display:grid;gap:18px;padding:18px;border:1px solid var(--line,#e1e8e4);border-radius:22px;background:var(--paper,#fff)}
+.moduleSkeletonLayout i,.quoteOpeningPaper i{display:block;border-radius:12px;background:linear-gradient(100deg,var(--motion-fill,#e8ede9) 25%,var(--motion-glint,#f5f7f5) 45%,var(--motion-fill,#e8ede9) 65%);background-size:240% 100%}
+.moduleSkeletonToolbar{display:flex;gap:12px}.moduleSkeletonToolbar i{height:42px;flex:1}.moduleSkeletonToolbar i:last-child{max-width:90px}
+.moduleSkeletonMetrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.moduleSkeletonMetrics i{height:70px}
+.moduleSkeletonRows{display:grid;gap:12px}.moduleSkeletonRows i{height:76px}
+.moduleLoadingHint{display:block;text-align:center;margin-top:18px;font-size:12px;color:var(--muted,#59655f);opacity:0;animation:motionHint 1s 1.8s forwards}
+.quoteOpeningOverlay{display:block!important;padding:16px!important}
+.quoteOpeningShell{width:min(900px,100%);margin:0 auto;color:var(--ink,#17372d)}
+.quoteOpeningPaper{min-height:min(74dvh,850px);padding:clamp(22px,5vw,44px);border-radius:18px;background:var(--paper,#fff);box-shadow:0 20px 70px #0003}
+.quoteOpeningHeader{display:flex;gap:18px;padding-bottom:30px;border-bottom:1px solid var(--line,#e1e8e4)}
+.quoteOpeningHeader>i{width:62px;height:62px;border-radius:50%;flex:none}.quoteOpeningHeader>div{display:grid;gap:12px;flex:1}.quoteOpeningHeader>div i{height:20px}.quoteOpeningHeader>div i:last-child{width:58%}
+.quoteOpeningFields{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:28px 0}.quoteOpeningFields i{height:30px}
+.quoteOpeningRows{display:grid;gap:12px}.quoteOpeningRows i{height:45px}
+.quoteOpeningTotal{display:grid;gap:12px;width:42%;margin:35px 0 0 auto}.quoteOpeningTotal i{height:24px}
+.quoteOpeningShell>footer{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px;background:var(--paper,#fff);border-radius:0 0 18px 18px;font-size:13px}
+.quotePreviewShell:focus{outline:none}
+[data-theme=dark] :is(.moduleSkeletonLayout,.quoteOpeningPaper){--motion-fill:#22303c;--motion-glint:#2e3b48}
+@keyframes motionShimmer{to{background-position:-140% 0}}
+@keyframes motionHint{to{opacity:1}}
+@keyframes navBlossom{0%{transform:scale(.82)}65%{transform:scale(1.08)}100%{transform:scale(1)}}
+@media(prefers-reduced-motion:no-preference){
+ .moduleSkeletonLayout i,.quoteOpeningPaper i{animation:motionShimmer 1.6s linear infinite}
+ .appTabBar>button[aria-current=page]>svg{animation:navBlossom .36s ease-out}
+ .appLaunchOverlay.isLeaving{overflow:hidden;background:transparent;animation:launchBloomCover .64s linear forwards}
+ .appLaunchOverlay.isLeaving .appBrandLoading{animation:launchBloomBackground .64s linear forwards}
+ .appLaunchOverlay.isLeaving .appBrandMark{animation:launchBloomLogo .64s cubic-bezier(.5,0,.8,.5) forwards}
+ .appLaunchOverlay.isLeaving .appBrandLoading>strong{animation:launchBloomName .16s ease-out forwards}
+}
+@keyframes launchBloomCover{0%,68%{opacity:1}100%{opacity:0}}
+@keyframes launchBloomBackground{0%,18%{background-color:#f7faf7}65%,100%{background-color:transparent}}
+[data-theme=dark] .appLaunchOverlay.isLeaving .appBrandLoading{animation-name:launchBloomBackgroundDark}
+@keyframes launchBloomBackgroundDark{0%,18%{background-color:#101715}65%,100%{background-color:transparent}}
+@keyframes launchBloomLogo{0%{transform:scale(1);opacity:1}16%{transform:scale(.94);opacity:1}60%{opacity:1}100%{transform:scale(var(--app-launch-zoom,18));opacity:0}}
+@keyframes launchBloomName{to{opacity:0}}
+@media(prefers-reduced-motion:reduce){
+ .moduleSkeletonLayout i,.quoteOpeningPaper i,.appTabBar>button[aria-current=page]>svg{animation:none}
+ .moduleLoadingHint{animation:none;opacity:1}
+ .appLaunchOverlay.isLeaving .appBrandMark,.appLaunchOverlay.isLeaving .appBrandLoading,.appLaunchOverlay.isLeaving .appBrandLoading>strong{animation:none;transform:none}
+}
+@media print{.appModuleSkeleton,.quoteOpeningOverlay{display:none!important}[data-surface-animating]{animation:none!important;transform:none!important;clip-path:none!important;opacity:1!important}}

@@ -1,0 +1,46 @@
+SEO DE UNOMESA · QUÉ ESTÁ LISTO Y QUÉ SIGUE
+
+BÚSQUEDAS OBJETIVO
+Software de reservaciones para restaurantes; sistema de reservas para
+restaurantes; plano de mesas; gestión de eventos y cotizaciones de restaurantes.
+English: restaurant reservation software, restaurant floor plans, event quotes.
+Las frases se usan de forma natural, sin páginas repetidas ni reseñas inventadas.
+
+INCORPORADO EN EL CÓDIGO
+- Inglés en / y español en /es. Contenido real presente en el HTML inicial.
+- Títulos y descripciones por idioma; canonical, hreflang y x-default.
+- Organization, WebSite, WebPage y SoftwareApplication en JSON-LD.
+- Ofertas mensuales y anuales obtenidas de los mismos planes de la aplicación.
+- Open Graph / Twitter con imagen 1200 × 630, robots.txt y sitemap.xml.
+- Acceso, OAuth, móvil y API con noindex; pruebas y previews fuera de búsqueda.
+- Precios claros, prueba de 10 días y preguntas frecuentes legibles.
+
+DESPUÉS DE PUBLICAR
+1. Revisa NEXT_PUBLIC_SITE_URL en Production de Vercel. Debe corresponder al
+   dominio principal real, con https y sin rutas, parámetros ni credenciales.
+   Verifica que NEXT_PUBLIC_SEARCH_INDEXING no sea false en producción.
+2. Abre /robots.txt y /sitemap.xml en ese dominio: deben incluir / y /es,
+   junto con las páginas legales. Las pantallas de acceso no se incluyen.
+3. En https://search.google.com/search-console añade/verifica la propiedad
+   del dominio. Si ya existe, utiliza esa misma propiedad.
+4. Envía sitemap.xml. Inspecciona / y /es mediante "Probar URL publicada"
+   y solicita indexación. Ese panel debe poder leer las páginas sin iniciar sesión.
+5. Si hay una pantalla de verificación del hosting o protección antibots,
+   revisa allí la configuración de la landing pública. Mantén protegidos los
+   módulos privados; no desactives globalmente las defensas de acceso.
+6. Revisa impresiones, clics, consultas e indexación en Search Console durante
+   las semanas siguientes; las posiciones también dependen de competencia y
+   enlaces/reconocimiento del sitio. Añade contenido útil según consultas reales.
+
+LÍMITES
+Nadie puede garantizar el primer puesto orgánico, la indexación inmediata ni
+resultados enriquecidos. Los cambios están preparados en este ZIP; esta entrega
+no despliega Vercel ni verifica la cuenta de Search Console. Se ha validado el
+HTML y comportamiento de una compilación local, no la indexación en Google.
+No se pudo confirmar la accesibilidad del sitio publicado mediante la consulta
+externa realizada; eso por sí solo no demuestra que Google esté bloqueado.
+
+Referencias oficiales:
+https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+https://developers.google.com/search/docs/specialty/international/localized-versions
+https://developers.google.com/search/docs/appearance/structured-data/software-app
