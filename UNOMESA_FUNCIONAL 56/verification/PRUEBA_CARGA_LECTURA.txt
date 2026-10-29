@@ -1,0 +1,79 @@
+UNOMESA — MEDICIÓN DE CARGA EN STAGING — 29 OCT 2026
+
+Estado: herramienta preparada y probada con respuestas simuladas. NO se ha
+ejecutado contra Supabase ni mide todavía capacidad de producción.
+
+1. Usar un proyecto Supabase de staging aislado, con las mismas migraciones,
+   índices y tamaño de cómputo que el entorno que se quiera medir. Datos ficticios.
+   No usar un clon con datos personales sin anonimizar.
+2. Preparar empresas independientes, usuarios normales y reservas de prueba.
+   Cada restaurante del archivo necesita una reserva conocida y visible para su
+   usuario. Un usuario de prueba no debe pertenecer a otra empresa del archivo.
+   Los tokens deben seguir vigentes durante toda la prueba.
+3. Guardar fuera del repositorio un JSON privado con este formato. Sustituir
+   cada marcador por un valor de STAGING. No compartir tokens por chat.
+
+{
+  "confirmation": "STAGING_ONLY",
+  "supabase_url": "https://PROYECTO-STAGING.supabase.co",
+  "allowed_host": "PROYECTO-STAGING.supabase.co",
+  "anon_key": "CLAVE_PUBLICABLE_O_ANON_DE_STAGING",
+  "concurrency": 10,
+  "duration_seconds": 300,
+  "think_ms": 1000,
+  "fixtures": [
+    {
+      "restaurant_id": "UUID_RESTAURANTE_A",
+      "company_root_id": "UUID_EMPRESA_A",
+      "probe_reservation_id": "UUID_RESERVA_A",
+      "access_token": "JWT_USUARIO_A"
+    },
+    {
+      "restaurant_id": "UUID_RESTAURANTE_B",
+      "company_root_id": "UUID_EMPRESA_B",
+      "probe_reservation_id": "UUID_RESERVA_B",
+      "access_token": "JWT_USUARIO_B"
+    }
+  ]
+}
+
+4. Con Node 24, desde la raíz del proyecto:
+   node verification/read-load.mjs /ruta/privada/staging-fixtures.json
+   La herramienta rechaza claves service_role/sb_secret_ y sesiones que no sean
+   de usuarios autenticados. El dominio permitido debe coincidir exactamente.
+   La confirmación es una protección contra errores; NO detecta automáticamente
+   si un proyecto es producción. Comprobar el proyecto antes de iniciar.
+
+Qué hace: primero comprueba que las reservas propias existen y que las de otra
+empresa no son visibles. Después ejecuta únicamente GET sobre reservas, clientes
+y cotizaciones con filtro de restaurante y límite de 25 filas. No inicia compras,
+no modifica registros y no crea usuarios. No imprime tokens ni datos de clientes.
+Ante una filtración o sesión inválida detiene nuevas solicitudes de carga.
+
+Escalado propuesto: 10, 50, 100 y 250 sesiones concurrentes, 5 minutos por etapa;
+después 1.000 durante 15 minutos si las etapas previas pasan y el presupuesto del
+entorno lo permite. Para hablar de 1.000 restaurantes se necesitan al menos
+1.000 restaurantes distintos en fixtures, no dos cuentas repetidas mil veces.
+Preparar volúmenes representativos por restaurante: por ejemplo 1.000 clientes,
+10.000 reservas históricas y 1.000 cotizaciones; ajustar al uso real esperado.
+
+Criterios propuestos de aceptación (objetivos del proyecto, no garantías):
+- Cero datos de otra empresa y cero errores en la prevalidación.
+- Errores de lectura inferiores al 1%; investigar cualquier 401/403/429/5xx.
+  El campo pass de esta herramienta es más estricto: exige cero errores.
+- Latencia p95 de lectura <= 1.500 ms. El informe da un límite superior por
+  intervalos, no un percentil exacto. Revisar también p99 en la plataforma.
+- Sin crecimiento sostenido de conexiones, bloqueos, CPU, memoria o colas.
+- Registrar región, cómputo, tamaño de datos, usuarios y duración junto al resultado.
+
+Cobertura que falta para certificar capacidad completa:
+- Escrituras simultáneas de reservas/plano, conflictos e invitaciones con cupo lleno.
+- RPC reales de listados, búsqueda, reportes, exportación y copiado de sucursales.
+- Canales privados de Realtime, desconexión/reconexión y sondeo de respaldo.
+- Registro, correos, recuperación de cuenta y cuota del proveedor SMTP.
+- Renovación, cambio de plan, cancelación, reembolso y caída temporal de la tienda;
+  usar sandbox y sus límites, nunca miles de cobros reales como prueba de carga.
+- Alertas, restauración de una copia de seguridad y despliegue con reversión.
+
+Los resultados de esta herramienta son una medición parcial de lecturas/RLS.
+No convierten por sí solos la aplicación en apta para miles de usuarios.
