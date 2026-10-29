@@ -1,0 +1,29 @@
+ACTUALIZACIÓN 25 OCT 2026 — APERTURA CONTINUA DE COTIZACIONES
+
+La apertura ahora mantiene una sola hoja desde la carga hasta el documento.
+Entra con una expansión y desplazamiento leves, adapta su altura y revela el
+contenido gradualmente. Ya no hay una segunda animación al terminar la consulta.
+Cerrar desvanece la hoja suavemente. Reducir movimiento usa fundidos breves.
+
+Publicar este ZIP completo en el mismo proyecto web de Vercel, conservando
+sus variables, dominio y Supabase. Después, cerrar y abrir UnoMesa.
+Este refinamiento llega a web, iOS y Android a través de la web publicada.
+No requiere otra build de Android ni iOS. Puede mantener Android 1.0.6 (7)
+e iOS 1.0 (21) preparados para la nueva animación nativa del inicio.
+No se publicó el proyecto desde esta revisión.
+
+DATOS
+Sin SQL nuevo ni modificaciones de SQL existentes. No repetir los SQL
+históricos por este cambio. No se escribieron ni eliminaron registros reales.
+Permisos, cálculos, estados y títulos de cotización se conservan.
+
+VALIDACIÓN
+- Compilación Next.js y TypeScript aprobada; 48 páginas generadas.
+- Chromium con React StrictMode: lecturas simuladas de 1, 80 y 1200 ms
+  mantienen el mismo elemento de presentación; cierre y cancelación correctos.
+- Cancelación, fallo de consulta, navegación rápida, cambio de sucursal
+  simulado, foco, opciones anidadas, Reducir movimiento y borradores al refrescar.
+- Cotización sin recortes horizontales en 320, 768 y 1280 px.
+- PDF descargado e impresión del ejemplo: título COTIZACIÓN CONFIRMADA,
+  una página válida y render idéntico píxel a píxel a la versión anterior.
+Pruebas con datos ficticios. Sin prueba en teléfono físico o Safari aquí.

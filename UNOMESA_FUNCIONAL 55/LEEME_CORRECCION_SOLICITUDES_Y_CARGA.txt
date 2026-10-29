@@ -1,0 +1,61 @@
+ACTUALIZACIÓN DE SOLICITUDES Y CARGA — 10 OCTUBRE 2026
+
+Instalación: actualice el mismo proyecto de Vercel con este ZIP completo.
+Conserve todas las variables existentes. No ejecute SQL por estos cambios.
+La corrección es web/servidor; el contenedor iOS actual que carga UnoMesa no
+necesita recompilarse. Cierre y vuelva a abrir la app tras el despliegue.
+
+TURNSTILE: MISMO WIDGET, DOS CLAVES DISTINTAS
+- NEXT_PUBLIC_TURNSTILE_SITE_KEY: copie la Site key pública de Cloudflare.
+- TURNSTILE_SECRET_KEY: copie la Secret key privada de ese MISMO widget.
+Son valores distintos. El mismo widget puede proteger ingreso y solicitudes;
+no es necesario crear otro ni rotar la clave de Supabase.
+La Secret key puede usarse en Supabase Auth y Vercel. El token generado por
+cada verificación es de un solo uso y no se comparte entre formularios.
+En Vercel compruebe el entorno Production y despliegue después de guardar.
+No pegue claves en chats, documentos públicos ni variables NEXT_PUBLIC de secreto.
+
+CAMBIO Y DIAGNÓSTICO
+Antes, una respuesta HTTP 400 de Cloudflare perdía el detalle y se convertía
+en SERVICE_UNAVAILABLE. Se reprodujo con una clave ficticia inválida. Esto
+no demuestra que la clave real del despliegue sea inválida; no se tiene acceso
+a sus valores de producción y no se han modificado.
+Ahora se leen los códigos de Cloudflare incluso en HTTP 400. La solicitud
+usa JSON explícito sin caché, recorta espacios al copiar las claves y reintenta
+una sola vez errores transitorios usando la misma clave de idempotencia.
+No se acepta ninguna verificación rechazada. Se conserva la validación del
+hostname, los controles de origen, el límite de envíos y el aislamiento.
+
+Si falla: Vercel → Logs → /api/public-restaurant. Busque la Referencia del
+formulario. El objeto verification incluye reason, providerCodes, httpStatus,
+attempts y, si corresponde, un código de conexión conocido. No guarda las
+claves, tokens, correo, teléfono ni el contenido de la solicitud.
+- missing-secret: falta TURNSTILE_SECRET_KEY en ese despliegue.
+- site-key-used-as-secret: se copiaron valores idénticos en ambas variables.
+- invalid-secret / invalid-input-secret: Cloudflare rechaza la Secret key.
+- token-rejected: nueva verificación; el token venció, se usó o es inválido.
+- hostname-mismatch: el token corresponde a otro dominio.
+- verification-network / verification-timeout: fallo de conexión o tiempo.
+- provider-http-error / provider-unavailable: consultar estado HTTP y servicio.
+Para errores de clave, copie las dos claves del mismo widget y despliegue.
+No cambie SQL ni desactive validaciones para resolver estos errores.
+
+CARGAS
+- Se mantiene la cubierta de inicio hasta terminar acceso y módulo inicial.
+- La web también oculta la composición inicial del módulo mientras carga.
+- El tema guardado se aplica antes de la hidratación para evitar el destello claro.
+- El texto técnico de carga permanece accesible a lectores de pantalla sin
+  aparecer y desaparecer debajo del logo.
+- Los refrescos de datos posteriores mantienen campos, foco y contenido actual.
+- La landing pública sigue sirviendo HTML para visitantes y buscadores.
+
+VALIDACIÓN
+Compilación de producción y TypeScript correctos. Pruebas de verificación,
+rechazos, reintentos, no duplicación, entrada pública, retorno Google y MFA.
+La API real de Cloudflare aceptó su clave oficial de prueba y rechazó una
+clave ficticia con invalid-input-secret. No se usaron claves ni clientes reales.
+Prueba del ciclo React: la cubierta espera acceso y módulo, se retira al estar
+listos y el refresco posterior conserva la instancia del campo y su contenido.
+No se realizó una prueba visual en un iPhone instalado.
+La comprobación final con la configuración de producción requiere desplegar
+y enviar una solicitud desde el enlace público.

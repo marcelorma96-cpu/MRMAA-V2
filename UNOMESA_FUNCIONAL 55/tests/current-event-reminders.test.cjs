@@ -1,0 +1,20 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
+const {database,rpc,rid,other,id,quote,floor}=require('./helpers/floor-database.cjs');
+test('past-event reminders disappear without writes; same-day, local date, rescheduling and pagination stay correct',async()=>{const db=await database();try{
+ await db.exec('create role service_role;create schema storage;create table storage.buckets(id text primary key,name text,public boolean,file_size_limit bigint,allowed_mime_types text[])');
+ await db.exec(fs.readFileSync('49_SEGUIMIENTO_EVENTOS.sql','utf8'));await db.exec(fs.readFileSync('50_PAGINA_PUBLICA.sql','utf8'));
+ const before=await quote(db,null,floor([]),{client_name:'Yesterday',event_date:'2026-10-08',event_time:'23:59',guests:2});
+ const today=await quote(db,null,floor([]),{client_name:'Today',event_date:'2026-10-09',event_time:'00:01',guests:2});
+ const future=await quote(db,null,floor([]),{client_name:'Future',event_date:'2026-10-10',event_time:'12:00',guests:2});
+ for(const [q,n] of [[before,101],[today,102],[future,103]])await rpc(db,'v2_event_save_task',[rid,'quote',q.id,id(n),0,{title:'Confirmar menú'}]);
+ const saved=await db.query('select * from v2_event_tasks order by id');
+ const read=(date,offset=0)=>rpc(db,'v2_event_inbox_current',[rid,date,offset]);
+ assert.equal((await read('2026-10-09')).total,2);assert.deepEqual((await read('2026-10-09')).rows.map(x=>x.event_id).sort(),[today.id,future.id].sort());
+ assert.equal((await read('2026-10-10')).total,1);assert.equal((await read('2026-10-11')).total,0);
+ assert.equal((await read('2026-10-08')).total,3,'Uses caller local day, not server UTC');assert.deepEqual(await db.query('select * from v2_event_tasks order by id'),saved);
+ assert.equal((await rpc(db,'v2_event_read',[rid,'quote',before.id])).tasks[0].status,'pending','History remains visible in the saved quote');
+ await db.query('update v2_quotes set event_date=$1 where id=$2',['2026-10-12',before.id]);assert.equal((await read('2026-10-11')).total,1,'Rescheduling restores the reminder');
+ for(let n=104;n<160;n++)await rpc(db,'v2_event_save_task',[rid,'quote',future.id,id(n),0,{title:'Pendiente '+n}]);
+ const first=await read('2026-10-09'),second=await read('2026-10-09',50);assert.equal(first.total,59);assert.equal(first.rows.length,50);assert.equal(second.rows.length,9);assert.ok(!second.rows.some(x=>first.rows.some(y=>x.id===y.id)));
+ await assert.rejects(rpc(db,'v2_event_inbox_current',[other,'2026-10-09',0]),/EVENT_ACCESS/);
+ }finally{await db.close();}});
