@@ -1,0 +1,38 @@
+UNOMESA — ACTUALIZACIÓN DE TÉRMINOS Y REFERENCIAS COMERCIALES
+29 de octubre de 2026
+
+CAMBIOS
+
+lib/legal-content.ts contiene los textos en español e inglés:
+- Términos, sección 4.1: derechos sobre contenido y marcas aportados al servicio.
+- Términos, sección 14: autorización opcional y específica para referencias públicas de clientes; aprobación adicional de testimonios o afirmaciones de confianza.
+- Privacidad, sección 3.3: alcance del uso autorizado de marcas y conservación de evidencia del permiso.
+- Fecha visible de términos y privacidad: 2026-10-29.
+
+El permiso operativo para alojar contenido no autoriza por sí mismo su uso publicitario. Suscribirse, pagar, subir un logo o aceptar los términos generales tampoco otorga el permiso separado de referencia comercial descrito en estos textos.
+
+CÓMO USARLO
+
+1. Completar AUTORIZACION_REFERENCIA_CLIENTE.txt con el negocio, logo, representante y canales concretos.
+2. Obtener y conservar su aprobación escrita expresa antes de publicar cualquier referencia. Conservar también los archivos y textos exactos aprobados.
+3. Usar «Negocios que utilizan UnoMesa» únicamente mientras exista la relación real como cliente y siga vigente el permiso.
+4. Obtener aprobación adicional del texto o pieza exacta para «confían en UnoMesa», testimonios o casos de éxito. No inferir una recomendación a partir de un pago.
+5. Registrar retiros y dejar de reutilizar el material retirado. Revisar periódicamente que los clientes publicados sigan activos.
+
+Esta actualización no crea una casilla automática de consentimiento, una lista pública de clientes ni un registro de permisos en Supabase. La autorización se obtiene y conserva por escrito, por ejemplo por correo. No se han enviado solicitudes a clientes ni publicado logos.
+
+Los identificadores de aceptación histórica y el protocolo de registro permanecen como estaban; no prueban aceptación de este permiso adicional. No se obliga a los clientes existentes a concederlo. Si se desea automatizar su recogida, hace falta implementar y probar un flujo separado con evidencia de quién, cuándo, qué versión, qué marcas y qué canales se aprobaron, junto con su retiro.
+
+DESPLIEGUE
+
+Publicar este proyecto web actualizado en Vercel mediante el procedimiento habitual. No se ha desplegado desde esta sesión. Confirmar tras el despliegue:
+- /terminos
+- /en/terms
+- /privacidad
+- /en/privacy
+
+Este cambio de textos no necesita ejecutar SQL ni modificar la compilación nativa. Una futura implementación de permisos automáticos sería un cambio adicional. Las declaraciones de privacidad de Apple deben reflejar los datos y finalidades reales de la compilación y los servicios habilitados en producción; actualizar los términos no completa esas declaraciones por sí solo.
+
+REVISIÓN LEGAL
+
+Los textos y la plantilla son una propuesta operativa que debe revisar un abogado según las jurisdicciones y usos concretos. Esta actualización no certifica cumplimiento legal ni la capacidad de la plataforma para una determinada carga de usuarios.
