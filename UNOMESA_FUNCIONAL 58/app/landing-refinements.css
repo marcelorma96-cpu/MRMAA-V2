@@ -1,0 +1,118 @@
+/* Public presentation is scoped away from the operational modules. */
+.landingRefined .landingConnected{max-width:1240px;margin:0 auto;padding:76px 32px;display:grid;grid-template-columns:1.05fr 1fr;gap:72px;align-items:center;scroll-margin-top:24px}
+.landingRefined .connectedCopy h2{font-size:clamp(30px,3.1vw,44px);letter-spacing:-1.4px;line-height:1.12;margin:18px 0 20px;color:#f7f8f3}
+.landingRefined .connectedCopy>p{font-size:16px;line-height:1.8;color:#b7c7c0}
+.landingRefined .connectedCopy ul{list-style:none;margin:26px 0;padding:0;display:grid;gap:18px}
+.landingRefined .connectedCopy li{display:flex;align-items:flex-start;gap:13px;line-height:1.65;font-size:14px;color:#e1e9e3}
+.landingRefined .connectedCopy li svg{flex:none;width:20px;height:20px;margin-top:2px;color:#f7b887}
+.landingRefined .connectedCopy .connectedFootnote{font-size:12px;line-height:1.75;color:#a8bbb2}
+.landingRefined .connectedCopy>a,.landingRefined .connectedBranchCard>a{display:inline-flex;align-items:center;gap:12px;min-height:44px;color:#ffc497;font-size:14px;font-weight:700;text-underline-offset:5px}
+.landingRefined .connectedPublicPreview{margin:0;min-width:0;padding:22px;border:1px solid #b0cebb25;border-radius:32px;background:radial-gradient(ellipse at 100% 0%,#bd89551a,transparent 55%),#18251f;box-shadow:0 24px 70px #0002}
+.landingRefined .connectedPublicPreview figcaption{font-size:11px;color:#a5bbae;margin-bottom:18px}
+.landingRefined .connectedAddress{display:flex;align-items:center;gap:9px;font-size:12px;color:#bcd0c3;overflow-wrap:anywhere}
+.landingRefined .connectedRestaurant{padding:28px 22px 22px;margin-top:20px;background:#f6f2e9;color:#20362b;border-radius:24px;text-align:center}
+.landingRefined .connectedMonogram{display:grid;place-items:center;width:56px;height:56px;margin:0 auto 18px;border:1px solid #56735a65;border-radius:50%;font:22px Georgia,serif}
+.landingRefined .connectedRestaurant>span{font-size:9px;letter-spacing:.17em;font-weight:650}
+.landingRefined .connectedRestaurant h3{font:36px/1.1 Georgia,serif;margin:10px 0;color:#20362b}
+.landingRefined .connectedRestaurant>p{font-size:12px;line-height:1.65;color:#596a60;margin:12px 0 20px}
+.landingRefined .connectedMenuChips{display:flex;flex-wrap:wrap;justify-content:center;gap:7px}
+.landingRefined .connectedMenuChips span{padding:9px 11px;background:#e6eadf;border:1px solid #c8d3c3;border-radius:50px;font-size:10px;font-weight:650}
+.landingRefined .connectedSpace{display:flex;align-items:center;gap:12px;padding:18px 0;text-align:left;margin-top:10px}
+.landingRefined .connectedSpace>div{display:grid;gap:5px}.landingRefined .connectedSpace strong{font-size:13px}.landingRefined .connectedSpace small{font-size:11px;color:#657468}
+.landingRefined .connectedRequestLabel{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border-radius:15px;background:#294337;color:#fff;font-size:12px;font-weight:600}
+.landingRefined .connectedRequestLabel svg{flex:none}
+.landingRefined .connectedInboxPreview{display:flex;align-items:center;gap:14px;background:#213e35;border:1px solid #c3e9d62b;padding:18px;border-radius:22px;margin:16px 0 0}
+.landingRefined .connectedInboxPreview>svg{color:#a5d0ba;flex:none}.landingRefined .connectedInboxPreview>div{display:grid;gap:6px}.landingRefined .connectedInboxPreview strong{font-size:13px;color:#f0f7f1}.landingRefined .connectedInboxPreview span{font-size:12px;color:#c2d8cb}.landingRefined .connectedInboxPreview small{font-size:10px;color:#a3bfaf}
+.landingRefined .connectedBranches{border-top:1px solid #ffffff15}
+.landingRefined .connectedBranchCard{min-width:0;padding:28px;border:1px solid #ffb57730;border-radius:32px;background:radial-gradient(ellipse at 100% 0%,#ac614e20,transparent 55%),#1c2721}
+.landingRefined .connectedBranchHeading{display:flex;align-items:center;gap:14px}.landingRefined .connectedBranchHeading>svg{flex:none;color:#ffc497;width:26px;height:26px}.landingRefined .connectedBranchHeading span{font-size:9px;letter-spacing:.13em;color:#b9c9bc}.landingRefined .connectedBranchHeading h3{font-size:23px;line-height:1.25;margin:5px 0;color:#faf4ea}
+.landingRefined .connectedBranchExamples{display:grid;gap:8px;margin:22px 0}.landingRefined .connectedBranchExamples>div{display:flex;align-items:center;gap:12px;border:1px solid #ffffff13;border-radius:15px;padding:13px 14px;color:#c5d4cb;font-size:13px}.landingRefined .connectedBranchExamples>div:first-child{background:#ffffff06;border-color:#ffbc7940;color:#ffe1bf}.landingRefined .connectedBranchExamples>div>span:nth-child(2){flex:1}.landingRefined .connectedBranchDot{width:5px;height:5px;border-radius:50%;background:#7e9a89}
+.landingRefined .connectedBranchPricing{padding:22px 0 12px;border-top:1px solid #ffffff15}.landingRefined .connectedBranchPricing>p{font-size:10px;letter-spacing:.05em;color:#b5c9bc;margin:0 0 18px}.landingRefined .connectedBranchPricing>div{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0;font-size:12px;color:#b8ccbf}.landingRefined .connectedBranchPricing strong{color:#fff0df}
+.landingRefined .connectedBranchPricing label{display:block;font-size:12px;color:#e4ecdf;margin:24px 0 10px}.landingRefined .connectedBranchPricing input{display:block;width:100%;max-width:100%;background:#111e17;border:1px solid #78948280;min-height:48px;border-radius:14px;padding:10px 14px;color:#fff;font-size:16px}
+.landingRefined .connectedBranchPricing output{display:flex;align-items:baseline;flex-wrap:wrap;gap:9px;margin:18px 0 12px;color:#b7cdbd;font-size:12px}.landingRefined .connectedBranchPricing output strong{font-size:36px;letter-spacing:-1.3px}.landingRefined .connectedBranchPricing small{display:block;font-size:10px;line-height:1.7;color:#a6bcae}
+@media(max-width:900px){.landingRefined .landingConnected{gap:32px;padding:55px 24px}.landingRefined .connectedBranchCard{padding:22px}.landingRefined .connectedCopy h2{font-size:34px}}
+@media(max-width:700px){.landingRefined .landingConnected{grid-template-columns:1fr;padding:42px 20px;gap:26px}.landingRefined .connectedPublicPreview,.landingRefined .connectedBranchCard{width:100%;max-width:480px;margin-inline:auto}.landingRefined .connectedCopy h2{font-size:34px}.landingRefined .connectedCopy>p{font-size:15px}.landingRefined .connectedRestaurant{padding:24px 16px 18px}}
+.landingRefined{background:#101a17;color:#f8f7f1}
+.landingRefined .landingNav{max-width:1240px;min-height:88px;height:auto;padding:22px 32px;background:transparent!important;border-bottom:1px solid #ffffff12}
+.landingRefined .landingNav>div{gap:22px}
+.landingRefined .landingLanguages{display:flex;align-items:center;gap:3px;padding:4px;border:1px solid #ffffff26;border-radius:100px}
+.landingRefined .landingLanguages a{display:flex!important;padding:7px 9px;border-radius:100px;font-size:12px;font-weight:700;line-height:1;color:#c9d7d0}
+.landingRefined .landingLanguages a[aria-current=page]{background:#f7f5ea;color:#16392b}
+.landingRefined .hero{max-width:1240px;min-height:650px;gap:64px;padding:76px 32px 70px;grid-template-columns:1.16fr .94fr}
+.landingRefined .hero h1{font-size:clamp(2.8rem,4.35vw,4.35rem);line-height:1.06;letter-spacing:-.04em;max-width:660px;margin:24px 0}
+.landingRefined .hero h1 em{color:#ffab6a}
+.landingRefined .hero>div>p{color:#c1cdc6;font-size:1.06rem;line-height:1.7}
+.landingRefined .hero .heroActions{gap:12px;margin-top:28px}
+.landingRefined .hero .heroActions button{font-size:14px;padding:14px 18px;border-radius:12px}
+.landingRefined .hero .trialReassurance{font-size:13px;color:#bcd0c4;margin-top:18px}
+.landingRefined .landingPriceAnchor{display:inline-flex;align-items:center;gap:8px;color:#ffc497;font-size:13px;line-height:1.5;text-underline-offset:4px;margin-top:7px}
+.landingRefined .heroPanel{min-width:0;transform:rotate(1deg);padding:24px;background:#22362d;border:1px solid #43594d;box-shadow:0 28px 70px #0005;border-radius:24px}
+.landingRefined .previewContent{border-radius:17px;margin-top:20px;padding:26px}
+.landingRefined .landingBenefits{background:transparent;color:#cdd9d0;border-block:1px solid #ffffff15;max-width:1176px;margin:auto;padding-block:22px}
+.landingRefined .landingWorkflow{padding:70px 32px 40px;max-width:1240px;margin:auto}
+.landingRefined .landingWorkflow h2{font:700 clamp(2rem,3vw,2.9rem)/1.15 Georgia,serif;letter-spacing:-.025em;margin:14px 0 30px;color:#f8f7f1}
+.landingRefined .landingWorkflow ol{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:0;margin:0;gap:18px}
+.landingRefined .landingWorkflow li{border:1px solid #ffffff20;background:#ffffff04;border-radius:20px;padding:26px}
+.landingRefined .landingWorkflow li>span{display:block;color:#ffb47d;font-size:13px;font-weight:800;letter-spacing:.1em;margin-bottom:28px}
+.landingRefined .landingWorkflow h3{font-size:19px;margin:0 0 12px;color:#f8f7f1}
+.landingRefined .landingWorkflow p{font-size:14px;line-height:1.7;margin:0;color:#bfcec5}
+.landingRefined .plansSection{scroll-margin-top:20px}
+.landingRefined .landingEventLink{max-width:1176px;margin:28px auto 12px;padding:32px;border:1px solid #ffffff25;border-radius:20px;display:flex;align-items:center;gap:32px;background:#1b2c24}
+.landingRefined .landingEventLink h2{font:700 clamp(1.5rem,2.5vw,2.15rem)/1.2 Georgia,serif;color:#f8f7f1;margin:12px 0}
+.landingRefined .landingEventLink p{color:#c1cdc6;line-height:1.7;margin:0;max-width:720px}
+.landingRefined .landingEventLink>a{display:inline-flex;align-items:center;gap:12px;flex-shrink:0;color:#ffc497;font-weight:700;text-underline-offset:5px}
+@media(max-width:800px){.landingRefined .landingEventLink{margin:24px;flex-direction:column;align-items:flex-start;padding:24px}.landingRefined .landingEventLink>a{flex-shrink:1}}
+.landingRefined .planGrid article{border-radius:22px}
+.landingRefined .planGrid article:last-child{border:2px solid #df783d;box-shadow:0 14px 40px #a4471014}
+.landingRefined :is(button,a,summary):focus-visible{outline:3px solid #ffa869;outline-offset:4px}
+#entryBootCover{display:none}
+html[data-unomesa-entry-pending=true] #entryBootCover{display:grid;position:fixed;inset:0;z-index:2147483000;overflow:hidden;background:#f7faf7}
+html[data-unomesa-entry-pending=true] .landing{visibility:hidden}
+.accessLoading{padding:0;min-height:100dvh;background:#f7faf7}
+.accessLoading .appLoadingBrand{position:relative}
+.accessLoadingText{position:absolute;top:calc(50% + 132px);left:24px;right:24px;margin:0;text-align:center;font:13px/1.5 system-ui;color:#55695e}
+.accessLoadingText.visuallyHidden{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+[data-theme=dark] .accessLoadingText{color:#bdcbc2}
+.appLaunchOverlay.isLeaving .appBrandMark:after{display:none}
+@keyframes brandSheen{from{background-position:200% 0}to{background-position:-100% 0}}
+@media(max-width:1050px){.landingRefined .hero{gap:28px}.landingRefined .landingNav>div{gap:14px}.landingRefined .hero h1{font-size:3.3rem}.landingRefined .landingNav .brandLogo{width:160px}.landingRefined .landingNav>div>a{font-size:13px}}
+@media(max-width:800px){.landingRefined .hero{grid-template-columns:1fr;max-width:680px;padding:44px 24px 54px;gap:38px}.landingRefined .hero h1{font-size:clamp(2.6rem,7vw,3.8rem)}.landingRefined .heroPanel{transform:none}.landingRefined .landingNav{padding:18px 24px;gap:16px;flex-wrap:wrap}.landingRefined .landingNav>div{flex-basis:100%;justify-content:space-between}.landingRefined .landingWorkflow{padding:50px 24px 28px}.landingRefined .landingWorkflow ol{grid-template-columns:1fr}.landingRefined .landingWorkflow li{padding:24px}.landingRefined .landingWorkflow li>span{margin-bottom:16px}.landingRefined .landingWorkflow p{max-width:620px}}
+@media(max-width:480px){.landingRefined .landingNav{padding:18px}.landingRefined .landingNav>div{gap:10px;flex-wrap:wrap}.landingRefined .landingNav .landingAuthActions{flex:1;justify-content:flex-end}.landingRefined .hero{padding:36px 20px 44px}.landingRefined .hero h1{font-size:2.7rem}.landingRefined .hero .heroActions{align-items:stretch;flex-direction:column}.landingRefined .heroPanel{padding:18px}.landingRefined .previewContent{padding:20px}.landingRefined .landingWorkflow{padding-inline:20px}.landingRefined .landingPriceAnchor{font-size:12px}.landingRefined .heroTag{font-size:10px;letter-spacing:.12em}}
+@media(prefers-reduced-motion:reduce){.appLaunchOverlay.isLeaving .appBrandMark:after{display:none}}
+@media print{#entryBootCover{display:none!important}}
+/* Override the previous workflow's two-column layout, including small screens. */
+.landingRefined .landingWorkflow{display:block}
+@media(max-width:480px){
+ .landingRefined .landingNav{display:grid;grid-template-columns:1fr auto;gap:14px}
+ .landingRefined .landingNav>div{display:contents}
+ .landingRefined .landingNav .landingLanguages{grid-column:2;grid-row:1}
+ .landingRefined .landingNav .landingAuthActions{grid-column:1/-1;grid-row:2;justify-content:flex-end}
+}
+
+/* A refresh uses the saved appearance before React mounts; no light flash in dark mode. */
+html[data-theme=dark][data-unomesa-entry-pending=true] #entryBootCover,
+html[data-theme=dark] .accessLoading{background:#101715}
+/* On the web only the initial module is covered. Later refreshes retain the current content. */
+html:not([data-unomesa-app=true]) .appModuleBoundary.isPreparing{min-height:min(60dvh,480px)}
+html:not([data-unomesa-app=true]) .appModuleLoading{position:absolute;inset:0;min-height:inherit;border-radius:18px}
+
+/* UnoMesa / luminous product presentation. CSS only; no new media requests. */
+.landingRefined{background:radial-gradient(ellipse at 88% 6%,#153744 0,transparent 32%),radial-gradient(ellipse at 8% 30%,#202441 0,transparent 32%),#0b121b;color:#f2f6ff}
+.landingRefined .landingNav{position:relative;background:#101a2780!important;border-color:#a8caff20}
+.landingRefined .hero{position:relative;isolation:isolate;padding-top:90px;padding-bottom:90px}
+.landingRefined .hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(#79cfff09 1px,transparent 1px),linear-gradient(90deg,#79cfff09 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(transparent,#000 25%,transparent)}
+.landingRefined .hero h1{font-family:var(--font-geist-sans,Arial),sans-serif;font-weight:750;letter-spacing:-.055em;line-height:1.04}
+.landingRefined .hero h1 em{font-style:normal;color:#9aedff;background:linear-gradient(100deg,#89efff,#c7b4ff 65%,#ffc185);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.landingRefined .heroTag{display:inline-flex;align-items:center;border:1px solid #9ae4ff40;border-radius:100px;padding:9px 13px;background:#7bdcff09;color:#a8eaff}
+.landingRefined .heroPanel{transform:none;background:linear-gradient(145deg,#24344cdd,#15222bee);border:1px solid #a1d4ff44;border-radius:28px;box-shadow:0 0 0 7px #91c9ff06,0 30px 80px #0005,0 0 65px #67c7ff14}
+.landingRefined .previewContent{box-shadow:0 15px 36px #0002}
+.landingRefined .hero .heroActions .primary{box-shadow:0 7px 28px #f8993933;border:1px solid #ffca8c80}
+.landingRefined .landingWorkflow :is(h2,h3),.landingRefined .landingEventLink h2{font-family:var(--font-geist-sans,Arial),sans-serif}
+.landingRefined .landingWorkflow li{background:linear-gradient(135deg,#23324990,#15222a90);border-color:#9fbfe72b;border-radius:24px;transition:transform .2s,border-color .2s}
+.landingRefined .landingWorkflow li>span{color:#93e4ff;display:inline-grid;place-items:center;width:40px;height:40px;border-radius:12px;border:1px solid #94d5ff30;background:#90ceff0a;margin-bottom:25px}
+.landingRefined .landingEventLink{background:linear-gradient(110deg,#203548,#24223c);border:1px solid #9cccff38;border-radius:26px}
+.landingRefined .landingBenefits{color:#c4d7ee;border-color:#bddcff20}
+.landingRefined .hero>div>p,.landingRefined .landingWorkflow p,.landingRefined .landingEventLink p{color:#c4cddd}
+@media(hover:hover){.landingRefined .landingWorkflow li:hover{transform:translateY(-4px);border-color:#94d5ff70}}
+@media(max-width:800px){.landingRefined .hero{padding-top:48px;padding-bottom:48px}.landingRefined .heroPanel{border-radius:22px}}
+@media(prefers-reduced-motion:reduce){.landingRefined .landingWorkflow li{transition:none}.landingRefined .landingWorkflow li:hover{transform:none}}

@@ -1,0 +1,84 @@
+'use client';
+import {useState,useEffect,useCallback,useRef} from 'react';
+import {supabase} from '@/lib/supabase';
+import {useAppPreferences} from './app-preferences';
+import {planFor} from '@/lib/plans';
+import {nativeStore,nativeShell,storeRequest} from '@/lib/store-native';
+import {STORE_CATALOG} from '@/lib/store-catalog';
+import {billingPresentation} from '@/lib/billing-presentation';
+import {subscriptionManagement} from '@/lib/subscription-management';
+import styles from './store-billing.module.css';
+export function BillingRouter({restaurantId,Lemon}:{restaurantId:string;Lemon:React.ComponentType<{restaurantId:string}>}) {
+ const {language}=useAppPreferences(),en=language==='en';
+ const [data,setData]=useState<any>(null),[error,setError]=useState(false);
+ const load=useCallback(async()=>{setError(false);const selected=await supabase.rpc('v2_account_billing',{p_restaurant:restaurantId});if(selected.error||!selected.data){setError(true);return;}
+  const root=selected.data.billing_root_id||restaurantId;
+  if(!selected.data.is_owner){setData({account:selected.data,provider:null,mode:null,rootId:root,canCheckout:false});return;}
+  const [a,s]=await Promise.all([supabase.rpc('v2_account_billing',{p_restaurant:root}),supabase.rpc('v2_billing_source',{p_restaurant:root})]);if(a.error||s.error||!a.data){setError(true);return;}setData({account:a.data,rootId:root,provider:s.data?.provider,mode:s.data?.mode,canCheckout:s.data?.can_checkout});},[restaurantId]);
+ useEffect(()=>{setData(null);void load();},[load]);
+ if(error)return <section role="alert"><p>{en?'Could not load subscription details. Verify that billing update SQL 55 is installed.':'No se pudo cargar la suscripción. Verifique que esté instalado el SQL 55 de facturación.'}</p><button onClick={()=>void load()}>{en?'Retry':'Reintentar'}</button></section>;
+ if(!data)return <p role="status">{en?'Loading subscription…':'Cargando suscripción…'}</p>;
+ if(data.account.is_owner&&!nativeShell()&&(!data.provider||data.provider==='lemon_squeezy'))return <><p className={styles.source}>{en?'Payment provider: UnoMesa website · Lemon Squeezy':'Proveedor de pago: web de UnoMesa · Lemon Squeezy'}</p><Lemon restaurantId={data.rootId||restaurantId}/></>;
+ return <StoreBillingPanel key={restaurantId} restaurantId={data.rootId||restaurantId} {...data} reload={load}/>;
+}
+function StoreBillingPanel({restaurantId,account,provider,mode,canCheckout,reload}:{restaurantId:string;account:any;provider:string|null;mode:string|null;canCheckout:boolean;reload:()=>Promise<void>}) {
+ const {language}=useAppPreferences(),en=language==='en',native=nativeStore(),shell=nativeShell();
+ const returnPending=useRef(false);
+ const source=provider==='apple'?'Apple App Store':provider==='google_play'?'Google Play':provider==='lemon_squeezy'?(en?'UnoMesa website':'web de UnoMesa'):null;
+ const [busy,setBusy]=useState(false),[notice,setNotice]=useState(''),[error,setError]=useState(''),[products,setProducts]=useState<any[]>([]),[cycle,setCycle]=useState('month'),[branches,setBranches]=useState(Math.min(95,Math.max(1,account.branch_capacity||1)));
+ const [catalogLoading,setCatalogLoading]=useState(false),[catalogError,setCatalogError]=useState(''),[catalogAttempt,setCatalogAttempt]=useState(0);
+ const view=billingPresentation(account),canBuy=account.is_owner&&!account.trial_exempt&&native&&(!provider||native===provider);
+ const api=useCallback(async(action:string,extra:any={})=>{
+  const session=await supabase.auth.getSession();const token=session.data.session?.access_token;if(!token)throw new Error(en?'Sign in again.':'Inicie sesión nuevamente.');
+  const response=await fetch(action==='refresh'?'/api/billing/refresh':'/api/billing/store',{method:'POST',headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({restaurant_id:restaurantId,provider:native,action,language,...extra})});
+  const result=await response.json();if(!response.ok)throw new Error(result.error||'No se pudo verificar la compra.');return result;
+ },[restaurantId,native,language,en]);
+ useEffect(()=>{
+  let alive=true;
+  setProducts([]);setCatalogError('');setCatalogLoading(!!native);
+  if(native)void (async()=>{
+   try{
+    // IDs are public; StoreKit/Play supplies actual availability and prices.
+    // Browsing never calls prepare/verify or changes the restaurant's billing.
+    const catalog=STORE_CATALOG.filter(p=>p.branches===branches).map(p=>({...p,productId:p[native]}));
+    const prices=await storeRequest('catalog',{products:catalog});
+    if(alive){setProducts(prices.products||[]);if(!prices.products?.length)setCatalogError(en?'The store did not return plans for this package. Please try again.':'La tienda no devolvió planes para este paquete. Intente nuevamente.');}
+   }catch(e){if(alive)setCatalogError(e instanceof Error?e.message:(en?'Store unavailable.':'Tienda no disponible.'));}
+   finally{if(alive)setCatalogLoading(false);}
+  })();
+  return()=>{alive=false;};
+ },[native,branches,en,catalogAttempt]);
+ useEffect(()=>{let alive=true;const returned=(event:Event)=>{if(document.visibilityState==='hidden'||!returnPending.current)return;if(event.type==='unomesa:billing-return')event.preventDefault();returnPending.current=false;void (async()=>{try{await api('refresh');if(!alive)return;await reload();window.dispatchEvent(new Event('mrmaa:billing-updated'));}catch(e){if(alive)setError(e instanceof Error?e.message:'No se pudo verificar el estado.');}})();};window.addEventListener('focus',returned);document.addEventListener('visibilitychange',returned);window.addEventListener('unomesa:billing-return',returned);return()=>{alive=false;window.removeEventListener('focus',returned);document.removeEventListener('visibilitychange',returned);window.removeEventListener('unomesa:billing-return',returned);};},[api,reload]);
+ const run=async(task:()=>Promise<void>)=>{if(busy)return;setBusy(true);setError('');setNotice('');try{await task();await reload();window.dispatchEvent(new Event('mrmaa:billing-updated'));}catch(e){setError(e instanceof Error?e.message:'No se pudo completar la operación.');}finally{setBusy(false);}};
+ async function verify(items:any[]) {let count=0,activeCount=0;for(const item of items){const result=await api('verify',{reference:item.reference});if(result.verified){await storeRequest('finish',{reference:item.reference});count++;if(result.status==='active')activeCount++;}}if(!count)throw new Error(en?'No purchases were found for this UnoMesa account. Check your store account.':'No se encontraron compras para esta cuenta de UnoMesa. Revise su cuenta de la tienda.');setNotice(activeCount?(en?'Purchase verified. Your plan is available on web, iOS and Android.':'Compra verificada. Su plan está disponible en web, iOS y Android.'):(en?'Purchase restored. The subscription is inactive; manage it in the original store.':'Compra restaurada. La suscripción está inactiva; gestiónela en la tienda original.'));}
+ async function buy(item:any) {
+  const prepared=await api('prepare',{plan:item.plan,cycle:item.cycle,branches:item.branches||branches});
+  if(prepared.replacementMode==='without_proration'&&!window.confirm(en?`Your capacity will change to ${item.branches} locations when you confirm the purchase. Google Play will charge the lower price at your next renewal. Continue?`:`Su capacidad cambiará a ${item.branches} locales al confirmar la compra. Google Play cobrará la tarifa menor en la siguiente renovación. ¿Continuar?`))return;
+  const result=await storeRequest('purchase',prepared);if(result.pending){setNotice(en?'Awaiting approval or payment in the store. Do not pay again.':'Pendiente de aprobación o pago en la tienda. No vuelva a pagar.');return;}if(result.cancelled){setNotice(en?'Purchase cancelled.':'Compra cancelada.');return;}await verify(result.purchases||[]);
+ }
+ const sameStore=!!native&&native===provider;
+ const management=subscriptionManagement(provider,native);
+ return <section className={styles.panel} aria-busy={busy}>
+  <div><p className={styles.eyebrow}>{en?'ONE ACCOUNT · ALL YOUR DEVICES':'UNA CUENTA · TODOS SUS DISPOSITIVOS'}</p><h2>{en?'Your subscription':'Su suscripción'}</h2><p>{en?'Use the same UnoMesa account on web, iPhone, iPad and Android.':'Use la misma cuenta de UnoMesa en web, iPhone, iPad y Android.'}</p></div>
+  <div className={styles.summary}><strong>{planFor(account.plan_code).name}{account.branch_capacity>1?` · ${account.branch_capacity} ${en?"locations":"sucursales"}`:""}</strong><span>{account.trial_exempt?(en?'Complimentary access':'Acceso sin pagos'):account.can_write?(view.paid?(en?'Active':'Activa'):(en?'Free trial':'Prueba gratuita')):(en?'Inactive':'Inactiva')}</span>{source&&<p>{en?'Purchased through: ':'Contratada en: '}<b>{source}</b>{mode==='test'?' · TEST':''}</p>}{view.end&&<p>{en?'Period ends: ':'Fin del período: '}{new Date(view.end).toLocaleDateString(en?'en-US':'es-GT')}</p>}{account.billing_cancel_at_period_end&&<p>{en?'Automatic renewal is off. Access continues until the paid period ends.':'Renovación automática desactivada. El acceso continúa hasta terminar el período pagado.'}</p>}</div>
+  {error&&<p role="alert" className={styles.error}>{error}</p>}{notice&&<p role="status" className={styles.notice}>{notice}</p>}
+  {!account.is_owner?<p>{en?'Only the restaurant owner can manage billing.':'Solo el propietario del restaurante puede gestionar los pagos.'}</p>:account.trial_exempt?<p>{en?'This account does not require a paid subscription.':'Esta cuenta no requiere una suscripción de pago.'}</p>:<>
+   {source&&<p>{provider==='lemon_squeezy'?(en?'Your subscription is managed on the UnoMesa website, under Settings → Subscription. Changes apply to every device.':'Su suscripción se gestiona en la página web de UnoMesa, en Configuración → Suscripción. Los cambios se reflejan en todos los dispositivos.'):(en?`Manage payments, renewal and cancellation through ${source}, where you subscribed.`:`Gestione los pagos, la renovación y la cancelación en ${source}, donde contrató el plan.`)}</p>}
+   <div className={styles.actions}>
+    {management?.kind==='native'&&<button type="button" className="primary" disabled={busy} onClick={()=>void run(async()=>{returnPending.current=native==='google_play';try{await storeRequest('manage');await api('refresh');}catch(e){returnPending.current=false;throw e;}})}>{en?'Manage subscription':'Gestionar suscripción'}</button>}
+    {management?.kind==='link'&&<a className="secondary" target="_blank" rel="noopener noreferrer" href={management.href} onClick={()=>{returnPending.current=true;}}>{provider==='lemon_squeezy'?(en?'Manage on the website':'Gestionar en la web'):provider==='apple'?(en?'Manage with Apple':'Gestionar con Apple'):(en?'Manage with Google Play':'Gestionar con Google Play')}</a>}
+    {native&&(!provider||sameStore)&&<button className="secondary" disabled={busy} onClick={()=>void run(async()=>{const r=await storeRequest('restore');if(r.pending){setNotice(en?'Payment is pending in the store. Do not pay again.':'El pago está pendiente en la tienda. No vuelva a pagar.');return;}await verify(r.purchases||[]);})}>{en?'Restore purchases':'Restaurar compras'}</button>}
+    {provider&&<button className="secondary" disabled={busy} onClick={()=>void run(async()=>{const r=await api('refresh');setNotice(r.verified?(en?'Status verified with your payment provider.':'Estado verificado con su proveedor de pago.'):(r.reason==='archived_expired'?(en?'Your previous subscription expired. You may subscribe again in the same store.':'Su suscripción anterior venció. Puede contratar de nuevo en la misma tienda.'):(en?'No paid subscription is linked yet.':'Todavía no hay una suscripción de pago vinculada.')));})}>{en?'Refresh status':'Actualizar estado'}</button>}
+   </div>
+   {shell&&!native&&<p>{en?'Update UnoMesa to purchase or restore subscriptions in this store.':'Actualice UnoMesa para comprar o restaurar suscripciones en esta tienda.'}</p>}
+  </>}
+  {native&&<div className={styles.panel} aria-busy={catalogLoading}>
+   <h3>{en?'Available plans':'Planes disponibles'}</h3>
+   <label>{en?'Locations in the package':'Sucursales del paquete'}<input type="number" min={1} max={95} disabled={busy} value={branches} onChange={e=>{const n=Number(e.target.value);if(Number.isSafeInteger(n)&&n>=1&&n<=95){setProducts([]);setBranches(n);if(n>1)setCycle('month');}}}/><small>{en?'The store displays the available package and its final recurring price.':'La tienda muestra el paquete disponible y su precio recurrente final.'}</small></label>
+   {catalogLoading&&<p role="status">{en?'Loading store plans…':'Consultando planes en la tienda…'}</p>}
+   {catalogError&&<div><p role="alert" className={styles.error}>{catalogError}</p><button type="button" className="secondary" disabled={busy||catalogLoading} onClick={()=>setCatalogAttempt(n=>n+1)}>{en?'Reload plans':'Volver a cargar planes'}</button></div>}
+   {products.length>0&&<><div className={styles.cycles}>{(branches>1?['month']:['month','year']).map(c=><button key={c} type="button" aria-pressed={cycle===c} onClick={()=>setCycle(c)}>{c==='month'?(en?'Monthly':'Mensual'):(en?'Annual':'Anual')}</button>)}</div><div className={styles.plans}>{products.filter(p=>p.cycle===cycle).map(p=><article key={p.productId+p.cycle}><h3>{p.branches>1?`Advanced · ${p.branches} ${en?"locations":"sucursales"}`:p.name}</h3><p><strong>{p.price}</strong> / {cycle==='month'?(en?'month':'mes'):(en?'year':'año')}</p><ul>{(en?planFor(p.plan).en:planFor(p.plan).es).map(line=><li key={line}>{line}</li>)}</ul>{canBuy&&<button className="primary" disabled={busy||catalogLoading} onClick={()=>void run(()=>buy(p))}>{provider&&!canCheckout?(en?'Change package':'Cambiar paquete'):(en?'Subscribe':'Suscribirse')}</button>}</article>)}</div><p className={styles.terms}>{en?'Recurring subscription. The store confirms the final price and renewal terms before purchase. It renews automatically until cancelled through your store. Your UnoMesa trial does not restart.':'Suscripción recurrente. La tienda confirma el precio final y las condiciones antes de la compra. Se renueva automáticamente hasta cancelarla en la tienda. La prueba de UnoMesa no se reinicia.'}</p></>}
+  </div>}
+  <p className={styles.terms}><a href="/terminos">{en?'Terms of use':'Términos de uso'}</a> · <a href="/privacidad">{en?'Privacy policy':'Política de privacidad'}</a></p>
+ </section>;
+}
