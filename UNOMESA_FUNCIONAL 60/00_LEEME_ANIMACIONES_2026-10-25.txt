@@ -1,0 +1,33 @@
+ACTUALIZACIÓN 25 OCT 2026 — TRANSICIONES DE UNOMESA
+
+- Las secciones se revelan desde el control tocado, con una transición breve.
+- Mientras se consulta información se muestra una estructura visual en lugar
+  del círculo de carga. Las actualizaciones posteriores conservan el contenido
+  y los borradores visibles.
+- Ver cotización responde inmediatamente con una hoja en preparación. Puede
+  cerrarla durante la carga. El documento aparece con un giro y expansión leves,
+  ya ajustado al ancho de la pantalla.
+- El inicio expande y desvanece el mismo logo circular sobre la interfaz lista.
+  No introduce un segundo logo cuadrado.
+- Se respeta Reducir movimiento; los PDF se capturan con la geometría estable.
+- Se mantiene COTIZACIÓN CONFIRMADA para cotizaciones confirmadas/convertidas.
+
+DATOS
+Este cambio no requiere SQL. No repita los SQL históricos por esta actualización.
+No se modificó ningún SQL ni se ejecutaron escrituras sobre información real.
+Se conserva la configuración de cuentas, sucursales, suscripciones y permisos.
+
+INSTALACIÓN WEB
+Publique UNOMESA_FUNCIONAL completo en el mismo proyecto Vercel, conservando
+variables, dominio y Supabase. Las transiciones de secciones y cotizaciones
+se reciben en las apps que cargan esa web al cerrarlas y abrirlas nuevamente.
+Para la nueva animación nativa del inicio, instale también las nuevas builds.
+No se publicó el proyecto desde esta revisión.
+
+VALIDACIÓN
+Compilación de producción Next.js y TypeScript aprobada (48 páginas).
+Pruebas Chromium: apertura/cancelación/error de cotización, PDF descargable,
+cambios rápidos de sección, cambio de sucursal simulado, conservación de
+borrador al refrescar, Reducir movimiento, teclado y anchos 320–1280 px.
+PDF de ejemplo conserva el título COTIZACIÓN CONFIRMADA y una página válida.
+No probado en Safari ni en dispositivos físicos en este entorno.
