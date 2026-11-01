@@ -1,0 +1,35 @@
+AVISO: las instrucciones vigentes están en 00_LEEME_ACTUALIZAR.txt.
+Este documento describe la entrega anterior de landing/SEO.
+
+UNOMESA FUNCIONAL · LANDING, SEO Y ACCESO · 8 OCTUBRE 2026
+
+INSTALAR ESTA ENTREGA
+1. Publica UNOMESA_FUNCIONAL en el MISMO proyecto Vercel existente. Conserva
+   las variables de entorno y el mismo Supabase. No ejecutes SQL.
+2. NEXT_PUBLIC_SITE_URL debe tener tu dominio público HTTPS canónico, sin
+   rutas: por ejemplo https://www.unomesa.com si ese es tu dominio principal.
+   Conserva el dominio usado por el retorno OAuth; no lo cambies por este ejemplo.
+3. Publica la web primero. Si ya tienes instalada la app iOS actual, cierra
+   y vuelve a abrirla. Esta actualización no necesita otra compilación nativa.
+4. Prueba / y /es; después Iniciar sesión con Google y una cuenta existente.
+
+CAMBIOS DE ESTA ENTREGA
+- El acceso se determina en el servidor para evitar el destello de la landing
+  al volver de Google. Pantalla de marca uniforme durante la validación.
+- La restauración de sesión usa una cubierta temprana de presentación.
+  No concede acceso: permanecen todos los controles de sesión, MFA y cuenta.
+- Landing renovada con reservas, eventos y plano de mesas como eje del mensaje.
+- Precios visibles antes del registro; se conservan los importes y la prueba.
+- Inglés en / y español en /es, con HTML público legible sin JavaScript.
+- Metadatos, enlaces canónicos, hreflang, sitemap bilingüe, JSON-LD con los
+  precios reales e imagen de enlace social. Accesos privados fuera del índice.
+- El panel privado se descarga cuando se necesita, separado de la landing.
+- Se mantienen las mejoras anteriores de Seguridad, opciones y cotizaciones.
+
+DATOS
+Los 16 archivos SQL y lib/plans.ts son idénticos a la versión base 112.
+No se ha accedido ni modificado la base de producción. Los clientes,
+reservaciones y cotizaciones siguen usando los mismos servicios existentes.
+Enlace público de reservaciones y cobros de anticipos continúan fuera del alcance.
+
+Consulta SEO_PUBLICACION.txt y VALIDACION_SEO_ACCESO.txt.
