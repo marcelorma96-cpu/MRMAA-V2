@@ -1,0 +1,52 @@
+UNOMESA — REVISIÓN DE PRODUCCIÓN — 29 OCT 2026
+
+Se revisó el paquete web actual junto a Android 1.0.12 (code 13) e iOS 1.0
+(build 24). Estas versiones corresponden a los archivos revisados; no se ha
+verificado que sean las instaladas en las tiendas ni el despliegue de Vercel.
+
+CAMBIOS EN ESTE PAQUETE WEB
+- Next.js 16.3.8 -> 16.4.3, Nodemailer 10.0.10 -> 10.1.4 y DOMPurify
+  transitivo 3.4.16 -> 3.4.17 por avisos de seguridad. Lockfile actualizado.
+- Limpieza autorizada de archivos por restaurante: incluye logos, imágenes y
+  menús de ambos buckets, carpetas y páginas; conserva el trabajo para reintento
+  si hay error. No toca prefijos de otro restaurante.
+- La eliminación de cuenta conserva la identidad Auth si no puede confirmar
+  cuántas membresías quedan. Evita borrar una identidad con recuento desconocido.
+- Reconciliación de tiendas: limita por proveedor/modo habilitado, intercala
+  proveedores, usa hasta cuatro operaciones concurrentes y protege verificaciones
+  más recientes. Una fila fallida sin otra actualización se reintenta tras unos
+  10 minutos de elegibilidad, en vez de esperar seis horas.
+- Pruebas de regresión y herramienta de lectura/carga para staging.
+- Diagnóstico de producción de SOLO LECTURA. No es una migración.
+
+VALIDACIÓN
+- 471 pruebas del proyecto: aprobadas; 3 pruebas adicionales del medidor: aprobadas.
+- TypeScript sin errores. Compilación Next.js de producción con webpack aprobada.
+- npm audit --omit=dev: 0 vulnerabilidades conocidas reportadas al revisar.
+- Android: 82 comprobaciones de lógica con dobles del SDK aprobadas.
+  No equivalen a compilar Android ni a comprar en Google Play.
+- Diagnóstico SQL ejecutado en PGlite aislado: devuelve JSON dentro de READ ONLY.
+
+ESTADO
+No se certifica aún capacidad para miles de restaurantes. Faltan el diagnóstico
+actual de Supabase, verificación del entorno live/webhooks/cron, pruebas de carga
+representativas y comprobación de copias de seguridad y recuperación.
+Los diagnósticos históricos disponibles son del 11 de octubre, anteriores a
+varias migraciones revisadas. Tampoco sustituyen una comprobación actual.
+
+DESPLIEGUE
+1. Revisar y probar este código en un Preview/staging. Usar package-lock.json
+   con npm ci y conservar los secretos únicamente en el entorno del servidor.
+2. Tras la validación, desplegar el paquete web en Vercel. Este trabajo no lo ha
+   publicado. No requiere un nuevo binario nativo por estos cambios.
+3. No instalar SQL nuevo para estas correcciones. Para cerrar la auditoría,
+   ejecutar scripts/diagnostico_produccion_2026-10-29.sql en el SQL Editor y
+   exportar la celda diagnostico. Solo lee metadatos/código; no cambia datos.
+4. No reinstalar todas las migraciones a ciegas. Comparar primero el diagnóstico.
+5. No habilitar MRMAA_RETENTION_DELETE_ENABLED hasta validar en staging la
+   eliminación de empresas con sucursales y la limpieza completa de sus archivos.
+   La clave foránea actual protege la empresa de un borrado con sucursales vivas.
+6. Seguir verification/PRUEBA_CARGA_LECTURA.txt para una primera medición aislada.
+
+No se cambiaron precios, derechos de planes, roles, exenciones, datos reales,
+productos de las tiendas ni configuraciones de producción durante esta revisión.
