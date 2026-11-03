@@ -1,0 +1,59 @@
+/* Fit the conversation to the visual viewport, including a software keyboard. */
+.aiHelpLayer{position:fixed;inset:0;z-index:110;isolation:isolate;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:stretch;min-width:0;--panel-height:100dvh;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+.aiHelpShade{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;border-radius:0;background:#081d3455;touch-action:manipulation}
+.aiHelpLayer .aiHelpPanel{position:relative;inset:auto;z-index:1;box-sizing:border-box;display:flex;flex-direction:column;min-width:0;min-height:0;width:min(560px,100%);height:100%;max-height:900px;margin-block:auto;border-radius:20px;overflow:hidden}
+.aiHelpLayer .aiHelpPanel>header{flex:none;min-height:60px;padding:8px 14px;gap:8px}
+.aiHelpLayer .aiHelpPanel>header>div{flex:1;min-width:0}
+.aiHelpLayer .aiHelpPanel>header strong{display:block;font-size:17px;line-height:1.3}
+.aiHelpLayer .aiHelpPanel>header small{font-size:12px;line-height:1.3;margin-top:2px}
+.aiHelpLayer .aiHelpPanel>header>button{flex:0 0 44px;min-width:44px;min-height:44px;padding:8px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink)}
+.aiHelpLayer .aiHelpPanel>header>button svg{width:20px;height:20px}
+.aiHelpLayer .aiHelpPanel .aiHelpMeta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:none;min-height:44px;max-height:none;overflow:visible;padding:0 14px;border-bottom:1px solid var(--line);font-size:12px}
+.aiHelpLayer .aiHelpMeta>span{min-width:0}
+.aiHelpLayer .aiHelpMeta>button{display:flex;align-items:center;gap:6px;flex:none;min-height:44px;margin:0;padding:4px 8px;border:0;background:transparent;color:var(--ink);font-size:12px}
+.aiHelpLayer .aiHelpPanel .aiHelpLog{flex:1 1 0;min-height:0;min-width:0;overflow-y:auto;overscroll-behavior:contain;overflow-wrap:anywhere;padding:12px 16px;scroll-padding:12px;-webkit-overflow-scrolling:touch}
+.aiHelpLayer .aiHelpLog>*{max-width:760px;margin-left:auto;margin-right:auto}
+.aiHelpLayer .aiHelpInfo{border-bottom:1px solid var(--line);padding-bottom:8px;color:var(--muted);font-size:12px;line-height:1.5}
+.aiHelpLayer .aiHelpInfo>summary{display:list-item;min-height:44px;padding:12px 0;cursor:pointer;color:var(--ink);box-sizing:border-box}
+.aiHelpLayer .aiHelpInfo>button{min-height:44px;font-size:12px}
+.aiHelpLayer .aiHelpInfo p{margin:8px 0}
+.aiHelpLayer .aiHelpWelcome h3{font:700 20px/1.3 system-ui,sans-serif;margin:14px 0 8px}
+.aiHelpLayer .aiHelpWelcome p{font-size:14px;line-height:1.5;margin:8px 0}
+.aiHelpLayer .aiHelpWelcome button{min-height:44px;font:500 14px/1.45 system-ui,sans-serif;white-space:normal}
+.aiHelpLayer .aiHelpMessage{padding:12px 14px;margin-top:12px;margin-bottom:12px}
+.aiHelpLayer .aiHelpMessage p{font-size:15px;line-height:1.6}
+.aiHelpLayer .aiHelpError{font-size:13px;line-height:1.5}
+.aiHelpLayer .aiHelpError button{min-height:44px;margin:4px}
+.aiHelpLayer .aiHelpPanel .aiHelpCompose{flex:none;min-height:0;max-height:none;overflow:visible;padding:8px 12px;background:var(--paper);border-top:1px solid var(--line)}
+.aiHelpLayer .aiHelpCompose form{max-width:860px;margin:0 auto}
+.aiHelpLayer .aiHelpCompose form>.aiHelpInputRow{display:flex;align-items:flex-end;gap:8px;margin:0;min-width:0}
+.aiHelpLayer .aiHelpCompose textarea{box-sizing:border-box;flex:1;min-width:0;width:0;height:44px;min-height:44px;max-height:96px;resize:none;padding:10px 12px;margin:0;overflow-y:auto;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:400 16px/22px system-ui,sans-serif}
+.aiHelpLayer .aiHelpInputRow>button{display:flex;align-items:center;justify-content:center;gap:6px;flex:none;min-width:44px;min-height:44px;margin:0;padding:10px 14px;border-radius:12px;font-size:14px}
+.aiHelpLayer .aiHelpCompose form>.aiHelpComposeNote{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin:5px 0 0;color:var(--muted)}
+.aiHelpLayer .aiHelpComposeNote small{font-size:10px;line-height:1.3}
+.aiHelpLayer .aiHelpComposeNote small:last-child{flex:none;white-space:nowrap}
+.aiHelpLayer button:focus-visible,.aiHelpLayer summary:focus-visible,.aiHelpLayer textarea:focus-visible,.aiHelpLayer .aiHelpLog:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.aiHelpLayer[data-expanded] .aiHelpPanel{width:100%;max-height:none}
+.aiHelpLayer[data-compact] .aiHelpPanel>header{min-height:48px;padding:2px 10px}
+.aiHelpLayer[data-compact] .aiHelpPanel>header small,.aiHelpLayer[data-compact] .aiHelpPanel .aiHelpMeta{display:none}
+.aiHelpLayer[data-compact] .aiHelpPanel .aiHelpCompose{padding:6px 10px}
+.aiHelpLayer[data-compact] .aiHelpCompose textarea{max-height:64px}
+@media(max-width:700px),(any-pointer:coarse){
+ .aiHelpLayer{padding:max(6px,env(safe-area-inset-top)) max(6px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left))}
+ .aiHelpLayer .aiHelpPanel{width:100%;max-height:none;border-radius:16px}
+ .aiHelpLayer .aiHelpPanel>header>.aiHelpExpand{display:none}
+}
+@media(max-width:480px){
+ .aiHelpLayer .aiHelpInputRow>button{width:44px;padding:10px}
+ .aiHelpLayer .aiHelpInputRow>button>span{display:none}
+ .aiHelpLayer .aiHelpPanel>header strong{font-size:16px}
+ .aiHelpLayer .aiHelpPanel .aiHelpLog{padding:10px 12px}
+}
+/* Fallback for browsers that resize the layout viewport or omit VisualViewport. */
+@media(max-height:480px){
+ .aiHelpLayer .aiHelpPanel>header{min-height:48px;padding:2px 10px}
+ .aiHelpLayer .aiHelpPanel>header small,.aiHelpLayer .aiHelpPanel .aiHelpMeta{display:none}
+ .aiHelpLayer .aiHelpPanel .aiHelpCompose{padding:6px 10px}
+ .aiHelpLayer .aiHelpCompose textarea{max-height:64px}
+}
+@media print{.aiHelpLayer{display:none!important}}
