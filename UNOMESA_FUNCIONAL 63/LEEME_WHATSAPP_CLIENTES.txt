@@ -1,0 +1,66 @@
+UnoMesa — WhatsApp y navegación de listados
+Actualización: 3 de noviembre de 2026
+
+WhatsApp
+- Ícono discreto junto al teléfono en clientes, reservaciones, cotizaciones y
+  buzón de solicitudes; conserva un área de toque cómoda en pantalla táctil.
+- El ícono abre primero WhatsApp Web con el destinatario y el mensaje preparado.
+  Al regresar a UnoMesa queda disponible «Abrir aplicación», mediante el enlace
+  oficial de WhatsApp, si Web no funciona en ese dispositivo o navegador.
+- No se intenta detectar la sesión de WhatsApp ni la aplicación instalada:
+  los navegadores no ofrecen una comprobación fiable. No hay redirecciones con
+  temporizador, apertura doble automática ni envío de mensajes sin intervención.
+- Las opciones Web/aplicación conservan el mismo destinatario y mensaje.
+- El mensaje es neutral: no confirma una reserva ni modifica estados. El usuario
+  lo revisa en WhatsApp y pulsa Enviar. Utilizar la cuenta del restaurante.
+- El seguimiento de eventos ofrece también Web primero y aplicación después.
+
+Teléfonos y configuración
+- Para completar teléfonos locales se usa primero el país del restaurante y,
+  si falta, el país detectado por la configuración existente de UnoMesa.
+- Los números con +, 00 o enlaces oficiales conservan su destino internacional.
+  Si faltan datos regionales o no se reconoce el país, se solicita corregirlos.
+  La validación no asegura que el destinatario tenga una cuenta WhatsApp.
+- El teléfono del cliente no se modifica al abrir un chat.
+- Si falta el WhatsApp del restaurante, el administrador puede ir directamente a
+  Configuración → General → WhatsApp, ingresar el número y guardar. Los usuarios
+  sin permiso de configuración reciben una indicación para pedirlo al administrador.
+- Guardar el número no vincula una sesión ni cambia la cuenta de WhatsApp activa.
+  El enlace de configuración abre WhatsApp Web para realizar su vinculación allí.
+
+PDF de cotizaciones
+Este cambio no habilita envíos automáticos ni adjunta un PDF mediante el enlace
+al chat. Se mantiene la opción PDF de la cotización: generar el archivo y
+compartirlo/adjuntarlo. El envío automático de documentos requiere una integración
+adicional con WhatsApp Business; no se ha configurado ni se han pedido credenciales.
+
+Primera y última página
+Se agregaron «Primera» y «Última», además de «Anterior» y «Siguiente», en los
+listados principales de cotizaciones, reservaciones y clientes. Se incluyen
+recordatorios de cotizaciones, pendientes del equipo, historial de cambios,
+papelera, usuarios, reportes e importación de clientes mediante el control común.
+
+Los listados principales obtienen el total de resultados filtrados y leen solo
+la página solicitada. No descargan el historial completo ni recorren todas las
+páginas para llegar al final. Se conservan búsqueda, fechas, sucursal y orden.
+El orden incluye el ID como desempate. Si se elimina la última página, se ajusta
+al nuevo final. Cambiar filtros o sucursal vuelve a la primera página.
+Los controles se desactivan durante la carga y en el extremo correspondiente;
+se adaptan a pantallas pequeñas y tienen textos en español e inglés.
+Los selectores auxiliares de vinculación/sucursales y el buzón que utilizan sus
+propios cursores conservan su paginación anterior.
+
+Instalación
+Desplegar este proyecto actualizado en Vercel. No requiere SQL nuevo ni
+credenciales de Meta. No se modificaron los proyectos nativos de las tiendas.
+No se desplegó ni se alteraron datos de producción desde esta revisión.
+
+Validación
+Pruebas de teléfonos, mensajes, opciones Web/aplicación, configuración y controles;
+consultas de paginación contra PostgreSQL local con filtros, empates, fechas nulas,
+sucursales separadas, papelera, último bloque parcial y recuperación de páginas
+eliminadas. Regresiones de contactos públicos, recordatorios y conversiones.
+Compilación de producción y TypeScript: npm run build -- --webpack.
+La apertura real de WhatsApp Web y de la aplicación debe comprobarse después del
+despliegue en los dispositivos usados por el restaurante; no se enviaron mensajes
+ni se dispuso de dispositivos físicos Android/Apple para esta verificación.
