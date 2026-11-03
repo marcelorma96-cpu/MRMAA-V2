@@ -1,0 +1,35 @@
+.phone{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap;max-width:100%;vertical-align:middle;min-width:0}
+.number{overflow-wrap:anywhere;min-width:0;max-width:100%;unicode-bidi:isolate}
+.button.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;max-width:100%;padding:7px 10px;border:1px solid #abd9bf;border-radius:11px;background:#edf9f1;color:#17613b;font-family:inherit;font-size:13px;font-weight:600;line-height:1.4;text-decoration:none;white-space:normal;cursor:pointer;vertical-align:middle;box-sizing:border-box}
+.button svg{flex:none}
+.button:hover{background:#dcf2e5}
+.button:focus-visible{outline:3px solid #24965a;outline-offset:3px}
+.button:disabled{opacity:.5;cursor:default}
+.button.iconButton{flex:none;width:28px;min-width:28px;height:28px;min-height:28px;padding:0;border:0;border-radius:50%;background:transparent;color:#258453}
+.button.iconButton:hover{background:#edf9f1}
+.dialog{display:grid;gap:12px;padding:20px;min-width:0}
+.dialog p{margin:0;overflow-wrap:anywhere}
+.dialog label{font-weight:600}
+.dialog input{width:100%;box-sizing:border-box;min-height:48px;font-size:16px}
+.dialog small{line-height:1.5;color:var(--muted,#64748b)}
+.preview{padding:12px;border-radius:12px;background:var(--soft,#f1f5f9)}
+.actions{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:10px}
+.openOptions{display:grid;gap:10px;min-width:0}
+.appAlternative{display:inline-flex;align-items:center;min-height:44px;padding:4px 8px;color:var(--ink,#334155);text-underline-offset:3px;font-size:14px;box-sizing:border-box}
+.appAlternative:focus-visible{outline:3px solid #24965a;outline-offset:2px;border-radius:6px}
+:global([data-theme=dark]) .button{background:#163c2b;border-color:#337e52;color:#c2f2d3}
+:global([data-theme=dark]) .button:hover{background:#205238}
+:global([data-theme=dark]) .button.iconButton{background:transparent;color:#70c895}
+:global([data-theme=dark]) .button.iconButton:hover{background:#205238}
+:global([data-theme=dark]) .preview{background:#182b28}
+@media(pointer:coarse){.button.button{min-height:44px}.button.iconButton{width:44px;min-width:44px;height:44px}}
+@media print{.button.button{display:none}}
+
+.openOptions select{display:block;width:100%;min-height:44px;margin-top:6px;font:inherit;box-sizing:border-box}
+.accountCheck{display:grid;gap:8px;min-width:0}
+.notice{display:grid;gap:10px;padding:12px;border:1px solid var(--line,#dce3eb);border-radius:12px;background:var(--soft,#f1f5f9);overflow-wrap:anywhere}
+.notice p{margin:0}
+.checkLabel{display:flex;align-items:flex-start;gap:8px;font-size:14px;line-height:1.5}
+.checkLabel input[type=checkbox]{flex:none;width:20px;height:20px;min-height:20px;margin:0;accent-color:#258453}
+button.appAlternative{border:0;background:transparent;text-decoration:underline;cursor:pointer;justify-self:start;font:inherit}
+button.appAlternative:disabled{opacity:.5;cursor:default}
