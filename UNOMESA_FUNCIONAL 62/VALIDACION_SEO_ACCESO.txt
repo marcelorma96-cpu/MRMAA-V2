@@ -1,0 +1,27 @@
+VALIDACIÓN · 8 OCTUBRE 2026
+
+- TypeScript sin errores; compilación Next.js de producción aprobada (webpack).
+- 15 pruebas unitarias: selección de acceso, metadatos y ofertas, cubierta de
+  sesión, retorno OAuth web/app y seguimiento de registro de Google Ads.
+- Navegador con datos ficticios: retorno Google con intercambio único,
+  cubierta durante MFA y carga del panel sin un solo frame visible de landing.
+- Restauración de sesión existente: cubierta temprana y acceso validado.
+- Googlebot y navegador reciben HTML público con contenido y precios.
+- / y /es legibles con JavaScript desactivado; canonical/hreflang, JSON-LD,
+  sitemap de 6 páginas y noindex de accesos comprobados.
+- Vista pública y su ejemplo, login, registro y volver revisados a 320, 390
+  y 1440 píxeles. Sin errores de JavaScript ni desplazamiento horizontal de página.
+- Comparación byte a byte: los 16 SQL y las tarifas de planes no cambian.
+- Datos simulados exclusivamente para las pruebas; no se modificó producción.
+
+iOS Build 10:
+- Revisión de código de animación: elevación suave, barrido de luz y halo,
+  con fade breve al activar Reducir movimiento.
+- Conserva la señal de contenido listo, reintento y protección al volver
+  del segundo plano. La entrada de Google mantiene sus reglas existentes.
+- Info.plist, storyboard XML y catálogos JSON válidos.
+- No hay Xcode ni SDK de iOS en este entorno: NO se ha compilado, firmado,
+  instalado ni probado en un iPhone/iPad real. Haz esa verificación en Mac.
+
+No se ha publicado Vercel ni enviado la app a Apple. Las pruebas OAuth usan
+respuestas simuladas; no se ejecutó una autenticación real con Google.

@@ -1,0 +1,56 @@
+UNOMESA — INICIO Y CONFIGURACIÓN — 28 OCTUBRE 2026
+
+ENTREGA
+Android 1.0.12 (código 13), iOS 1.0 (build 24) y web.
+Esta actualización sustituye las instrucciones de inicio de las entregas previas.
+
+COMPORTAMIENTO
+- Apertura desde cero: portada con el logo original de iOS, nombre y salida
+  circular animada. Android conserva el mismo arte y distribución.
+- Volver desde segundo plano: se conserva la pantalla abierta, su posición y
+  sus formularios; la portada completada no espera la red ni se vuelve a animar.
+- Si se sale durante la animación, esta se termina antes de la captura del
+  sistema. Al regresar se muestra el contenido ya preparado.
+- Las pantallas estáticas del sistema usan un fondo neutro. El código de la
+  app es el único responsable de mostrar el logo una vez por proceso.
+- Si el sistema termina el proceso, la siguiente apertura sí es un inicio nuevo.
+- Web conserva el estado de presentación por pestaña y termina la animación
+  al ocultar/restaurar la página. Los controles de sesión siguen vigentes.
+- Configuración compartida: nuevo acceso con icono, encabezado, tarjetas,
+  descripciones y selección activa; modo claro/oscuro y español/inglés.
+  Cancelar la confirmación de cambios sin guardar mantiene el selector abierto.
+
+INSTALACIÓN
+1. Publicar UNOMESA_FUNCIONAL en el mismo proyecto de Vercel.
+2. Android: abrir este proyecto completo, conservar firma y keystore.properties,
+   sincronizar y ejecutar Run. Para Google Play generar AAB firmado, código 13.
+3. iOS: abrir UnoMesa.xcodeproj, conservar Team y com.unomesa.app. Compilar
+   e instalar build 24; para TestFlight generar Archive y subir ese build.
+4. Actualizar encima de las apps existentes. No es necesario desinstalarlas.
+No requiere SQL nuevo ni variables nuevas. No ejecutar SQL históricos por
+esta actualización. No se modifican pagos, productos, credenciales o datos.
+
+VALIDACIÓN REALIZADA
+- TypeScript sin errores y compilación web de producción con webpack correcta.
+  Turbopack no aceptó el enlace local de dependencias de este entorno; no se
+  cambió la configuración de compilación del proyecto.
+- 18 pruebas dirigidas: presentación por sesión, regreso desde segundo plano,
+  BFCache, controles de acceso, retorno Google y navegación de facturación.
+- Selector: renderizado ES/EN, filtro de permisos, sección activa y aceptación/
+  cancelación de navegación comprobados; CSS analizado.
+- 82 comprobaciones de catálogo Android con dobles locales de SDK: pasan.
+  La implementación de compras existente se conserva sin cambios.
+- Java analizado sintácticamente; recursos XML, plist y storyboard válidos.
+
+LÍMITES Y PRUEBA EN DISPOSITIVOS
+No hay Xcode/Android SDK aquí: no se compilaron ni firmaron IPA/APK/AAB.
+Chromium no pudo arrancar en este entorno; falta validación visual real de
+configuración y del cambio de aplicación. La revisión de sintaxis no sustituye
+compilación nativa. Esta entrega no realizó ningún despliegue.
+
+En cada app: abrir desde cero, esperar Reservaciones, desplazarse, dejar un
+formulario sin guardar, salir a Inicio y volver 5 veces. Debe conservar la vista
+sin portada. Repetir saliendo durante el zoom y con la red temporalmente
+interrumpida DESPUÉS de cargar. Confirmar también retorno de Google y tienda.
+Probar configuración con texto largo y en ambos temas; cancelar un cambio
+con borrador debe dejar el selector abierto y conservar los datos.

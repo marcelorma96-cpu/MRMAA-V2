@@ -1,0 +1,38 @@
+UnoMesa — Contactar clientes por WhatsApp
+
+Se agregó un botón «WhatsApp» junto al teléfono en:
+- Reservaciones: listado web y detalle de la app.
+- Cotizaciones: listado web y detalle de la app.
+- Clientes: listado web y detalle de la app.
+- Buzón de solicitudes: datos de contacto, conservando la preferencia del cliente
+  y las opciones existentes de llamar o enviar correo.
+
+Al abrirlo, WhatsApp recibe un mensaje preparado en español o inglés con el
+nombre del cliente, el restaurante y, cuando corresponde, la fecha del evento.
+El mensaje es neutral: no confirma automáticamente una reserva ni modifica
+estados. El empleado puede editarlo en WhatsApp y debe pulsar Enviar.
+
+El botón utiliza la cuenta de WhatsApp activa en ese dispositivo; conviene usar
+la del restaurante. UnoMesa no envía mensajes, no registra conversaciones y no
+adjunta automáticamente el PDF de una cotización.
+
+Teléfonos
+Se aceptan números internacionales con +, prefijo 00, enlaces oficiales con
+número y números completos largos guardados con código de país sin +.
+Los números cortos o incompletos abren un diálogo para indicar el código de país.
+La corrección del diálogo solo se usa para ese chat. Para conservar el número
+completo, editar el registro correspondiente. Si no existe teléfono no se muestra
+el botón. La validación de formato no confirma si el número tiene WhatsApp.
+
+Instalación
+Desplegar este proyecto actualizado en Vercel. No requiere SQL ni credenciales
+de Meta. Se mantiene el mecanismo de enlaces externos ya utilizado por la web y
+las apps de UnoMesa. No se han modificado los proyectos nativos de las tiendas.
+
+Validación
+Pruebas automatizadas de números, mensajes, enlaces, renderizado del control,
+lectura de teléfonos de cotizaciones y regresión de contactos y recordatorios.
+Compilación de producción y TypeScript correctos con npm run build -- --webpack.
+No se enviaron mensajes ni se modificaron datos de producción. La apertura real
+de WhatsApp en iPhone, iPad y dispositivos Android debe comprobarse después del
+despliegue; no se dispuso de dispositivos físicos para esta verificación.

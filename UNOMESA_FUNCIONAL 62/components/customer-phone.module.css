@@ -1,0 +1,19 @@
+.phone{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:100%;vertical-align:middle;min-width:0}
+.number{overflow-wrap:anywhere;min-width:0;max-width:100%;unicode-bidi:isolate}
+.button.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;max-width:100%;padding:7px 10px;border:1px solid #abd9bf;border-radius:11px;background:#edf9f1;color:#17613b;font-family:inherit;font-size:13px;font-weight:600;line-height:1.4;text-decoration:none;white-space:normal;cursor:pointer;vertical-align:middle;box-sizing:border-box}
+.button svg{flex:none}
+.button:hover{background:#dcf2e5}
+.button:focus-visible{outline:3px solid #24965a;outline-offset:3px}
+.button:disabled{opacity:.5;cursor:default}
+.dialog{display:grid;gap:12px;padding:20px;min-width:0}
+.dialog p{margin:0;overflow-wrap:anywhere}
+.dialog label{font-weight:600}
+.dialog input{width:100%;box-sizing:border-box;min-height:48px;font-size:16px}
+.dialog small{line-height:1.5;color:var(--muted,#64748b)}
+.preview{padding:12px;border-radius:12px;background:var(--soft,#f1f5f9)}
+.actions{display:flex;justify-content:flex-end;flex-wrap:wrap}
+:global([data-theme=dark]) .button{background:#163c2b;border-color:#337e52;color:#c2f2d3}
+:global([data-theme=dark]) .button:hover{background:#205238}
+:global([data-theme=dark]) .preview{background:#182b28}
+@media(pointer:coarse){.button.button{min-height:44px}}
+@media print{.button.button{display:none}}
