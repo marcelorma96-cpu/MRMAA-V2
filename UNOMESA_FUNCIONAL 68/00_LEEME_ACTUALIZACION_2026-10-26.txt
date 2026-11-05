@@ -1,0 +1,17 @@
+UNOMESA — ACTUALIZACIÓN MULTIPLE LOCATIONS — 27/10/2026
+
+PROYECTO WEB COMPLETO PARA VERCEL
+Actualizar el repositorio conectado a Vercel desde la carpeta que contiene package.json.
+Conservar las variables de entorno. Desplegar antes de probar la nueva app Android.
+
+Google: multiple_locations con 2-branches, 3-branches, 4-branches y 5-branches,
+todos mensuales. Se conservan Basic, Intermediate y Advanced mensual/anual.
+Resubscribe y retiro de Generar automáticamente en Horarios siguen integrados.
+No aplicar nuevamente los parches anteriores.
+
+NO REQUIERE SQL NUEVO. No se ejecutó ninguna operación en producción.
+Los SQL existentes y los registros guardados no se modificaron durante la preparación.
+
+Consultar GOOGLE_MULTIPLE_LOCATIONS.md para instalación, cambios de paquete y pruebas.
+La entrega incluye código fuente; no publica la app ni configura Google Cloud/RTDN.
+Las compras reales en dispositivo están pendientes de validar.

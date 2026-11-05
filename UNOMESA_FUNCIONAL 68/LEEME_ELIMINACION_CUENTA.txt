@@ -1,0 +1,43 @@
+ACTUALIZACIÓN 17 OCT 2026 — URL PÚBLICA PARA ELIMINAR CUENTA
+
+1. Publique este ZIP completo en el MISMO proyecto Vercel de UnoMesa,
+   conservando variables, dominio y proyecto Supabase.
+2. Cuando esté Ready, abra en una ventana privada:
+   https://www.unomesa.com/en/delete-account
+   https://www.unomesa.com/eliminar-cuenta
+3. En Google Play → Data safety → Delete account URL pegue:
+   https://www.unomesa.com/en/delete-account
+4. Pruebe el botón Preparar correo de solicitud: debe abrir un borrador
+   dirigido a support@unomesa.com. Revise destinatario/asunto y envíe una
+   prueba propia si desea verificar la entrega a su buzón.
+
+El enlace solo funcionará públicamente después del despliegue.
+No requiere SQL, variables nuevas ni recompilar iOS o Android.
+Incluye el arreglo anterior de PDF Android y todas las actualizaciones previas.
+No se cambió ningún SQL, endpoint de borrado, permiso o registro existente.
+La actualización por sí misma no elimina cuentas ni información.
+
+Hay enlaces desde Configuración → Cuenta, ingreso y documentos legales.
+Incluye español/inglés, sitemap, instructivo y referencia del asistente.
+El formulario opcional de Google sobre borrar datos sin cerrar la cuenta
+no queda acreditado por crear esta página: declare solo el servicio que ofrece.
+
+ATENCIÓN DE SOLICITUDES
+La vía implementada es atención manual por support@unomesa.com, no un
+formulario que envía automáticamente ni un servicio automático de borrado.
+Debe monitorear ese buzón y responder. Confirmar identidad y alcance antes
+de realizar acciones; nunca pedir contraseñas ni códigos de autenticación.
+Una solicitud personal no autoriza a borrar el restaurante entero. Revisar
+membresías de todas las sucursales, datos personales asociados y proveedores.
+El propietario puede solicitar transferencia o cierre con soporte. Revisar
+cancelación de renovación en el proveedor original para evitar nuevos cobros.
+Comunicar al solicitante el plazo y los datos retenidos, su motivo y período,
+incluidos los respaldos según la configuración real. No prometer un plazo de
+respaldo no verificado ni un borrado universal en 90 días. Confirmar al terminar.
+Esta página no corrige ni amplía por sí misma los controles automáticos existentes.
+
+VALIDACIÓN
+Compilación y revisión del HTML generado se documentan en
+VALIDACION_URL_ELIMINACION_2026-10-17.txt.
+No se envió correo ni se eliminó ninguna cuenta durante las comprobaciones.
+

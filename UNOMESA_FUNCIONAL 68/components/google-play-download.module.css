@@ -1,0 +1,12 @@
+.banner{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:16px;width:calc(100% - 64px);max-width:1176px;margin:20px auto 0;padding:8px 20px;border:1px solid #9edcff38;border-radius:16px;background:#142638;color:#f2f6ff}
+.copy{display:grid;gap:5px;min-width:0;text-align:left}
+.copy strong{font-size:15px;line-height:1.4;font-weight:700;color:#f2f6ff}
+.copy span{font-size:13px;line-height:1.5;color:#c4d3e4}
+.badge{display:block;flex:none;width:200px;max-width:100%;padding:0;line-height:0;text-decoration:none;border-radius:10px}
+.badge img{display:block;width:100%;height:auto;max-width:100%}
+.badge:focus-visible{outline:3px solid #ffab6a;outline-offset:3px}
+.compact{display:flex;flex-direction:column;align-items:center;gap:4px;margin:26px auto 0}
+.compact .copy{text-align:center}
+.compact .copy strong{font-size:13px;font-weight:500;color:#c4d3e4}
+@media(max-width:800px){.banner{width:calc(100% - 48px);padding:8px 14px}}
+@media(max-width:560px){.banner{width:calc(100% - 40px);flex-direction:column;gap:4px;padding:16px 14px 6px;margin-top:16px}.banner .copy{text-align:center}.copy strong{font-size:15px}.copy span{font-size:12px}.badge{width:190px}}
