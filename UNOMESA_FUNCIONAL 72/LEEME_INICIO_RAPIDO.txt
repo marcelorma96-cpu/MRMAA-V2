@@ -1,0 +1,22 @@
+UNOMESA — INICIO RÁPIDO OPCIONAL
+
+Cambios
+- El recorrido ya no se abre automáticamente ni exige completar formularios.
+- La invitación permite Empezar u Omitir. También se puede continuar por cuenta propia.
+- Un recorrido omitido se puede retomar desde Ayuda > Inicio rápido.
+- Al finalizar, desaparecen la tarjeta y el acceso a Inicio rápido. Ayuda, Instructivo y Tutorial permanecen disponibles.
+- La finalización se guarda por usuario y restaurante en las preferencias de la cuenta. También se respeta la finalización del inicio rápido anterior.
+- El recorrido abre las pantallas reales de reservas, plano de mesas, cotizaciones y clientes. Agrega horarios y reportes según el plan y los permisos.
+- Está pensado para unos cinco minutos, con textos breves en español e inglés. No crea registros de prueba automáticamente.
+- Si no se puede guardar la preferencia, se informa el error y se permite cerrar o reintentar.
+
+Aplicación
+Desplegar este proyecto actualizado en Vercel para que el cambio llegue a la interfaz web. No requiere SQL nuevo ni cambios de esquema en Supabase. No se modificaron los proyectos nativos.
+
+Validación
+- 10 pruebas automatizadas de pasos, permisos, preferencias y renderizado: correctas.
+- TypeScript: correcto.
+- Compilación de producción con Webpack: correcta, usando Next 16.3.8 disponible en el entorno. Se conservó Next 16.4.3 declarado por el proyecto.
+- No fue posible ejecutar el navegador de pruebas en este entorno. Tras el despliegue, comprobar el recorrido en móvil y escritorio con una cuenta nueva: omitir, retomar, finalizar y volver a iniciar sesión.
+
+Este paquete conserva los demás archivos del ZIP de origen. No despliega automáticamente ni modifica datos operativos de restaurantes.
