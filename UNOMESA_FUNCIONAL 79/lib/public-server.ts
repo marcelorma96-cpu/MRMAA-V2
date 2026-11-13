@@ -1,0 +1,7 @@
+import { createClient } from '@supabase/supabase-js';
+import { NextRequest } from 'next/server';
+import { requireVerifiedMfa } from './mfa';
+import { RequestSafetyError } from './server-scale';
+export function publicAdmin(){const url=process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.SUPABASE_SECRET_KEY||process.env.SUPABASE_SERVICE_ROLE_KEY;if(!url||!key)throw new RequestSafetyError('SERVICE_UNAVAILABLE',503);return createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}});}
+export function sameOrigin(req:NextRequest){const origin=req.headers.get('origin');if(origin&&origin!==new URL(req.url).origin)throw new RequestSafetyError('INVALID_ORIGIN',403);}
+export async function publicManager(req:NextRequest,restaurant:string){sameOrigin(req);const token=req.headers.get('authorization')?.replace(/^Bearer /,'');if(!token)throw new RequestSafetyError('PUBLIC_ACCESS',401);const client=createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!,process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,{auth:{persistSession:false,autoRefreshToken:false},global:{headers:{Authorization:`Bearer ${token}`}}});const user=await client.auth.getUser(token);if(user.error||!user.data.user)throw new RequestSafetyError('PUBLIC_ACCESS',401);await requireVerifiedMfa(user.data.user,token);const check=await client.rpc('v2_public_settings',{p_restaurant:restaurant});if(check.error)throw new RequestSafetyError('PUBLIC_ACCESS',403);return {client,admin:publicAdmin()};}

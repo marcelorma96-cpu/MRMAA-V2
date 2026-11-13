@@ -1,0 +1,3 @@
+13 nov 2026 · UnoMesa
+Apertura desde el centro, únicamente después de ingresar con éxito. No aparece al abrir el login, fallar o cancelar el ingreso, refrescar ni volver desde segundo plano. Respeta «Reducir movimiento».
+Publica esta carpeta web en Vercel. Sirve la misma transición en web y en ambas aplicaciones. Para eliminar las antiguas animaciones nativas ANTES del login en versiones instaladas, distribuye los contenedores nuevos. No requiere SQL para el inicio. Las instrucciones por área de Horarios mantienen su migración independiente 67_INSTRUCCIONES_HORARIOS.sql.
