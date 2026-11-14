@@ -1,0 +1,39 @@
+DOCUMENTOS LEGALES EN ESPAÑOL E INGLÉS — 12 OCT 2026
+
+Despliegue este ZIP completo en el mismo proyecto Vercel. Conserve sus
+variables y la conexión a Supabase. No requiere SQL ni cambios de datos.
+
+Las páginas de términos, privacidad, suscripciones y tratamiento de datos
+ahora tienen versiones completas en ambos idiomas, servidas desde el inicio.
+El selector general y los enlaces de la landing, acceso, registro con Google,
+invitaciones, páginas de eventos y solicitudes públicas abren el idioma que
+se está mostrando. Cada documento incluye su propio selector Español/English
+y enlaces a los demás documentos en el mismo idioma.
+
+Rutas en español (se conservan):
+  /terminos
+  /privacidad
+  /suscripciones
+  /tratamiento-datos
+
+Rutas en inglés:
+  /en/terms
+  /en/privacy
+  /en/subscriptions
+  /en/data-processing
+
+El sitemap incluye ambas versiones con sus enlaces de idioma y metadatos.
+La medición de Speed Insights contempla también las nuevas páginas públicas.
+Se conservan las condiciones originales, fechas de los documentos y la versión
+de aceptación 2026-09-10. Esta entrega es una corrección de idioma, no una
+modificación del contrato ni de los consentimientos registrados.
+
+Comprobación después de publicar:
+1. Cambie la landing a EN y abra Terms o Privacy en el pie de página.
+2. Compruebe que título, párrafos, fecha y navegación están en inglés.
+3. Pulse Español dentro del documento; debe abrir el mismo documento en español.
+4. Repita desde la pantalla de registro y desde un formulario público en inglés.
+
+Las rutas inglesas son explícitas: se pueden compartir, abrir en otra pestaña
+y consultar sin JavaScript, sin depender de la ubicación o idioma del navegador.
+La versión web integrada en la app recibe estos enlaces al cargar el despliegue.

@@ -1,0 +1,46 @@
+UNOMESA · LANDING Y BÚSQUEDA ORGÁNICA · 9 OCTUBRE 2026
+
+Esta actualización parte de UNOMESA_FUNCIONAL.zip versión 120.
+Incluye las correcciones anteriores de pagos, página pública y buzón.
+
+QUÉ CAMBIA
+- La landing explica reservas diarias y eventos de grupos grandes.
+- Se corrige la respuesta que decía que no existía página pública.
+  Las solicitudes llegan al buzón: no confirman reservas ni cobran anticipos.
+- Se añaden páginas públicas específicas en español e inglés:
+  /es/software-eventos-restaurantes
+  /restaurant-event-management
+- Las páginas incluyen títulos, descripciones, enlaces entre idiomas,
+  canonical, datos estructurados y entradas en sitemap.xml.
+- Los canonical de unomesa.com se normalizan a www.unomesa.com,
+  coherentes con la redirección observada en el sitio publicado.
+- La medición permite /es y las nuevas páginas públicas, manteniendo
+  el bloqueo de rutas privadas, datos de formularios y retornos de acceso.
+
+PUBLICAR
+1. Use el mismo proyecto Vercel y la misma conexión Supabase.
+2. Conserve todas sus variables. Compruebe que
+   NEXT_PUBLIC_SITE_URL=https://www.unomesa.com
+   y NEXT_PUBLIC_SEARCH_INDEXING no esté en false en producción.
+3. Publique el contenido de este ZIP. Esta corrección SEO no requiere SQL.
+   Las instrucciones históricas de SQL 50 solo aplican si esa funcionalidad
+   anterior aún no está instalada. No repita las migraciones históricas.
+4. Abra las dos páginas nuevas, pruebe el enlace a la prueba y revise
+   https://www.unomesa.com/sitemap.xml
+5. En Search Console, inspeccione /es y cada página nueva. Ejecute la
+   prueba de URL publicada y solicite indexación. Envíe sitemap.xml.
+6. Compare consultas, impresiones y clics orgánicos en Search Console.
+   Google Ads y Vercel Analytics miden cosas distintas.
+
+VALIDACIÓN Y ALCANCE
+- Compilación de producción completada y 50 pruebas de SEO, medición,
+  privacidad de URLs y registro aprobadas.
+- No se cambia la lógica de reservaciones, cotizaciones, clientes,
+  horarios, reportes, pagos, permisos ni la base de datos.
+- Los archivos SQL y las rutas API se conservan respecto al ZIP recibido.
+- No se ejecutaron migraciones, no se crearon cuentas y no se publicó
+  esta actualización en producción desde esta revisión.
+- Preparar contenido e indexación no garantiza una posición en Google.
+
+Consulte 00_LEEME_ACTUALIZAR.txt para las instrucciones de las entregas
+anteriores que continúan incluidas en este proyecto.

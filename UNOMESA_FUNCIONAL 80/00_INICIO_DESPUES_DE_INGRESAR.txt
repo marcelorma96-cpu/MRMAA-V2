@@ -1,0 +1,4 @@
+UnoMesa · Apertura
+Con una sesión guardada, el símbolo aparece mientras se valida el acceso. El «1» se mueve y la cortina se abre sobre el panel. También aparece después de ingresar con correo, Google o Apple y al abrir de nuevo la app de iOS o Android tras cerrarla por completo. Si la sesión sigue vigente, se entra con la misma cuenta. Si solo cambias a otra aplicación y vuelves, se conserva la pantalla sin repetir la apertura. Al cerrar sesión se vuelve al ingreso. Si se solicita un código o falla la verificación se muestra la pantalla correspondiente.
+Navegar entre módulos, editar una reserva y cambiar de pestaña en un navegador normal no reinicia la animación. Se respeta «Reducir movimiento».
+Publica este proyecto web en Vercel. El ajuste no requiere SQL ni cambios en los contenedores que ya cargan la web. La pantalla de arranque inicial del sistema operativo es independiente.
