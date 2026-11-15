@@ -1,0 +1,25 @@
+UnoMesa — Nombres de varias áreas en Reservaciones
+
+Corrección
+Cuando una reservación tiene dos o más áreas completas seleccionadas, la etiqueta
+se construye con todos los nombres de la selección guardada. Antes, el texto del
+área principal podía ocultar los demás nombres aunque sí estuvieran seleccionados.
+
+Ejemplo: Salón + Terraza + Jardín - Áreas completas.
+
+La función es compartida por los listados de Reservaciones y Cotizaciones, sus
+vistas web y app, y las etiquetas del plano. Conserva el formato de una sola área
+y de mesas individuales. Si un área existe únicamente en el catálogo y no está
+dibujada en el plano, se conserva el texto combinado guardado de la reservación.
+
+Instalación
+Desplegar este proyecto actualizado en Vercel como de costumbre.
+Esta corrección no requiere ejecutar SQL ni volver a guardar las reservaciones.
+No cambia las áreas asignadas, importes ni estados de las reservaciones.
+
+Validación
+16 pruebas automatizadas de etiquetas, lecturas por lotes y selección múltiple.
+Incluyen el caso de un texto antiguo que solo contiene el área principal, dos
+y tres áreas, español e inglés, cotizaciones vinculadas y edición de la selección.
+Compilación de producción con TypeScript: npm run build -- --webpack.
+No se realizaron pruebas en dispositivos físicos ni contra datos de producción.

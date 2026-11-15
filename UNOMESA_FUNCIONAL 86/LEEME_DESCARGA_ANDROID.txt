@@ -1,0 +1,41 @@
+UNOMESA — DESCARGA DESDE GOOGLE PLAY EN LA WEB
+31 de octubre de 2026
+
+CAMBIOS
+- Aviso de descarga inmediatamente después del menú superior, antes del título
+  principal, en las páginas de inicio en español e inglés.
+- Insignia oficial de Google Play en el idioma de cada página.
+- Segundo acceso de descarga en la sección final de la página de inicio.
+- Acceso al inicio de las páginas informativas de gestión de eventos EN/ES.
+- Diseño adaptable: en pantallas pequeñas el texto y el botón se colocan en columna.
+- La pregunta frecuente sobre uso en teléfono ahora menciona Android y la cuenta
+  compartida entre app y web.
+- No se muestra una descarga de Apple; se añadirá cuando esté disponible.
+
+ENLACE DIRECTO
+https://play.google.com/store/apps/details?id=com.unomesa.android
+
+Se consultó la ficha pública mediante HTTPS el 31 de octubre de 2026. Respondió
+HTTP 200 con el nombre «UnoMesa: Restaurant Management», sistema Android y autor
+UnoMesa. El enlace lleva a su ficha en Google Play, donde se realiza la instalación.
+
+VALIDACIÓN
+- Compilación de producción y comprobación TypeScript completadas:
+  npm run build -- --webpack
+- Renderizado HTML de las variantes superior/final en ambos idiomas: enlaces,
+  etiquetas accesibles e imágenes locales comprobados.
+- El acceso superior está antes del título principal.
+- Insignias PNG: dimensiones 646 x 250, proporción conservada.
+- Comprobación visual en navegador y dispositivos físicos pendiente.
+
+ACTUALIZACIÓN
+Desplegar este ZIP en Vercel mediante el procedimiento habitual. No se ha desplegado
+desde aquí. No requiere SQL ni variables nuevas. Conserva las correcciones del
+plano de mesas y del asistente incluidas en la versión anterior.
+
+RECURSOS
+Insignias oficiales sin modificar:
+https://play.google.com/intl/en_us/badges/static/images/badges/es_badge_web_generic.png
+https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png
+Guía de uso: https://partnermarketinghub.withgoogle.com/brands/google-play/google-play/lockups-icons-badges/
+Google Play y su logotipo son marcas de Google LLC.
