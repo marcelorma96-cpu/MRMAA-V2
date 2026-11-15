@@ -1,0 +1,26 @@
+CORRECCIÓN DEL FORMULARIO PÚBLICO — 30 de octubre de 2026
+
+Instalación
+1. Actualice el proyecto existente de Vercel con el contenido de este ZIP y despliegue.
+2. Conserve las variables de entorno actuales de Supabase y Cloudflare Turnstile.
+3. Abra el enlace público actualizado del restaurante. Compruebe el envío con una solicitud identificada como prueba y verifique su llegada a la bandeja del restaurante.
+Este ajuste no necesita SQL nuevo. No se ha modificado ni desplegado la base de producción.
+
+Cambios
+- El teléfono se envía desde el valor internacional del selector de país, separado del texto que se muestra en pantalla.
+- Formulario y API comparten validación. Se normalizan espacios exteriores del correo, signos de formato del teléfono y horas HH:mm:00.
+- Una fecha inexistente o fuera del rango admitido, un teléfono incompleto y otros campos inválidos muestran su propio aviso; el formulario lleva el foco al campo correspondiente.
+- La fecha muestra los límites que ya exige SQL (desde ayer hasta 1826 días adelante).
+- Si SQL rechaza una opción, la API consulta el catálogo público actual para distinguir menú, salón o contacto retirado. No acepta silenciosamente una opción distinta.
+- Los errores sin causa identificada reciben una referencia de diagnóstico sin registrar datos del invitado.
+- Se conservan los datos escritos, el identificador del intento, la verificación, el límite de solicitudes y la autorización de la base de datos.
+
+Validación realizada
+- 42 comprobaciones aprobadas entre formulario/API, Turnstile, utilidades públicas y SQL.
+- Prueba de integración de la ruta HTTP con la función SQL real en una base local: inserción, reintento sin duplicación, rechazo de menú retirado y corrección del mismo intento.
+- TypeScript sin errores y compilación de producción local completada.
+- La compilación local utiliza las dependencias disponibles (Next.js 16.3.8). El package.json original se conserva; declara 16.4.3. Vercel debe completar su propia compilación.
+- No se realizó una prueba visual en navegador ni un envío en producción.
+
+Alcance del diagnóstico
+La fotografía muestra el mensaje genérico y que el widget de Cloudflare se completó; no muestra los valores de los campos. Por ello no se ha podido determinar cuál causó ese rechazo exacto. Se corrigieron las diferencias de formato reproducidas y se añadió identificación del campo para diagnosticar cualquier caso restante.

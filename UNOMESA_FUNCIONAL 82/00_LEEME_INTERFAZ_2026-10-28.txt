@@ -1,0 +1,10 @@
+ACTUALIZACIÓN DE INTERFAZ — 28 de octubre de 2026
+
+Android 1.0.11 (código 12): usa el arte original del logo de inicio iOS, exportado con transparencia a 624 px. Conserva el tamaño, disposición y animación de inicio existentes, y el indicador de una presentación por proceso.
+Web: selector de configuración con iconos, descripciones en español/inglés, tarjetas y estado activo. Se mantienen los filtros de permisos y la confirmación de cambios pendientes. El selector compartido se utiliza en Android, iOS y web.
+
+Instalación: abrir UnoMesa-Android en Android Studio y compilar/instalar con la firma existente. Publicar el paquete UNOMESA_FUNCIONAL en el despliegue web habitual para ver los cambios de configuración. Este trabajo no realizó ningún despliegue.
+
+Validación: recursos XML analizados y logo con transparencia comprobado; archivos ZIP verificados. No se compiló Android (SDK no disponible), ni Next.js (dependencias no instaladas). No se ejecutó revisión visual en navegador: Chromium no está instalado. Revisar en dispositivo el inicio en frío y la configuración en modo claro/oscuro, incluyendo etiquetas largas y desplazamiento.
+
+Pendiente: no se pudo recuperar la descripción exacta del problema del video anterior. No se afirma que esté corregido. La revisión de la reaparición del logo en iOS también continúa pendiente; este paquete no modifica iOS.
