@@ -1,0 +1,46 @@
+UNOMESA — CALENDARIO DIRECTO
+30 de octubre de 2026
+
+CAMBIOS
+- Se conserva el cuadro de fecha, sus flechas anterior/siguiente y el gesto de deslizar entre días.
+- El listado de reservaciones y el plano muestran un botón visible «Elegir fecha».
+- Tocar la fecha o ese botón abre directamente un calendario mensual.
+- El calendario permite cambiar mes y año, resalta la fecha seleccionada y marca el día actual.
+- Elegir un día aplica la fecha y cierra el calendario. También hay accesos «Hoy» y «Mañana».
+- Cambiar de mes o año solo recorre el calendario; no modifica la fecha activa.
+- «Cancelar», la X, Escape o tocar fuera cierran el calendario sin modificar la selección.
+- En el plano móvil, «Hora y filtros» conserva el acceso a la hora y la disponibilidad.
+- Español e inglés; colores claro y oscuro; navegación por teclado y devolución del foco al cerrar.
+- Se conservan los límites de fecha del plano y la confirmación de cambios pendientes.
+- Las fechas se calculan como días locales, sin convertirlas a UTC.
+
+ALCANCE
+El cambio corresponde al selector principal de fecha del listado de reservaciones y del plano.
+Los campos de fecha de otros formularios y el filtro de rango conservan su comportamiento existente.
+Este ZIP acumula las correcciones anteriores del formulario público y el contador del buzón.
+No cambia permisos, planes, cobros ni esquema de base de datos.
+
+PUBLICACIÓN
+Actualizar el proyecto de Vercel con este ZIP, usando las variables y configuración existentes.
+No hay SQL nuevo que ejecutar en Supabase.
+No se ha desplegado esta actualización automáticamente.
+
+VALIDACIÓN
+- TypeScript sin errores.
+- Compilación de producción local completada con webpack.
+- Siete pruebas de lógica de calendario aprobadas: cambio de mes/año, años bisiestos,
+  distribución de días, teclado, límites y cuatro zonas horarias con cambios de horario.
+- La compilación local usó Next.js 16.3.8, disponible en el entorno. Se conserva sin cambios
+  la versión 16.4.3 declarada por el proyecto y su configuración de dependencias.
+- El navegador automatizado no pudo iniciarse en este entorno. No se afirma haber realizado
+  una prueba visual ni táctil en iPhone, Android o iPad.
+
+COMPROBACIÓN TRAS DESPLEGAR
+1. En Reservaciones, pulsar «Elegir fecha»: debe abrir el calendario.
+2. Cambiar de mes; cancelar: la fecha original debe permanecer igual.
+3. Elegir un día y luego «Hoy» / «Mañana»: el listado debe mostrar la fecha elegida.
+4. En el plano móvil, comprobar «Elegir fecha» y «Hora y filtros» por separado.
+5. Comprobar las flechas y el deslizamiento entre días, en español e inglés.
+
+Prueba de lógica reproducible desde la raíz del proyecto:
+node --test tests/calendar-date.test.cjs
