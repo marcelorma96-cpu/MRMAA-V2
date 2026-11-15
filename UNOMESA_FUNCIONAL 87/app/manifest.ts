@@ -1,0 +1,4 @@
+import type { MetadataRoute } from 'next';
+export default function manifest(): MetadataRoute.Manifest {
+ return { name:'UnoMesa',short_name:'UnoMesa',description:'Reservations, quotes and restaurant floor plan',start_url:'/mobile',scope:'/',display:'standalone',background_color:'#f4f5f6',theme_color:'#17201e',icons:[{src:'/mobile-app-icon.png',sizes:'512x512',type:'image/png'}] };
+}

@@ -1,0 +1,80 @@
+UNOMESA — MENÚ MÓVIL, LANDING Y CONTACTO DIRECTO
+Entrega: 13 de octubre de 2026 (UTC)
+
+INSTALACIÓN
+Despliegue UNOMESA_FUNCIONAL.zip completo en el mismo proyecto Vercel.
+Conserve sus variables, Supabase, dominio y datos. Esta entrega no agrega
+SQL ni ejecuta modificaciones de registros existentes.
+
+Este ZIP conserva el trabajo de multisucursal y sus instrucciones previas.
+Si aún no activó esa función, siga MULTISUCURSAL_CONFIGURACION.md y los
+requisitos SQL 55/56; el menú, la landing y el teléfono de WhatsApp no
+requieren otra migración.
+
+Las apps existentes iOS/Android cargan la interfaz desde el dominio de
+UnoMesa. Después de publicar, cierre y abra la app. No hace falta recompilar
+los proyectos nativos para estos cambios de interfaz. Esta entrega no
+publica versiones en App Store ni Google Play y no activa proveedores de
+pago que aún estén pendientes de configurar.
+
+MENÚ MÓVIL
+- Más / los tres puntos conserva todas las opciones autorizadas del menú.
+- Deslice un dedo hacia la derecha sobre contenido libre para abrirlo.
+- Deslice hacia la izquierda dentro del menú para cerrarlo; también puede
+  tocar X o fuera del panel.
+- El panel sigue el dedo, usa bordes redondeados y tonos oscuros con
+  acentos naranja, violeta y verde. Respeta Reducir movimiento.
+- El mapa conserva sus gestos de movimiento y zoom. Formularios, entradas,
+  listas horizontales y diálogos tienen prioridad sobre el gesto del menú.
+- La vista actual, el scroll y los borradores permanecen montados. Cambiar
+  de módulo sigue usando la comprobación existente de cambios sin guardar.
+- En computadora se conserva la barra lateral y Mostrar/Ocultar menú.
+
+LANDING
+- Nuevas secciones: Página pública y Sucursales, en español e inglés.
+- Página pública: logo, salones/capacidad, menús PDF, enlace propio, QR,
+  solicitudes de cotización en el buzón y medios de contacto.
+- Las solicitudes no confirman una reserva. Las consultas y peticiones
+  de reserva abren WhatsApp, correo o teléfono según la configuración.
+- Multisucursal: cuenta principal, selección de local, copias selectivas,
+  permisos y datos separados, hasta 15 usuarios por sucursal Advanced.
+- Calculadora mensual: 1 sucursal US$55; desde 2, US$45 por sucursal.
+  Ejemplos: 2 = US$90; 85 = US$3,825. Impuestos aparte. Precios web.
+- Se mantienen las funciones anteriores y se detallan pendientes,
+  personalización, PDF/impresión, dispositivos, reportes, horarios,
+  clientes, seguridad, tutorial y asistente.
+- Texto SEO y datos estructurados actualizados. Son secciones de las
+  rutas existentes: no hacen falta URLs nuevas en el sitemap.
+- Las vistas son ejemplos ficticios; no se usan datos de restaurantes
+  clientes ni se inventan reseñas, número de usuarios o resultados.
+
+WHATSAPP
+Configuración → Página pública → 2 · Contacto.
+Active WhatsApp, escriba el número con código de país, pruebe y guarde.
+Ejemplos: +502 Guatemala, +52 México, +1 Estados Unidos.
+UnoMesa genera https://api.whatsapp.com/send?phone=NUMERO sin text.
+No se envía un mensaje automáticamente ni se verifica que la cuenta exista.
+Los enlaces anteriores conservan su destino y mensaje hasta que el
+administrador cambie explícitamente el número y guarde.
+Instructivo y asistente actualizados en ambos idiomas.
+
+VERIFICACIÓN REALIZADA
+- Compilación de producción Next.js: correcta.
+- 16 pruebas automatizadas de WhatsApp, contactos, menús públicos y SEO:
+  correctas, incluyendo enlaces antiguos y números inválidos.
+- Navegador Chromium con eventos táctiles reales: apertura/cierre por
+  deslizamiento, botón Más, gestos verticales, mapa, formularios, listas
+  horizontales, dos dedos, diálogo, foco, scroll y borradores.
+- Tamaños 393×852, 820×1180, 1024×768 y 740×390; escritorio 1440×960.
+- Landing compilada: español/inglés, teléfono, tablet y escritorio;
+  calculadora 1/2/85 y valor inválido; sin desbordamiento horizontal.
+- Editor de WhatsApp real con servicio simulado aislado: número,
+  validación, enlace generado, datos de guardado y preservación de enlace
+  anterior. No se escribieron datos reales ni se enviaron mensajes.
+- Inspección visual de capturas del menú, landing y contacto.
+
+LÍMITES DE LA VERIFICACIÓN
+No se desplegó a producción desde este entorno ni se hizo una prueba
+física en iPhone/Android. El gesto compartido se verificó en navegador
+con emulación táctil; conviene comprobarlo en los dispositivos tras
+publicar. No se recompilaron binarios nativos porque no cambiaron.

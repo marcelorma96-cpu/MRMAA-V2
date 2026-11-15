@@ -1,0 +1,46 @@
+UNOMESA — FECHAS E INICIO — 29 OCTUBRE 2026
+
+Cambios
+- Selector de fecha centrado, con superficies suaves y contraste para claro/oscuro.
+- Día anterior y siguiente visibles durante el arrastre; un gesto corto vuelve al día actual.
+- Flechas, calendario, Hoy, filtros de rango/todas las fechas y edición del plano conservados.
+- Inicio con expansión del logo una vez por proceso nativo o sesión de pestaña web.
+- Navegación, cambio de módulo y retorno desde segundo plano no repiten la expansión.
+- Android: icono vectorial real en el inicio del sistema y en el icono adaptable.
+
+Instalación conjunta
+1. Desplegar el contenido de UNOMESA_FUNCIONAL.zip en el proyecto web existente de Vercel.
+2. iOS: abrir UnoMesa.xcodeproj; conservar Team y com.unomesa.app. Version 1.0, Build 23.
+   Compilar/probar en Xcode y después archivar para TestFlight. Si ya usó 23 o superior,
+   use un build mayor al último que aparece en App Store Connect.
+3. Android: abrir UnoMesa-Android en Android Studio; sincronizar y ejecutar.
+   Version 1.0.9, versionCode 10, paquete com.unomesa.android también en debug.
+   Para Google Play, generar el AAB firmado con su misma clave y subir a Pruebas internas.
+   Si 10 ya está usado, aumentar versionCode antes de generar el AAB.
+4. Conservar claves de firma, configuración del equipo y variables existentes.
+   No requiere SQL, migraciones, borrado de datos, cambio de planes ni variables nuevas.
+
+Comprobaciones realizadas
+- Compilación de producción de la web y TypeScript.
+- Navegador Chromium con eventos táctiles reales emulados: avance/cancelación,
+  scroll vertical, cancelación del puntero, segundo dedo, calendario y movimiento reducido.
+- 320/390/768/1280 px, español/inglés, claro/oscuro; sin desbordamiento horizontal.
+- Inicio web: espera por acceso, nueva carga durante salida, remonte, recarga y pestaña nueva.
+- Pruebas de sesión/autenticación y presentación de facturación.
+- Lógica Java del catálogo Google Play (45 comprobaciones con dobles del SDK) y puente Android.
+
+Pendiente en equipos nativos
+Este ZIP contiene código fuente, no un IPA/APK/AAB compilado.
+No se dispone aquí de Xcode ni del SDK Android; la compilación nativa y el inicio real
+frío/caliente deben comprobarse en su Mac, emulador y dispositivos antes de publicar.
+No se ha efectuado ninguna compra real ni se ha desplegado automáticamente a producción.
+Se conservan las correcciones anteriores del catálogo de compras; no se declara resuelto
+un error de Google Play sin comprobar el resultado en el emulador/dispositivo.
+
+Prueba breve de aceptación
+- Abrir desde app cerrada: logo completo y una sola expansión.
+- Cambiar de módulo, abrir/cerrar una compra o login, bloquear/desbloquear y volver:
+  no reaparece el inicio; formularios y sesión siguen sujetos a sus comprobaciones.
+- Cerrar realmente el proceso y abrir: vuelve a existir una sola animación de arranque.
+- Deslizar fechas despacio: ver el día entrar durante el movimiento, cancelar un gesto corto.
+- Probar flechas, calendario, Hoy, rango, todas las fechas y plano con cambios sin guardar.

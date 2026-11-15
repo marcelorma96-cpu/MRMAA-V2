@@ -1,0 +1,52 @@
+UNOMESA — ASISTENTE ADAPTABLE A PANTALLA Y TECLADO
+31 de octubre de 2026
+
+Este paquete incluye también la corrección anterior del plano de mesas.
+
+CAMBIOS
+- El asistente aprovecha el ancho y alto disponibles en teléfonos y tablets
+  táctiles, en vertical y horizontal. Respeta las zonas seguras de la pantalla.
+- En computadora tiene un panel más ancho y un botón para ampliarlo.
+- Abrir el asistente ya no enfoca el campo de escritura automáticamente.
+- Al enviar se retira el foco del campo; recibir una respuesta no abre el teclado.
+- El panel sigue la altura y posición del área visible cuando cambia el teclado.
+- El encabezado y los controles se compactan cuando queda poca altura disponible.
+- El campo de escritura comienza con una línea y crece con un límite.
+- Las respuestas tienen desplazamiento independiente; una nueva respuesta larga
+  se muestra desde su inicio.
+- La información completa de privacidad, cuota y renovación está disponible en
+  «Privacidad y consultas». El aviso breve de privacidad permanece junto al campo.
+- Se conserva el acceso al tutorial y la lógica de consultas, permisos y cuotas.
+
+ACTUALIZACIÓN
+Desplegar este proyecto web en Vercel mediante el procedimiento habitual.
+Este cambio no requiere SQL ni cambios en Supabase. No se ha desplegado desde aquí.
+Para apps que cargan esta web, cerrar y abrir la app después del despliegue para
+comprobar que se cargó la actualización.
+
+VALIDACIÓN REALIZADA
+- TypeScript: tsc --noEmit --incremental false, sin errores.
+- Compilación de producción: npm run build -- --webpack, completada.
+  Turbopack no pudo resolver las dependencias enlazadas fuera del directorio de
+  este entorno de trabajo; se validó la compilación completa con Webpack.
+- node --test tests/panel-viewport.test.cjs tests/tutorial-help.test.cjs:
+  14 pruebas aprobadas.
+- Las pruebas del área visible simulan reducción por teclado, desplazamiento de
+  la ventana visible como en iOS, rotación, eventos rápidos y cierre del panel.
+  Son pruebas de comportamiento, no capturas ni pruebas en equipos físicos.
+- Integridad del ZIP: archivos ajenos a este ajuste conservados del paquete base.
+
+COMPROBACIÓN VISUAL PENDIENTE TRAS DESPLEGAR
+Probar en iPhone/iPad (Safari y app), teléfono/tablet Android (Chrome y app), y
+computadora. Repetir en ambas orientaciones cuando corresponda:
+1. Abrir el asistente: el teclado debe permanecer cerrado.
+2. Escribir: el campo y Enviar deben quedar sobre el teclado.
+3. Enviar una pregunta: el teclado debe cerrarse y no reaparecer con la respuesta.
+4. Leer y desplazar una respuesta larga desde su inicio hasta el final.
+5. Girar el dispositivo con el teclado abierto y cerrado.
+6. Cerrar, reabrir, cambiar tema y abrir el tutorial.
+7. Con teclado físico, recorrer los controles con Tab/Shift+Tab y cerrar con Escape.
+
+No se ha verificado visualmente en dispositivos físicos ni en un navegador
+ejecutable en este entorno. Este paquete no equivale a una certificación de todos
+los modelos Android y Apple.

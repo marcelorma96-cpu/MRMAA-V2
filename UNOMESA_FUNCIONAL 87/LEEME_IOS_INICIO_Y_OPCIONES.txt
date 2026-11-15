@@ -1,0 +1,72 @@
+UNOMESA — INICIO iOS Y OPCIONES EN LA MISMA PANTALLA
+11 de octubre de 2026
+
+CAMBIOS
+
+- iOS Build 15: logo y nombre UnoMesa centrados con el mismo indicador
+  naranja pulsante de carga de la web. El inicio estático y la pantalla
+  nativa usan la misma distribución para evitar un salto al comenzar.
+- Se conserva el brillo y movimiento final del logo cuando están listos
+  el acceso y el primer módulo, con alternativa para Reducir movimiento.
+- /login y /es ya esperan la señal de contenido listo, igual que /mobile
+  y la página raíz; terminar de descargar HTML no adelanta el acceso.
+- Los diálogos se muestran sobre la pantalla activa y comparten orden con
+  los paneles laterales/inferiores. Las opciones de PDF e impresión dejan
+  de quedar detrás de Más opciones. Solo la capa superior recibe interacción.
+- Al seleccionar PDF o Imprimir en Reservaciones se cierra el panel de
+  acciones y aparecen inmediatamente las opciones del documento.
+- La ventana se adapta al espacio visible, con título, cierre y botones
+  accesibles. Se conserva el foco al cerrar y los borradores permanecen.
+- El desplegable Más opciones dentro de la app ocupa el ancho de su panel,
+  sin salir por sus bordes. El documento generado conserva el visor de iOS
+  para compartir o guardar; el selector de contenido permanece dentro de UnoMesa.
+- La frase de 10 días de Advanced bajo Google se muestra solo al registrar
+  una cuenta. Iniciar sesión conserva los enlaces legales sin ofrecer una
+  nueva prueba. Se mantiene el registro con Google y el acceso existente.
+
+INSTALACIÓN
+
+1. Publique UNOMESA_FUNCIONAL.zip en el MISMO proyecto de Vercel.
+2. Descomprima UNOMESA_iOS.zip en una carpeta nueva. Abra UnoMesa.xcodeproj.
+3. Seleccione su Team, conserve com.unomesa.app, Version 1.0 y Build 15.
+4. Conecte el iPhone, seleccione ese dispositivo y pulse Command + R.
+   Instale encima de la app; no hace falta desinstalar ni borrar datos.
+5. Si necesita comprobar el build, debajo de Google aparece UnoMesa iOS · 1.0.15.
+
+No cambie claves, Redirect URLs de Google, variables ni conexión a Supabase.
+No hay SQL nuevo para esta actualización. SQL 54 pertenece a la mejora
+anterior de cotizaciones y sigue incluido, sin cambios, por si está pendiente.
+Conserve la variable NEXT_PUBLIC_MRMAA_REALTIME=true como está configurada.
+
+COMPROBACIÓN EN iPHONE/iPAD
+
+- Cierre y abra la app: logo y carga, después acceso o su sesión actual.
+- Compruebe que inicio de sesión no anuncia 10 días; registro sí.
+- Abra Reservaciones → Opciones de reservaciones → Más opciones → Descargar
+  PDF. Debe ver Todo, Solo reservaciones y Solo resumen al frente.
+- Cancele y pruebe Imprimir. Repita desde Opciones del plano con PDF/Imprimir.
+- Genere un PDF de prueba y use el visor para guardarlo/compartirlo.
+- Confirme que entrar con Google y regresar de Gestionar suscripción siguen
+  funcionando. No necesita hacer un pago real para comprobar el regreso.
+
+VALIDACIÓN REALIZADA
+
+- Compilación web de producción y TypeScript: correctos.
+- 37 pruebas dirigidas a Google/retorno iOS, sesión persistente, navegación
+  de pagos, informes, impresión del plano y protección del registro: pasan.
+- Navegador con componentes reales de Reservaciones, Modal y AppSheet:
+  393x852, 320x568, 852x393, 1024x768 y 1440x900. PDF/impresión al frente,
+  selección de contenido, botones dentro del viewport, sin desborde horizontal,
+  conservación de borrador y orden/foco de paneles anidados: correctos.
+- Texto Google en español e inglés: prueba solo en registro.
+- Coordinación de acceso/carga inicial y conservación del contenido al
+  refrescar en segundo plano: correcta en comprobación React.
+- iOS: estructura de Info.plist, storyboard, assets y build 15 revisados.
+  Los archivos de Google, retorno de pagos e identidad de app se conservan.
+
+LÍMITES
+
+Las pruebas de interfaz fueron en Chromium con tamaños de móvil/tablet, no
+en WebKit de un iPhone físico. No hay Xcode/SDK iOS en este entorno: no se ha
+compilado ni firmado el proyecto nativo. Verifique Command + R en su Mac.
+No se ha desplegado ni accedido a datos de producción desde esta revisión.

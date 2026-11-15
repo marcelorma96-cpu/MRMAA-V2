@@ -1,0 +1,12 @@
+<!-- Bloque opcional para INSERTAR en Invite user, antes del botón que ya funciona.
+     No sustituye la plantilla completa ni modifica enlaces de autenticación. -->
+{{ if .Data.company_name }}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:20px 0;border:1px solid #e9dfd6;border-radius:16px;background:#fff7ef;color:#28231e;font-family:Arial,sans-serif">
+  <tr><td style="padding:20px">
+    <p style="font-size:12px;margin:0 0 8px;color:#866343">{{ if eq .Data.language "en" }}YOUR TEAM ACCESS{{ else }}SU ACCESO AL EQUIPO{{ end }}</p>
+    <p style="font-size:20px;font-weight:700;margin:0 0 12px">{{ .Data.company_name }}</p>
+    {{ if .Data.branch_access_summary }}<p style="font-size:14px;line-height:1.6;margin:0 0 12px">{{ .Data.branch_access_summary }}</p>{{ end }}
+    <p style="font-size:13px;line-height:1.5;margin:0;color:#665d54">{{ if eq .Data.language "en" }}Open your invitation to review your assigned locations and set your password. You will only have access to the locations authorized by your administrator.{{ else }}Abra su invitación para revisar las sucursales asignadas y crear su contraseña. Solo tendrá acceso a los locales autorizados por su administrador.{{ end }}</p>
+  </td></tr>
+</table>
+{{ end }}
