@@ -1,0 +1,50 @@
+UNOMESA — PLANO AMPLIADO EN TELÉFONOS, TABLETS Y COMPUTADORAS
+Actualización: 31 de octubre de 2026
+
+QUÉ CAMBIA
+- Cabecera de fecha más compacta, conservando Elegir fecha y Hora y filtros.
+- En pantallas anchas, niveles, área y zoom comparten una fila para dejar
+  más altura al plano. En teléfonos, se distribuyen en filas cortas.
+- Zoom +/− y Ajustar visibles desde que se abre el mapa.
+- Mover mapa permite desplazarlo también con ratón o trackpad.
+- Botón Ampliar para usar el espacio de la pantalla, manteniendo fecha,
+  niveles, áreas, reservas y opciones. Volver o Escape restaura la vista.
+- La vista ampliada utiliza CSS dentro de UnoMesa; no depende de la API
+  Fullscreen del navegador. Respeta las zonas seguras del dispositivo.
+- Las tablets con entrada táctil conservan los controles aunque también
+  tengan teclado, ratón o trackpad conectados.
+
+PUBLICACIÓN
+Actualice el MISMO proyecto Vercel con este ZIP y mantenga sus variables
+actuales. No hay SQL nuevo que ejecutar en Supabase por esta corrección.
+Las aplicaciones actuales cargan la interfaz web de UnoMesa: cierre y
+vuelva a abrir la app después del despliegue. No se modificaron proyectos
+nativos ni se realizó un despliegue desde esta sesión.
+
+VERIFICACIÓN REALIZADA
+- TypeScript sin errores.
+- Compilación de producción Next.js 16.4.3 (webpack), incluida generación
+  de 48 páginas.
+- 21 pruebas aprobadas: controles de zoom/ampliación, acceso a fecha y
+  reservas, calendario, límites de áreas y distribución de etiquetas.
+- Revisión del código responsive para entrada táctil, ratón y teclado;
+  disposición estrecha/ancha, orientación horizontal y zonas seguras.
+- Ningún cambio a SQL, endpoints, permisos, pagos ni geometría guardada.
+
+LÍMITE DE LA VERIFICACIÓN
+El navegador de pruebas no pudo iniciarse en este entorno. Las pruebas
+anteriores son de compilación, lógica y renderizado de controles en servidor;
+no constituyen comprobación visual en Safari, Chrome o WebView, ni pruebas
+físicas en todos los modelos Apple/Android.
+
+COMPROBACIÓN VISUAL TRAS PUBLICAR
+En iPhone y teléfono Android, iPad y tablet Android, y Mac/navegador:
+1. Abrir Plano de mesas en vertical y horizontal.
+2. Verificar fecha/calendario, cambio de nivel y selector de área.
+3. Pulsar +, mover el mapa y Ajustar; comprobar que ninguna mesa quede
+   debajo de los botones.
+4. Pulsar Ampliar y Volver. Abrir la agenda de una mesa y cerrar el panel.
+5. Girar la pantalla estando ampliado y usar Ajustar si se desea encuadrar.
+6. Con teclado, verificar Tab y Escape; con ratón, activar Mover mapa.
+
+Los archivos SQL incluidos en el ZIP son el historial existente.
