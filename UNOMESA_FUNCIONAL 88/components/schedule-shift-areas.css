@@ -1,0 +1,15 @@
+.shiftAreaPicker{min-width:0;margin:0;padding:.65rem .8rem;border:1px solid var(--line,#a0aab755);border-radius:12px}
+.shiftAreaPicker div{display:flex;flex-wrap:wrap;gap:.4rem}.shiftAreaPicker legend,.shiftAreaPicker small{font-size:.83rem}.shiftAreaPicker small{display:block;margin-top:.45rem}
+.shiftAreaPicker button{background:transparent;border:1px solid var(--line,#a0aab755);border-radius:999px;padding:.42rem .72rem;color:inherit;cursor:pointer}
+.shiftAreaPicker button[aria-pressed=true]{background:var(--um-accent-soft,#fbb37533);border-color:var(--um-accent,#d97020);font-weight:700}
+.scheduleEditor .assignmentScope,.scheduleEditor .assignmentPeople,.scheduleEditor .assignmentExtras,.scheduleEditor .assignmentNoShifts,.scheduleEditor .assignmentShift,.scheduleEditor .assignmentMessage{grid-column:1/-1;min-width:0}
+.scheduleEditor .assignmentScope,.scheduleEditor .assignmentShift{display:grid;gap:.3rem;font-weight:650}
+.scheduleEditor .assignmentScope select,.scheduleEditor .assignmentShift select{width:100%;min-width:0;text-overflow:ellipsis}
+.scheduleEditor .assignmentPeople,.scheduleEditor .assignmentExtras{border:1px solid var(--line,#a0aab755);border-radius:12px;padding:0 .75rem}
+.scheduleEditor details>summary{display:list-item;list-style:revert;cursor:pointer;padding:.62rem .1rem;font-weight:600;line-height:1.35}
+.scheduleEditor .assignmentPeople[open]>.employeeMultiSelect,.scheduleEditor .assignmentExtras[open]>div{margin:0 0 .7rem}
+.scheduleEditor .assignmentExtras>div{display:grid;gap:.65rem}
+.scheduleEditor .assignmentNoShifts{margin:0;line-height:1.4}
+.scheduleEditor .assignmentMessage{color:var(--um-ink,inherit);margin:0;font-weight:600}
+.scheduleAreaFilter{display:inline-flex;gap:.4rem;align-items:center;max-width:100%}.scheduleAreaFilter select{min-height:40px;max-width:100%}
+@media(max-width:700px){.shiftAreaPicker button,.scheduleEditor details>summary,.scheduleAreaFilter select,.scheduleEditor .assignmentScope select,.scheduleEditor .assignmentShift select{min-height:44px}.scheduleAreaFilter{flex:1 1 100%}.scheduleAreaFilter select{flex:1}}
