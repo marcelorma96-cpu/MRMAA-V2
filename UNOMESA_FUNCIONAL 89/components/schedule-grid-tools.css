@@ -1,0 +1,11 @@
+.gridTools{display:grid;justify-items:start;align-content:start;gap:.45rem;margin-bottom:.6rem}
+.gridToolsActions{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+.gridToolsActions strong{font-variant-numeric:tabular-nums;margin-inline-end:.25rem}
+.gridTools small,.gridDialog small{color:inherit;opacity:.8}
+.gridDialog{display:grid;gap:1rem}.gridDialog label{display:grid;gap:.35rem}.gridDialog select,.gridDialog textarea{max-width:100%;min-width:0}
+.gridMoveList{list-style:none;padding:0;margin:0;max-height:40dvh;overflow:auto}
+.gridMoveList li{display:flex;flex-wrap:wrap;gap:.4rem;padding:.55rem 0;border-bottom:1px solid #8494a544}
+.scheduleModule .monthRow button.gridPicked{position:relative;outline:3px solid #007da7!important;outline-offset:-3px}
+.scheduleModule .monthRow button.gridPicked:after{content:'✓';position:absolute;top:0;right:0;font-size:9px;line-height:13px;width:13px;border-radius:0 3px 0 6px;color:white;background:#006285}
+@media print{.gridTools{display:none!important}.scheduleModule .monthRow button.gridPicked{outline:none!important}.scheduleModule .monthRow button.gridPicked:after{display:none}}
+.gridToolsActive{position:sticky;top:var(--schedule-grid-top,0);align-self:start;z-index:4;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:.6rem .75rem}

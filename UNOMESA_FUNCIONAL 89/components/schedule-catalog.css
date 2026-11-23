@@ -1,0 +1,33 @@
+.scheduleCatalogActions{display:flex;gap:8px;flex-wrap:wrap}.scheduleCatalogActions button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px}
+.scheduleCatalog{min-width:0;color:var(--um-ink);font-size:15px;line-height:1.45}
+.dialogLayer>.modal:has(.scheduleCatalog){width:min(700px,100%);overflow-x:hidden}
+.scheduleCatalogIntro{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:4px 0 20px}.scheduleCatalogIntro p{color:var(--um-muted);margin:0;max-width:330px}
+.scheduleCatalogIntro button{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0;min-height:44px}
+.scheduleCatalogFilters{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,.8fr);align-items:end;gap:10px;margin-bottom:14px}
+.scheduleCatalog label{display:grid;gap:7px;min-width:0;font-weight:600}.scheduleCatalogFilters label>span{font-size:12px;font-weight:500;color:var(--um-muted)}
+.scheduleCatalog input,.scheduleCatalog select{min-width:0;width:100%;min-height:44px;box-sizing:border-box}
+.scheduleCatalog .scheduleCatalogSearch{display:flex;position:relative;align-items:center}.scheduleCatalogSearch svg{position:absolute;left:13px;color:var(--um-muted);pointer-events:none;flex:none}.dialogLayer .modal .scheduleCatalog .scheduleCatalogSearch input{padding-left:39px!important}
+.scheduleCatalogList{display:grid;gap:0;border:1px solid var(--um-line);border-radius:18px;overflow:hidden}
+.scheduleCatalogList article{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:15px 16px;background:var(--um-raised);border-bottom:1px solid var(--um-line)}.scheduleCatalogList article:last-child{border-bottom:0}.scheduleCatalogList article>div{min-width:0;overflow-wrap:anywhere}
+.scheduleCatalogList strong{display:block;font-weight:650}.scheduleCatalogList small{display:block;color:var(--um-muted);margin-top:3px;font-size:12px}.scheduleCatalogList button{flex:none;display:flex;align-items:center;justify-content:center;gap:7px;min-height:44px;min-width:44px;border-radius:12px}
+.scheduleCatalogInactive{display:inline-block;font-size:11px;padding:2px 7px;border-radius:6px;background:var(--um-line);margin-top:6px}
+.scheduleCatalogEmpty{padding:32px 18px;text-align:center;color:var(--um-muted)}.scheduleCatalogEmpty button{display:block;margin:14px auto 0;min-height:44px}
+.scheduleCatalogPages{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px}.scheduleCatalogPages button{min-height:44px}.scheduleCatalogPages span{font-variant-numeric:tabular-nums;color:var(--um-muted)}
+.scheduleCatalogForm{display:grid;gap:18px}.scheduleCatalogForm>fieldset{border:0;padding:0;margin:0;display:grid;gap:20px;min-width:0}.scheduleCatalogTwo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.scheduleCatalog .scheduleCatalogBack{justify-self:start;display:inline-flex;align-items:center;gap:7px;padding:8px 0;background:none;border:0;color:var(--um-muted);min-height:44px;font-size:13px}
+.scheduleCatalogHint{margin:0;font-size:13px;color:var(--um-muted);padding:12px 14px;background:var(--um-raised);border-radius:12px;border-left:2px solid var(--um-line);font-weight:400}
+.scheduleCatalogFooter{display:flex;justify-content:flex-end;gap:10px;border-top:1px solid var(--um-line);padding-top:18px}.scheduleCatalogFooter button{min-width:110px;min-height:46px}
+.scheduleCatalogSuccess{display:flex;align-items:center;gap:8px;color:var(--um-ink);padding:10px 12px;background:var(--um-accent-soft);border-radius:10px;font-size:13px}.scheduleCatalogSuccess svg{flex:none}
+.scheduleCatalogError{padding:12px;border:1px solid #d9585844;border-radius:12px;color:var(--um-ink);background:#d9585812}.scheduleCatalogError button{margin:8px;min-height:44px}
+.scheduleCatalog .shiftAreaPicker{padding:12px;border-radius:14px}.scheduleCatalog .shiftAreaPicker button{min-height:44px}.scheduleCatalog .shiftEndpoints{padding:16px;border:1px solid var(--um-line);border-radius:16px;background:var(--um-raised)}.scheduleCatalog .shiftCalculation label{display:flex;font-weight:400;align-items:flex-start}.scheduleCatalog .shiftCalculation input[type=checkbox]{width:18px;min-height:18px;flex:none}
+@media(max-width:600px){
+ .scheduleCatalogIntro{align-items:flex-start;flex-direction:column;gap:12px}.scheduleCatalogIntro button{width:100%}
+ .scheduleCatalogFilters{grid-template-columns:repeat(2,minmax(0,1fr))}.scheduleCatalogSearch{grid-column:1/-1}
+ .scheduleCatalogTwo{grid-template-columns:minmax(0,1fr)}.scheduleCatalogFooter button{flex:1}
+ .scheduleCatalogList article{padding:12px}.scheduleCatalogList button span{display:none}
+ .scheduleCatalog input,.scheduleCatalog select{font-size:16px}.scheduleCatalog .shiftEndpoints{grid-template-columns:minmax(0,1fr)}
+ .scheduleCatalogActions{width:100%}.scheduleCatalogActions button{flex:1}
+}
+@media print{.scheduleCatalogActions{display:none!important}}
+
+.scheduleCatalogForm .visuallyHidden{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
