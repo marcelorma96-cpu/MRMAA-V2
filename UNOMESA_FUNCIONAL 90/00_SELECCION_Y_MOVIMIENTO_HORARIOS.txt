@@ -1,0 +1,46 @@
+UNOMESA · SELECCIÓN Y MOVIMIENTO DE HORARIOS
+
+QUÉ CAMBIÓ
+- Activa «Seleccionar casillas» y desliza sobre un bloque con cursor o dedo.
+- Puedes añadir otros bloques o tocar una casilla para marcarla o desmarcarla.
+- Para mover todo: arrastra desde una casilla marcada con horario hasta el destino.
+  Alternativa: pulsa «Mover» y toca el destino de la primera casilla del grupo.
+- Con «Mover», la primera casilla se determina por el orden visible de filas y fechas,
+  no por el orden en que las marcaste. Al arrastrar, la casilla que tomas sigue al cursor.
+- Los turnos se trasladan conservando su orden y separación entre filas y fechas.
+  Los espacios vacíos no se rellenan ni sobrescriben horarios existentes.
+- Se conservan IDs, descansos, colores, notas y horas de comida. El área se ajusta
+  al empleado de destino; se valida que el turno esté permitido en esa área.
+- El traslado es una sola operación: un destino ocupado o un cambio concurrente
+  rechaza el grupo completo. No se reemplazan horarios ajenos a la selección.
+- El movimiento se guarda al soltar o elegir el destino, sin otra ventana intermedia.
+- La selección sigue disponible para modificar conjuntamente turno, tipo de día,
+  color, notas u horario de comida según corresponda.
+- Usa la X para salir de la selección. En el teléfono, puedes deslizar la cabecera
+  de fechas para recorrer el calendario; arrastrar sobre las casillas selecciona
+  o mueve mientras el modo de selección esté activo.
+- Las casillas vacías tienen el mismo tamaño y zona de interacción que las asignadas.
+  Los controles de selección se acomodan en teléfonos estrechos.
+
+PUBLICACIÓN
+Publicar este proyecto actualizado en el despliegue web habitual de Vercel.
+Este paquete no fue desplegado y no alteró la base de datos de producción.
+No se añadió ninguna migración SQL en este cambio. Utiliza la función
+v2_schedule_cells de 69_SELECCION_HORARIOS.sql que ya usa la selección múltiple.
+Se conservan los cambios de gestión directa de Empleados/Turnos y sus permisos
+para administrador y gerente de la versión anterior, incluida la migración 71.
+
+VERIFICACIÓN
+- 10 pruebas automatizadas aprobadas: selección, orden, espacios, colisiones,
+  transacción íntegra, conservación de registros, permisos y turnos por área.
+- Compilación de producción y TypeScript completados.
+- Pruebas de navegador con datos ficticios: barrido de tres casillas, arrastre
+  conjunto, destino por toque/clic, rechazo de destino ocupado, edición de notas
+  conjunta y ocultación de catálogos al rol operativo.
+- Diseño revisado en anchos de teléfono 320/390 px y tablet 768 px, sin desbordamiento.
+- Los gestos usan Pointer Events para cursor y toque. No se contó con dispositivos
+  físicos iOS o Android; esa comprobación sigue pendiente.
+
+AVISO DE COMPILACIÓN
+La herramienta informa una advertencia de seguridad preexistente en Next.js 16.4.3.
+No se cambiaron dependencias en este ajuste. Conviene actualizar esa versión.

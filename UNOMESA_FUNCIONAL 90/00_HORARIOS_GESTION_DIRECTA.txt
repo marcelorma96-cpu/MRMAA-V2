@@ -1,0 +1,55 @@
+UNOMESA · GESTIÓN DIRECTA DESDE HORARIOS
+22 de noviembre de 2026
+
+QUÉ CAMBIÓ
+- Dos accesos compactos, Empleados y Turnos, en la pantalla de Horarios.
+- Agregar y editar empleados; nombre, área, ID opcional, teléfono y estado activo/inactivo.
+- Crear y editar turnos; áreas disponibles, entrada/salida por hora o texto y horas opcionales para cálculo.
+- Listados con búsqueda, filtros por área/estado y paginación.
+- Solo administrador/admin y gerente activos ven los nuevos accesos y pueden guardar.
+- La autorización se revisa nuevamente al guardar y también dentro de PostgreSQL.
+- Se conserva el mes y la selección del calendario. Los catálogos se actualizan tras guardar.
+- Se conserva el borrador ante un error; no se sobrescriben silenciosamente ediciones simultáneas.
+- Dar de alta a un empleado no crea una cuenta de acceso al sistema.
+- Editar un turno existente actualiza los horarios que lo usan. El formulario lo indica; para conservar las horas anteriores, crear un turno nuevo.
+
+INSTALACIÓN
+1. Descomprimir este proyecto.
+2. En Supabase > SQL Editor, ejecutar una vez 71_GESTION_DESDE_HORARIOS.sql.
+   Requiere las migraciones anteriores, en particular 70_TURNOS_POR_AREA.sql.
+   El SQL instala una función de guardado y sus permisos; su instalación no modifica empleados, turnos, reservas ni asignaciones existentes.
+3. Publicar este proyecto actualizado en Vercel conservando las variables de entorno actuales.
+4. Abrir Horarios con administrador y gerente: comprobar alta/edición de un empleado de prueba y un turno de prueba en la sucursal correcta.
+5. Abrir con operación/lectura: los accesos Empleados y Turnos no deben aparecer.
+
+El cambio está en la aplicación web. Este paquete no modifica ni recompila los proyectos nativos iOS y Android. Las aplicaciones que cargan esta web recibirán el cambio al cargar la versión publicada.
+
+VALIDACIÓN REALIZADA
+- TypeScript sin errores.
+- Compilación de producción de Next.js con webpack.
+- Diez pruebas automatizadas aprobadas: permisos, validación, sucursal, MFA/sesión, plan/facturación, ediciones simultáneas, duplicados por reintento y conservación de asignaciones; regresiones de selección, áreas e instrucciones.
+- SQL probado en PostgreSQL local aislado (PGlite), con controles de acceso simulados. No se ejecutó en producción.
+- Interacción con los componentes reales en Chromium y datos ficticios: alta de empleado/turno, edición, guardado, actualización del calendario y error con reintento manteniendo el texto.
+- Comprobación de visibilidad por rol en navegador.
+- Diseño revisado en anchos 320, 390, 768, 1024 px y escritorio; modos claro/oscuro y presentación de app, sin desbordamiento horizontal en los formularios.
+- Controles del turno en pantalla pequeña de al menos 44 px; panel desplazable con altura reducida.
+- Abrir/cerrar el panel conservó la posición de desplazamiento comprobada.
+
+LÍMITES DE ESTA VALIDACIÓN
+No se probaron dispositivos físicos, Safari/iOS ni Android WebView reales. Antes del despliegue definitivo, comprobar teclado, zona segura, cierre del panel y guardado en un iPhone y un Android/tablet reales. No se modificó la base de datos de producción ni se publicó el proyecto.
+El build usó webpack porque Turbopack no resuelve las dependencias enlazadas fuera de esta copia de trabajo. No se cambió el comando de build del proyecto. La herramienta de build emitió un aviso de seguridad sobre la versión de Next.js existente; no se realizó una actualización de dependencias dentro de este cambio.
+
+ARCHIVOS
+components/dashboard.tsx
+components/schedules-module.tsx
+components/schedule-catalog-dialog.tsx
+components/schedule-catalog.css
+lib/permissions.ts
+lib/schedule-catalog.ts
+71_GESTION_DESDE_HORARIOS.sql
+tests/schedule-catalog.test.cjs
+
+PRUEBAS
+node --test tests/schedule-catalog.test.cjs tests/schedule-shift-areas.test.cjs tests/schedule-grid.test.cjs tests/schedule-area-instructions.test.cjs
+npx tsc --noEmit
+npm run build -- --webpack

@@ -1,0 +1,14 @@
+CONTADOR DE SOLICITUDES NUEVAS — 30 de octubre de 2026
+
+Actualice el proyecto de Vercel con el contenido completo de este ZIP.
+No requiere SQL nuevo. Incluye la corrección anterior del formulario público.
+
+El menú muestra una insignia numérica junto a Buzón de solicitudes (1, 2, 3…).
+La app muestra el mismo número en Más, y la web en el botón del menú cuando está cerrado.
+El contador se oculta al llegar a cero y conserva el límite existente de 99+.
+Cuenta solo solicitudes con estado Nueva de la sucursal activa. Verlas no cambia ese estado; marcarlas en atención, cotizarlas o archivarlas reduce el contador. Volver a Nueva lo aumenta.
+
+El aviso, el sonido y las insignias utilizan una sola consulta del contador. Conserva las actualizaciones del sistema, consulta cada 30 segundos mientras la página está visible y actualiza al volver a la ventana o recuperar la conexión. Las acciones locales del buzón actualizan el número inmediatamente después de confirmarse en el servidor.
+Al cambiar de sucursal, no se reutiliza el contador de la anterior. No se agregaron consultas independientes por cada insignia.
+
+Verificación: TypeScript, compilación local y representación HTML de valores 0, 1, 2, 3, 98 y 99+ en español/inglés. La compilación local usa Next.js 16.3.8 disponible; el manifiesto original conserva 16.4.3. Falta comprobarlo visualmente después del despliegue en Vercel.

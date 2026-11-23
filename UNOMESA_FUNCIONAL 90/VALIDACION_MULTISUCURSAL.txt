@@ -1,0 +1,10 @@
+VALIDACIÓN MULTISUCURSAL · 13/10/2026
+Web: build Next.js completado y TypeScript sin errores.
+Android: assembleDebug, testDebugUnitTest y lintDebug completados. versionCode 4.
+iOS: proyecto Build 17 actualizado; plist y recursos válidos. Falta compilar/firmar en Xcode (macOS).
+50 pruebas dirigidas verificadas: sucursales SQL, RLS/MFA, copias, archivo, propiedad, ciclo de usuarios compartidos, registro sin repetir prueba, conciliación Lemon/Apple/Google y ayuda.
+Interfaz: 6 escenarios a 390/820/1280 px, propietario y empleado, sin desborde horizontal. Búsqueda, páginas de 25, copia y selección verificadas con fixtures.
+85 sucursales bajo una principal verificadas en PostgreSQL embebido (PGlite); esta prueba no simula miles de empresas concurrentes.
+SQL 56 repetido sin duplicación ni modificación de registros comerciales previos en fixture. Mantiene UNIQUE(owner_id) para las cuentas principales.
+No se conectó ni modificó producción. No se ejecutaron compras reales, no se configuraron productos en tiendas y no se ejecutó una prueba de carga en Supabase/Vercel.
+Lea MULTISUCURSAL_CONFIGURACION.md para activar SQL 56 después de 55, variante por volumen, cron, productos y pruebas antes de publicar.
