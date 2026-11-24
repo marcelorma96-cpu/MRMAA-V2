@@ -1,0 +1,23 @@
+VALIDACIÓN — URL PÚBLICA DE ELIMINACIÓN DE CUENTA — 2026-10-17
+
+Resultado: npm run build completado, Next.js 16.3.8 / TypeScript.
+15 comprobaciones existentes de SEO e instructivo/asistente: correctas.
+HTML prerenderizado verificado en /eliminar-cuenta y /en/delete-account:
+- Texto completo, idioma, un solo título principal y enlaces entre idiomas.
+- Enlaces de privacidad y borrador mailto con asunto/cuerpo para support@unomesa.com.
+- Páginas estáticas sin dependencia de sesión ni consulta a registros privados.
+- Sitemap incluye ambas rutas mediante el catálogo de documentos públicos.
+
+Los 30 SQL conservan exactamente sus bytes anteriores. No se modifican
+endpoints, reglas, autenticación, suscripciones o borrado de registros.
+La corrección CSP de PDF Android de la versión anterior se conserva.
+No se eliminan archivos de la entrega anterior.
+
+LÍMITES
+Se verificaron compilación y HTML, sin revisión visual en navegador ni prueba
+física en iOS/Android en este entorno. No se desplegó a Vercel ni se verificó
+la URL en producción. No se enviaron correos ni se borraron cuentas.
+El operador debe verificar tras publicar que la URL abre sin sesión y que
+support@unomesa.com recibe correo. Las solicitudes requieren atención manual,
+verificación de titularidad y comunicación de alcance, plazo y retención.
+No se garantiza aprobación de Google Play por esta comprobación.

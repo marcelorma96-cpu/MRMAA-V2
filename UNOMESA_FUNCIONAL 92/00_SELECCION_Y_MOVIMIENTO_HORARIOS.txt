@@ -1,0 +1,54 @@
+UNOMESA · MOVER HORARIOS ENTRE EMPLEADOS · 23 NOVIEMBRE 2026
+
+CÓMO USARLO
+1. En Horarios, pulsa «Seleccionar casillas» y marca con toques/clics o deslizando.
+   Empezar a deslizar desde una casilla marcada también amplía la selección.
+2. Pulsa «Mover». Elige el empleado de destino; aparecen los empleados activos
+   de la sucursal, aunque el calendario esté filtrado por otra área o nombre.
+3. Las fechas se mantienen inicialmente. Si deseas cambiarlas, elige la fecha
+   del primer horario. La vista previa muestra cuántos horarios se moverán y las fechas.
+4. Pulsa el botón «Mover» del formulario para guardar el grupo. Si seleccionaste
+   varios empleados, puedes indicar un destino para cada uno. Se conserva el orden
+   y la separación de fechas. Las casillas vacías no generan ni sobrescriben horarios.
+
+DETALLES
+- «Cancelar» conserva la selección para ajustarla.
+- «Elegir en calendario» mantiene la alternativa de tocar el destino inicial
+  dentro del calendario visible; en esta alternativa se mantienen los desplazamientos
+  entre filas y fechas del bloque.
+- «Modificar» sigue permitiendo editar turno, tipo de día, color, notas y comida.
+- El movimiento por selección no se dispara mientras marcas las casillas.
+- Al guardar un movimiento correcto se sale de la selección para recorrer el calendario.
+- Los destinos deben estar dentro del mes abierto. Los turnos deben estar activos
+  y habilitados para el área de destino. Se conservan descansos, permisos y vacaciones.
+- Si un destino está ocupado, se repite o cambió un horario desde que fue seleccionado,
+  no se guarda parcialmente el grupo. Los intercambios circulares con casillas ocupadas
+  se rechazan; elige destinos libres.
+- Se mantienen IDs, notas, colores y horas de comida. El área se ajusta al empleado
+  de destino cuando corresponda, usando la función transaccional existente.
+
+PUBLICACIÓN Y DATOS
+Publica este proyecto actualizado en el despliegue web habitual de Vercel.
+Esta entrega no está desplegada y no accedió ni modificó datos de producción.
+No añade ni ejecuta SQL. Usa la función v2_schedule_cells de la actualización 69
+ y las reglas de turnos por área de la actualización 70 ya incluidas. Conserva
+la gestión directa de Empleados/Turnos y los permisos de la actualización 71.
+Los 42 archivos SQL permanecen idénticos a los del paquete anterior.
+El cambio es web; los contenedores iOS/Android que cargan esa web lo reciben al
+publicar y volver a abrir la app. No se modificaron los proyectos nativos.
+Se conservaron también las correcciones de acceso y conexión de la entrega anterior.
+
+VERIFICACIÓN
+- 25 pruebas automatizadas aprobadas: 18 de planificación, permisos, catálogos,
+  reglas de área y operación SQL en una base temporal; 7 React/DOM con cursor y
+  toque simulados, selección desde casillas marcadas, destinos fuera del filtro,
+  cancelación, errores, edición, calendario y destinos separados por empleado.
+- Se comprueba conservación de IDs, detalles, orden y huecos, rechazo de destinos
+  ocupados y cambios concurrentes sin guardado parcial.
+- Compilación de producción y comprobación TypeScript completadas.
+- No hubo comprobación visual en navegador ni pruebas con dispositivos físicos
+  iOS/Android en esta entrega; los eventos táctiles automatizados no las sustituyen.
+
+AVISO PREEXISTENTE
+La compilación informa una vulnerabilidad conocida en Next.js 16.4.3 y recomienda
+actualizarlo. No se cambiaron dependencias en este ajuste de horarios.

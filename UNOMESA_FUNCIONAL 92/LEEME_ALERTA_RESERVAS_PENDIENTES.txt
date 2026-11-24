@@ -1,0 +1,29 @@
+UnoMesa — Aviso de reservaciones pendientes
+
+Al crear o editar una reservación, y al convertir una cotización en reservación,
+el aviso de Reservaciones cercanas incluye también las reservas pendientes.
+Comprueba las áreas seleccionadas y la misma fecha. El margen antes y después
+usa la duración predeterminada guardada por el restaurante (Duración en minutos,
+recordada para nuevas reservas). Si no se ha configurado, usa tres horas.
+La consulta vuelve a leer la configuración al comprobar la reserva y muestra
+el margen aplicado en el aviso. Incluye los límites del intervalo. No depende del estado
+confirmado ni de los filtros o la página del listado que esté abierta.
+
+El aviso muestra cliente, área, hora, personas y estado para facilitar la revisión.
+Revisar conserva el borrador; Guardar de todos modos mantiene la confirmación
+existente. Las canceladas, eliminadas y la propia reserva en edición no generan
+este aviso. La comprobación del plano conserva sus reglas de duración y mesas.
+
+INSTALACIÓN
+Subir este proyecto actualizado a Vercel. No requiere ejecutar SQL ni cambiar
+variables. No modifica los datos existentes. Usa la misma sesión y los permisos
+de lectura del restaurante. Conserva los cambios del plano, asistente y descarga
+de Android incluidos en la versión anterior.
+
+VERIFICACIÓN
+Pruebas con consultas reales del cliente Supabase contra una base local de
+prueba: estados, márgenes configurados de 90, 120 y 240 minutos, predeterminado
+de 180 minutos, límites horarios, áreas múltiples, paginación, permisos,
+instalación anterior sin área múltiple y confirmación/cancelación del formulario.
+Compilación de producción con Webpack y comprobación TypeScript.
+No se probó contra la base de producción ni en dispositivos físicos.

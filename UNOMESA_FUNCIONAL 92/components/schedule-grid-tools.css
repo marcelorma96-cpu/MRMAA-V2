@@ -1,0 +1,53 @@
+.gridTools{display:grid;justify-items:start;align-content:start;gap:.45rem;margin-bottom:.6rem}
+.gridToolsActions{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+.gridToolsActions strong{font-variant-numeric:tabular-nums;margin-inline-end:.25rem}
+.gridTools small,.gridDialog small{color:inherit;opacity:.8}
+.gridDialog{display:grid;gap:1rem}.gridDialog label{display:grid;gap:.35rem}.gridDialog select,.gridDialog textarea{max-width:100%;min-width:0}
+.gridMoveList{list-style:none;padding:0;margin:0;max-height:40dvh;overflow:auto}
+.gridMoveList li{display:flex;flex-wrap:wrap;gap:.4rem;padding:.55rem 0;border-bottom:1px solid #8494a544}
+.scheduleModule .monthRow button.gridPicked{position:relative;outline:3px solid #007da7!important;outline-offset:-3px}
+.scheduleModule .monthRow button.gridPicked:after{content:'✓';position:absolute;top:0;right:0;font-size:9px;line-height:13px;width:13px;border-radius:0 3px 0 6px;color:white;background:#006285}
+@media print{.gridTools{display:none!important}.scheduleModule .monthRow button.gridPicked{outline:none!important}.scheduleModule .monthRow button.gridPicked:after{display:none}}
+.gridToolsActive{position:sticky;top:var(--schedule-grid-top,0);align-self:start;z-index:4;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:.6rem .75rem}
+
+.monthlyWrap[data-grid-selecting=true] [data-grid-employee]{touch-action:none!important;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:crosshair}
+.monthlyWrap[data-grid-selecting=true] .gridPicked{cursor:crosshair}
+.monthlyWrap[aria-busy=true] [data-grid-employee]{cursor:progress}
+.scheduleModule .monthRow button.gridDestination{outline:3px dashed #1b9a75!important;outline-offset:-4px;box-shadow:inset 0 0 0 6px #1b9a7533}
+.scheduleModule .monthRow button.gridDestinationBlocked{outline:3px dashed #d54949!important;outline-offset:-4px;cursor:not-allowed}
+.gridToolsActions>button{min-height:44px}.gridToolsActive small{max-width:720px}
+@media print{.scheduleModule .monthRow button.gridDestination,.scheduleModule .monthRow button.gridDestinationBlocked{outline:none!important;box-shadow:none!important}}
+
+/* Empty cells must use the same hit box as assigned cells, not the global empty-state card. */
+.scheduleModule .monthRow>button[data-grid-employee]{min-width:0;width:100%;box-sizing:border-box;padding:4px 2px;overflow:hidden}
+
+@media(max-width:600px){
+ .gridToolsActions{gap:6px}
+ .gridToolsActions>strong{width:100%;font-size:13px}
+ .gridToolsActions>button{padding:8px 11px;font-size:13px}
+ .gridToolsActive small{font-size:12px;line-height:1.4}
+}
+.scheduleModule .monthRow .scheduleEmployeeAction{color:inherit!important}
+
+.scheduleMoveDialog{width:min(100%,480px);margin-inline:auto;display:grid;gap:1.2rem}
+.scheduleMoveDialog *{box-sizing:border-box}
+.scheduleMoveSummary{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--paper)}
+.scheduleMoveIcon{display:grid;place-items:center;width:42px;height:42px;flex-shrink:0;border-radius:13px;background:#ff96331a;color:#db6905}
+.scheduleMoveSummary strong,.scheduleMoveSummary small{display:block}
+.scheduleMoveDialog small{font-size:13px;line-height:1.45;opacity:.75}
+.scheduleMoveSummary small{margin-top:4px}
+.scheduleMoveDialog fieldset{border:0;padding:0;margin:0;min-width:0;display:grid;gap:16px}
+.scheduleMoveDialog label{display:grid;gap:6px;min-width:0;font-size:14px;font-weight:600}
+.scheduleMovePeople{display:grid;gap:16px;max-height:34dvh;overflow-y:auto;padding:2px}
+.scheduleMovePeople label>small{font-weight:400}
+.scheduleMoveDialog select,.scheduleMoveDialog input{width:100%;min-width:0;max-width:100%;min-height:48px;margin:0;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:16px;background:var(--paper);color:inherit}
+.scheduleMoveDate>span{display:flex;gap:7px;align-items:center}
+.scheduleMoveDateHelp{margin-top:-10px;min-height:20px}
+.scheduleMovePreview{display:flex;align-items:center;gap:8px;padding:12px;border-radius:12px;background:#1b9a7512;border:1px solid #1b9a7540;font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+.scheduleMovePreview svg{flex-shrink:0}
+.scheduleMoveError{margin:0;padding:12px;border:1px solid #d5494940;border-radius:12px;color:var(--text);background:#d5494910;font-size:14px;line-height:1.45}
+.scheduleMoveActions{display:flex;justify-content:flex-end;gap:8px;padding-top:4px}
+.scheduleMoveActions button{min-height:44px;white-space:normal}
+.scheduleMoveDialog .scheduleMoveLink{display:inline-flex;justify-content:center;align-items:center;gap:7px;width:fit-content;min-height:36px;padding:5px 0;border:0;border-radius:0;background:transparent;color:inherit;box-shadow:none;font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.scheduleMoveDialog .scheduleMoveCalendar{justify-self:center;opacity:.8}
+@media(max-width:420px){.scheduleMoveSummary{padding:11px;gap:9px}.scheduleMoveActions{display:grid;grid-template-columns:1fr 1.5fr}.scheduleMoveActions button{padding:10px 12px;font-size:14px}}
