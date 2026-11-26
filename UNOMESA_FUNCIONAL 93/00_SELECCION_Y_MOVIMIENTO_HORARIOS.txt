@@ -1,0 +1,58 @@
+UNOMESA · MOVIMIENTO DIRECTO DE HORARIOS · 23 NOVIEMBRE 2026
+
+CÓMO USARLO
+1. Pulsa «Seleccionar casillas» y marca con toques/clics o deslizando.
+2. Pulsa «Mover».
+3. Toca la casilla donde debe empezar el grupo, en el mismo empleado o en otro.
+   El movimiento se guarda directamente, sin un formulario ni otra confirmación.
+
+CASO DE LA CAPTURA
+Seleccionar los siete horarios del 23 al 29 de noviembre y tocar el día 30 de otra
+empleada los traslada del 30 de noviembre al 6 de diciembre. El límite del mes
+visible ya no bloquea el grupo. Para ver los días de diciembre, abre diciembre
+con el control de mes existente; la vista actual no salta automáticamente.
+
+DETALLES
+- Se conserva el orden y los huecos entre fechas, también al cruzar mes o año.
+- Si la selección incluye varias filas, se conservan sus desplazamientos relativos.
+  Debe haber suficientes filas de empleados para alojar todo el bloque.
+- La casilla de destino corresponde a la primera casilla con horario, según
+  el orden visible de filas y fechas, no al orden en que se marcaron.
+- Las casillas vacías de la selección no crean ni sobrescriben horarios.
+- La previsualización muestra las fechas de destino; la confirmación breve
+  posterior indica el número de horarios, empleado cuando es uno y rango de fechas.
+- «Volver a seleccionar» permite ajustar el grupo. La X sale de la selección.
+- «Modificar» conserva su formulario para turno, tipo de día, color, notas y comida.
+- Marcar o ampliar la selección nunca mueve registros por sí solo.
+- Los turnos deben estar activos y habilitados para el área de destino.
+- Un destino ocupado, incluso en otro mes que no está cargado en pantalla, o un
+  cambio concurrente rechaza toda la operación sin guardar parcialmente el grupo.
+- Se conservan IDs, notas, colores, horas de comida, descansos, permisos y vacaciones.
+  El área se ajusta al empleado de destino conforme a las reglas existentes.
+
+PUBLICACIÓN Y DATOS
+Publica este proyecto actualizado en el despliegue web habitual de Vercel.
+Esta entrega no está desplegada y no accedió ni modificó datos de producción.
+No añade ni ejecuta SQL. Usa v2_schedule_cells de la actualización 69 y las reglas
+por área de la actualización 70 ya incluidas. Conserva la gestión directa y los
+permisos de la actualización 71. Los 42 archivos SQL son idénticos al paquete previo.
+El cambio es web; los contenedores iOS/Android que cargan esa web lo reciben al
+publicar y volver a abrir la app. No se modificaron los proyectos nativos.
+Se conservaron las correcciones de acceso y conexión de la entrega anterior.
+
+VERIFICACIÓN
+- 31 pruebas automatizadas: planificación, operación SQL sobre una base temporal,
+  concurrencia, datos conservados, permisos, catálogos y turnos por área, más
+  componentes reales React/DOM con eventos simulados de cursor y dedo.
+- Caso de la captura comprobado: siete días a otro empleado desde el 30 de noviembre
+  hasta el 6 de diciembre, sin formulario y con una sola operación de guardado.
+- Pruebas de cambios de año, años bisiestos y zonas horarias; destinos ocupados en
+  fechas fuera del mes cargado; preservación exacta de IDs y detalles, y reversión
+  completa ante errores o cambios concurrentes.
+- Compilación de producción y TypeScript comprobados.
+- Sin comprobación visual en navegador ni pruebas en dispositivos físicos
+  iOS/Android en esta entrega; las pruebas táctiles simuladas no las sustituyen.
+
+AVISO PREEXISTENTE
+La compilación informa una vulnerabilidad conocida en Next.js 16.4.3 y recomienda
+actualizarlo. No se cambiaron dependencias en este ajuste de horarios.

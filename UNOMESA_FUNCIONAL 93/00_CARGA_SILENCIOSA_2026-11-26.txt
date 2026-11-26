@@ -1,0 +1,49 @@
+UNOMESA — CARGA INICIAL Y RECUPERACIÓN AUTOMÁTICA
+26 de noviembre de 2026
+
+CAMBIO ACTUAL
+- La apertura conserva la animación de UnoMesa mientras verifica acceso y
+  prepara la primera pantalla. Las demoras y fallos temporales no muestran
+  avisos de «el servidor está tardando» ni botones de reintento.
+- Las lecturas iniciales fallidas por transporte/servicio se reintentan
+  automáticamente. Los intentos tienen límite de tiempo, descartan respuestas
+  antiguas y no se solapan por eventos de foco o actualización.
+- La recuperación conserva sesión y formularios ya abiertos. El contenido
+  suspendido queda bloqueado hasta volver a comprobar el acceso.
+- Expiración, revocación, cambio de usuario y verificación en dos pasos
+  conservan sus controles. Los errores permanentes que requieren una acción
+  tienen su pantalla correspondiente.
+
+ARCHIVOS Y PUBLICACIÓN
+1. UNOMESA_FUNCIONAL.zip: publicar la carpeta UNOMESA_FUNCIONAL en el mismo
+   proyecto Vercel, conservando dominio y variables actuales.
+2. UNOMESA_iOS.zip: abrir el proyecto en Xcode; versión 1.0, build 31.
+   Compilar, firmar y probar antes de subir la nueva build a App Store Connect.
+3. UNOMESA_Android.zip: abrir en Android Studio; versión 1.0.16, code 17.
+   Compilar y firmar el AAB con la configuración habitual para Google Play.
+
+El cambio web quita los avisos de la verificación y la cortina web en las apps
+actuales. Las nuevas builds también quitan el aviso propio del contenedor
+nativo que aparecía a los 25 segundos, antes de que cargara la web.
+Para aplicar el ajuste completo deben publicarse la web y las nuevas builds.
+
+No requiere SQL. Los scripts SQL incluidos son historial: no ejecutarlos
+nuevamente para este ajuste. No se realizaron cambios en datos de producción.
+
+VALIDACIÓN Y ALCANCE
+Consultar VALIDACION_CARGA_2026-11-26.txt para resultados de las pruebas.
+Los tests de navegador usan Auth, datos y dispositivos simulados. No sustituyen
+una prueba en iPhone/iPad y Android físicos con la build firmada.
+Este paquete contiene fuentes; no incluye un IPA o AAB firmado. No se desplegó
+en Vercel ni se subió a las tiendas desde esta entrega.
+
+PRUEBA EN EL DISPOSITIVO ANTES DE ENVIAR A REVISIÓN
+- Abrir desde cero con la cuenta de revisión y con una sesión guardada.
+- Confirmar que abre el panel con datos y que MFA aparece si corresponde.
+- Cortar y recuperar Internet: debe conservar carga y recuperar el acceso
+  automáticamente cuando el servicio responda y las verificaciones pasen.
+- Volver de segundo plano y comprobar que no se repite la apertura.
+- Verificar que un formulario sin guardar conserva su contenido al reconectar.
+
+Las instrucciones anteriores del 23/11 sobre avisos «Sin conexión» y
+«Reconectando» describen la versión previa y quedan sustituidas por este ajuste.

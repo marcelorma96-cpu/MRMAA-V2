@@ -1,0 +1,31 @@
+UNOMESA — AVISOS DE RESERVACIONES POR MESAS
+26 de noviembre de 2026
+
+El aviso previo a guardar ahora tiene en cuenta las mesas seleccionadas.
+- Misma área y horario, pero mesas distintas: no muestra aviso de cruce
+  cuando la asignación guardada confirma que las mesas no se intersectan.
+- Misma mesa: conserva el aviso y la confirmación de conflicto.
+- Área completa: ocupa todas las mesas de esa área, también si otra reserva
+  tiene solo una parte de sus mesas. Se comprueba en ambos sentidos.
+- Al convertir una cotización se consulta su propia propuesta de mesas.
+- Reservas sin asignación de mesas o datos incompletos conservan el aviso
+  por área; no se presume disponibilidad a partir de información desconocida.
+- El servidor mantiene la comprobación final del horario, mesas, permisos
+  y versión de la asignación antes de guardar.
+
+PUBLICACIÓN
+Publicar UNOMESA_FUNCIONAL en el mismo proyecto Vercel.
+No requiere SQL ni subir nuevas versiones de iOS o Android.
+Incluye los ajustes anteriores de carga silenciosa y recuperación automática.
+
+CARGA SILENCIOSA EN LAS APPS ACTUALES
+Publicar esta web quita el aviso «el servidor está tardando» y los avisos de
+demora de la pantalla web, también dentro de las apps actuales.
+Los ZIP nativos de la entrega anterior son opcionales para este objetivo:
+solamente hacen falta para quitar también el aviso propio del contenedor
+que aparece a los 25 segundos cuando la web aún no ha logrado cargar.
+
+VALIDACIÓN
+Consultar VALIDACION_RESERVAS_MESAS_2026-11-26.txt.
+Las pruebas usan datos simulados y una base de datos local de prueba.
+El paquete no fue publicado en Vercel desde esta entrega.

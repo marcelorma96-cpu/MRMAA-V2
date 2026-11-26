@@ -1,0 +1,61 @@
+UnoMesa — Copiar teléfonos y navegación de listados
+Actualización: 3 de noviembre de 2026
+
+Copiar teléfonos
+- Se sustituyen los accesos internos de WhatsApp por un icono discreto de copiar
+  junto al teléfono en reservaciones, cotizaciones, clientes, buzón de solicitudes,
+  seguimiento de eventos y detalles/listados del plano de mesas.
+- Al copiar correctamente aparece una marca de confirmación. Si el portapapeles
+  está bloqueado, se ofrece el número seleccionable para copiar manualmente.
+- El nombre y el teléfono de las cotizaciones ocupan líneas separadas; el icono
+  de copiar permanece alineado junto al número, incluso con poco espacio.
+- Los controles tienen etiquetas accesibles en español e inglés, área táctil
+  ampliada en dispositivos táctiles y se ocultan al imprimir.
+- Se conserva la normalización existente: primero se usa el país del restaurante
+  y, si falta, el país detectado por la configuración de UnoMesa. Los números
+  internacionales conservan su prefijo. Los números internacionales completos
+  reconocidos sin + se identifican antes de aplicar el país local. Si no se puede resolver un número local
+  con certeza, se copia el texto original. No se alteran los datos guardados.
+
+WhatsApp queda pendiente
+- Se retiran los diálogos de envío, selección de cuenta, comprobación manual de
+  dispositivo, apertura/reutilización de ventanas y el apartado interno WhatsApp
+  de Configuración. No se abren ventanas externas al copiar un teléfono.
+- Se conservan los valores previamente guardados y los enlaces/contactos públicos
+  del restaurante. No se cambian las preferencias de contacto de las solicitudes.
+- No hay integración con WhatsApp Business Platform. Su evaluación queda pendiente.
+
+PDF de cotizaciones
+- Se conserva el botón PDF al abrir la cotización, junto con Imprimir.
+  La generación, diseño, paginación y descarga originales no cambian.
+- No hay envío automático de archivos por WhatsApp.
+
+Primera y última página
+Se agregaron «Primera» y «Última», además de «Anterior» y «Siguiente», en los
+listados principales de cotizaciones, reservaciones y clientes. Se incluyen
+recordatorios de cotizaciones, pendientes del equipo, historial de cambios,
+papelera, usuarios, reportes e importación de clientes mediante el control común.
+
+Los listados principales obtienen el total de resultados filtrados y leen solo
+la página solicitada. No descargan el historial completo ni recorren todas las
+páginas para llegar al final. Se conservan búsqueda, fechas, sucursal y orden.
+El orden incluye el ID como desempate. Si se elimina la última página, se ajusta
+al nuevo final. Cambiar filtros o sucursal vuelve a la primera página.
+Los controles se desactivan durante la carga y en el extremo correspondiente;
+se adaptan a pantallas pequeñas y tienen textos en español e inglés.
+Los selectores auxiliares de vinculación/sucursales y el buzón que utilizan sus
+propios cursores conservan su paginación anterior.
+
+Instalación
+Desplegar este proyecto actualizado en Vercel. No requiere SQL nuevo ni
+credenciales de Meta. No se modificaron los proyectos nativos de las tiendas.
+No se desplegó ni se alteraron datos de producción desde esta revisión.
+
+Validación
+25 pruebas automatizadas correctas: copia al portapapeles, fallback y errores,
+normalización de teléfonos, controles accesibles, contactos públicos,
+recordatorios, conversiones y seguimiento de eventos.
+Compilación de producción y TypeScript: npm run build -- --webpack.
+La comprobación visual interactiva quedó limitada por la falta de conexión del
+navegador de pruebas y la indisponibilidad del control de la ventana local.
+Revisar copia/pegado en los dispositivos usados por el restaurante tras desplegar.
