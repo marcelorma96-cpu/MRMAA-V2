@@ -1,0 +1,19 @@
+VALIDACIÓN — AVISOS POR MESAS, 26/11/2026
+
+52 pruebas relacionadas aprobadas: avisos cercanos, conflictos de mesas,
+áreas completas, varias áreas, etiquetas de mesas, edición y conversión.
+Tras el último ajuste para mesas liberadas al finalizar el servicio,
+se repitieron las 12 pruebas de avisos cercanos: todas aprobadas.
+
+7 escenarios de base de datos local con SQL real verifican mesas distintas
+misma área/hora, misma mesa, área completa en ambos sentidos, pendientes,
+canceladas/finalizadas, edición propia, límites de duración, medianoche,
+conversión y compatibilidad con SQL44/45.
+
+TypeScript y compilación de producción Next.js: aprobados.
+Los SQL del paquete no cambiaron. No se modificaron datos de producción.
+Se conserva la advertencia de seguridad preexistente de Next.js 16.4.3,
+ya documentada en VALIDACION_CARGA_2026-11-26.txt.
+
+No requiere SQL ni nueva build móvil. Publicar solo el proyecto web en Vercel.
+No se publicó el proyecto desde esta entrega.

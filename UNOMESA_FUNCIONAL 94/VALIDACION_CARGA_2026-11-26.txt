@@ -1,0 +1,29 @@
+UNOMESA — VALIDACIÓN DE CARGA SILENCIOSA
+26 de noviembre de 2026
+
+RESULTADOS
+- Batería general web: 655 pruebas aprobadas, 0 fallos, 0 omitidas.
+  Incluye pruebas Chromium de apertura y recuperación, con Auth/datos simulados.
+- Validación focal de acceso tras la revisión final: 36 pruebas aprobadas.
+- TypeScript y compilación Next.js de producción: aprobados.
+- Apertura web en perfiles iOS/Android con movimiento normal y reducido:
+  45 segundos esperando acceso y otros 45 esperando datos; carga silenciosa,
+  bloqueo de contenido privado y apertura tras completar ambos. Aprobado.
+- Recuperación: mismo formulario y texto tras desconexión/error/timeout;
+  descarte del formulario al cambiar usuario, revocar acceso o exigir MFA.
+- Java: política de reintento compilada y ejecutada, 21 casos aprobados.
+- Sintaxis Java y Swift: análisis aprobado.
+- Contratos Android/web en Chromium: carga, herramientas, idioma,
+  exportación, impresión, navegación y retorno Google aprobados.
+
+ALCANCE
+Las pruebas usaron servicios simulados y bases de datos locales de prueba.
+No se consultaron ni modificaron registros de producción para validar cambios.
+No se realizó compilación nativa completa, firma, publicación ni prueba física
+con Xcode/Android SDK. Deben probarse las builds firmadas en dispositivos.
+
+OBSERVACIÓN PREEXISTENTE
+La herramienta de compilación reportó una advertencia de seguridad para
+Next.js 16.4.3. La compilación de producción terminó correctamente al repetir
+el comando. Este ajuste conserva las dependencias existentes; esa advertencia
+requiere revisar y aplicar una actualización de seguridad por separado.

@@ -1,0 +1,7 @@
+.scheduleModule .scheduleUndoBar {display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;background:var(--soft);border:1px solid var(--line);border-radius:14px}
+.scheduleModule .scheduleUndoBar button {flex:none;min-height:44px;display:inline-flex;align-items:center;gap:8px}
+.scheduleModule .scheduleUndoBar>span {min-width:0;font-size:12px;line-height:1.5;color:var(--muted)}
+.scheduleModule .scheduleUndoBar button:not(:disabled) {color:var(--ink);border-color:var(--orange);background:var(--orange-soft)}
+.scheduleModule .scheduleUndoError {display:flex;align-items:center;gap:12px;margin-top:10px;font-size:13px;line-height:1.5;padding:12px 14px;background:var(--orange-soft);border-radius:12px}
+.scheduleModule .scheduleUndoError>span {flex:1}
+@media(max-width:600px){.scheduleModule .scheduleUndoBar {gap:10px;padding:10px}.scheduleModule .scheduleUndoError {align-items:flex-start;flex-direction:column}}

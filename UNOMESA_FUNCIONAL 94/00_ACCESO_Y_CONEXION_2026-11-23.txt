@@ -1,0 +1,82 @@
+UNOMESA · ACCESO Y RECUPERACIÓN DE CONEXIÓN
+23 de noviembre de 2026
+
+QUÉ CAMBIÓ
+- Cuando el dispositivo informa que está sin conexión, aparece «Sin conexión».
+  Se conserva la sesión y se verifica de nuevo al recuperar conexión.
+- Las demoras de red y los errores temporales del servidor muestran
+  «Reconectando…», con reintentos automáticos a 1, 3, 10 y después 30 segundos.
+- Una comprobación no puede dejar la pantalla de espera indefinidamente:
+  el intento tiene un límite de 12 segundos y se cancelan solicitudes anteriores.
+- Los errores de permisos, configuración o respuestas inesperadas muestran
+  «No pudimos verificar su acceso», sin atribuirlos a una pérdida de conexión.
+- Se conserva «Reintentar ahora» y «Cerrar sesión». No se abre información
+  protegida cuando no se pudo completar la comprobación.
+- Durante una interrupción temporal se mantienen los formularios ya abiertos
+  y sus borradores en memoria, detrás de una pantalla opaca que bloquea la
+  interacción. Al recuperar el acceso se retoma el mismo formulario.
+- El bloqueo también cubre las ventanas emergentes y los calendarios.
+  Al cerrar sesión, cambiar de usuario o sesión, o recibir una denegación
+  de seguridad, el formulario anterior se desmonta y no se comparte.
+- Se pausan los reintentos mientras la app/pestaña está en segundo plano y
+  se reanuda la comprobación al volver. Los resultados antiguos se descartan.
+- Las sesiones revocadas y vencidas siguen cerrándose. La verificación en
+  dos pasos sigue siendo obligatoria cuando corresponde. Se mantienen las
+  comprobaciones independientes de permisos en servidor y base de datos.
+- La consola registra etapa, categoría y código/estado acotado, sin volcar
+  credenciales, identidad, tokens, URLs ni mensajes crudos del servidor.
+- No cambia Cloudflare, facturación, prueba de la cuenta demo ni datos del negocio.
+
+PUBLICACIÓN
+1. Publicar este proyecto actualizado en el MISMO proyecto web de Vercel,
+   conservando variables, dominio y proyecto Supabase.
+2. Esperar a que el despliegue esté Ready y asignado al dominio habitual.
+3. Cerrar y volver a abrir UnoMesa en iOS y Android para cargar la web actualizada.
+
+Este cambio pertenece a la web que cargan las apps actuales. No requiere
+SQL ni nuevas builds de iOS/Android. El ZIP no ha sido desplegado desde aquí.
+No ejecutar otra vez los SQL históricos incluidos en el proyecto.
+
+COMPROBACIÓN ANTES DE SOLICITAR OTRA REVISIÓN A APPLE
+- En la misma build enviada a Apple, cerrar sesión e ingresar por correo
+  y contraseña con las credenciales entregadas a revisión.
+- Confirmar que abre la sucursal demo con acceso sin vencimiento.
+- Desactivar Wi-Fi y datos: debe aparecer el aviso de conexión sin cerrar sesión.
+  Si el sistema no detecta inmediatamente la caída, el aviso aparecerá al fallar
+  o vencer la siguiente comprobación. Los navegadores no siempre detectan
+  una conexión sin salida a Internet mediante navigator.onLine.
+- Restaurar la conexión: el acceso debe recuperarse sin escribir otra vez la
+  contraseña, siempre que la sesión siga vigente y sus verificaciones pasen.
+- Volver de segundo plano y de la pantalla de gestión de suscripciones.
+  No hace falta comprar ni cancelar una suscripción para probar el retorno.
+- Repetir en iPad si esa build también se distribuye para iPad.
+
+El error de la captura de Apple no prueba por sí solo una causa concreta.
+La expiración de la prueba y la verificación de seguridad son controles
+separados. Este cambio corrige el tratamiento de fallos temporales; no acredita
+que aquel incidente concreto fuera una desconexión ni garantiza la aprobación.
+
+VALIDACIÓN
+- 23 pruebas del componente real de acceso con Auth/red simulados: desconexión,
+  reconexión, tiempos límite, reintentos acotados, segundo plano, resultados
+  tardíos, cierre de sesión, MFA, revocación, permisos y registro del dispositivo.
+- 34 comprobaciones adicionales de sesiones, persistencia, inactividad,
+  apertura, contraseña, Google/Apple y controles de servidor: aprobadas.
+- 1 prueba adicional de React y formularios reales con DOM simulado: conserva
+  el mismo campo, texto y componente tras desconexión, error temporal y timeout;
+  elimina el borrador al cambiar de cuenta, requerir MFA, revocar o cerrar sesión.
+- Total: 58 pruebas aprobadas. La prueba de navegador real quedó pendiente
+  porque el entorno no permite iniciar Chromium; no se cuenta como aprobada.
+- TypeScript y compilación web de producción comprobados.
+- Se comparó el contenido completo con el paquete anterior: los 42 archivos
+  SQL, scripts de despliegue, configuraciones y endpoints del negocio siguen
+  idénticos. No se añadieron ni ejecutaron migraciones o borrados de negocio.
+- No se usaron cuentas reales ni se modificaron datos de producción.
+- No se ejecutó Xcode ni se probó este cambio en dispositivos físicos aquí.
+  La comprobación indicada arriba sigue pendiente después del despliegue.
+
+ADVERTENCIA PREEXISTENTE DE DEPENDENCIA
+La herramienta de compilación informa que Next.js 16.4.3 está afectado por
+una vulnerabilidad conocida y recomienda actualizarlo. Las dependencias se
+conservaron en este cambio de recuperación de red. La advertencia requiere
+una revisión de actualización independiente y no queda corregida por este ZIP.

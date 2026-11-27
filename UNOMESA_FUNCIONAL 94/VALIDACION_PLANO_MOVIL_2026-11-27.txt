@@ -1,0 +1,26 @@
+VALIDACIÓN · PLANO MÓVIL Y BUZÓN · 27 NOV 2026
+
+- 30 pruebas focales de controles, gestos, geometría, etiquetas, ocupación e
+  impresión del plano: aprobadas, sin fallos ni omisiones.
+- TypeScript y compilación web de producción: aprobados.
+- Navegador Chromium con componentes reales y datos ficticios: 6 configuraciones
+  (320x700, 402x874, 768x1024, 1024x768 y 700x400, ES/EN, claro/oscuro).
+- Calendario, cambio de día, Listado, Todo el día y zoom: aprobados.
+- Zoom conservado al cambiar fecha; pinch de dos dedos y pan de un dedo probados.
+- Tap abre una sola vez la mesa correcta. Arrastrar o hacer pinch no abre mesas.
+- Sin desbordamiento horizontal ni errores de JavaScript en esas pruebas.
+- Se corrigió y volvió a comprobar el recorte del botón de filtros en horizontal
+  y la superposición del icono de calendario en pantallas pequeñas.
+- El plano abre con 135 % de acercamiento en la vista estrecha y 115 % en tablet.
+  El usuario puede recorrerlo o alejar con − hasta ver la distribución completa.
+- Se comparó el paquete con la versión anterior: 42 archivos SQL idénticos,
+  sin archivos originales eliminados, sin modificaciones al servidor ni a las
+  dependencias de la aplicación.
+- No se accedió a cuentas reales ni se cambió información de producción.
+- Las comprobaciones de navegador usan emulación táctil; no son pruebas físicas
+  en iPhone, iPad o Android. No se publicó en Vercel desde este entorno.
+
+OBSERVACIÓN PREEXISTENTE
+La herramienta Next.js informa una advertencia de seguridad en la versión 16.4.3.
+Se conservaron las dependencias existentes. El ajuste visual no resuelve esa
+advertencia, que requiere una actualización de seguridad independiente.

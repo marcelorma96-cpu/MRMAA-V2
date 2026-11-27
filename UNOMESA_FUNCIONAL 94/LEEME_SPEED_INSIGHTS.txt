@@ -1,0 +1,71 @@
+UNOMESA — SPEED INSIGHTS — 11 OCT 2026
+
+INSTALACIÓN
+1. Despliegue este ZIP completo en el MISMO proyecto Vercel mrmaa-v2.
+   Conserve sus variables y la conexión actual a Supabase.
+2. No ejecute SQL nuevo para esta integración. Los SQL anteriores están
+   incluidos sin cambios; no hay que repetir los que ya aplicó.
+3. Abra https://www.unomesa.com, utilice la web y navegue o cambie de pestaña
+   para que el navegador envíe las primeras métricas. En Vercel entre a
+   mrmaa-v2 → Speed Insights → Production. La medición comienza después
+   de este despliegue; no recupera visitas anteriores.
+4. Mantenga la modalidad Speed Insights gratuita. No active Upgrade to Plus
+   para este paso. Esta entrega no contrata servicios ni cambia la facturación.
+
+No requiere una clave nueva. VERCEL_ENV=production es una variable automática
+de Vercel; conserve activada su exposición de variables del sistema. El
+dominio se obtiene de NEXT_PUBLIC_SITE_URL, que ya utiliza la web; si no está
+definida, se limita a https://www.unomesa.com. Preview y desarrollo no envían
+métricas. Si quiere desactivarlo, agregue
+NEXT_PUBLIC_VERCEL_SPEED_INSIGHTS_ENABLED=false y vuelva a desplegar.
+
+ALCANCE Y PRIVACIDAD
+- Paquete oficial @vercel/speed-insights 2.0.0, integrado una sola vez en el
+  layout general, con carga diferida y sin bloquear el acceso ni los módulos.
+- No añade consultas a Supabase, cron, sondeos ni lecturas de registros.
+- Mide entradas web y /mobile en producción, y páginas públicas compatibles.
+  No representa una medición de la animación Swift ni de la instalación iOS.
+- Elimina parámetros y fragmentos. Las páginas de restaurantes se agrupan
+  como /r/[slug]. No se envían nombres, correos, teléfonos o registros como
+  propiedades personalizadas. Excluye autenticación, invitaciones, enlaces de
+  soporte, recuperación, retorno de pagos y archivos; conserva la exclusión
+  si el inicio de sesión limpia después su URL original.
+- Vercel recibe métricas técnicas de navegador/dispositivo/conexión/país y
+  rendimiento; no se añade grabación de sesiones ni de formularios.
+- No cambia Google Ads, Meta Pixel ni los eventos de visitas/registro.
+
+PLAN Y LÍMITES
+Según documentación de Vercel revisada el 11 de octubre de 2026:
+- Speed Insights gratuito: puntuación general RES y 10,000 eventos en los
+  últimos 30 días, compartidos entre proyectos del equipo. Un evento no
+  equivale necesariamente a una visita. Al agotar el límite se pausa la
+  medición, no el sitio; no se generan cargos por excedente de este nivel.
+- Speed Insights Plus, opcional: USD 10 por proyecto/mes en Pro, más
+  USD 0.65 por 10,000 eventos. No está contratado por este código. Si ya
+  contrató Plus en Vercel, añadir el paquete no lo cancela ni cambia de nivel:
+  revise su configuración de facturación.
+
+La vista gratuita no ofrece todas las métricas detalladas. La medición no
+acelera automáticamente la aplicación ni certifica capacidad para 50,000
+restaurantes. UnoMesa comparte '/' entre varios módulos; cambiar de módulo
+sin recargar no equivale a una nueva medición completa de carga. Para aislar
+Cotizaciones hay que complementar con sus tiempos de consulta/servidor.
+
+COMPROBACIÓN
+Si no ve métricas: confirme que el despliegue nuevo sea Production, abra el
+dominio público correcto, revise el intervalo del panel y pruebe sin un
+bloqueador de contenido. Espere visitas suficientes para evaluar resultados.
+No compre Plus solo porque todavía no aparezcan eventos. Un fallo al cargar
+el script de medición no bloquea la aplicación.
+
+iOS: no se necesita un nuevo ZIP nativo ni recompilar por este cambio. La
+app que abre la web actualizada recibe esta integración al recargar. Su
+firma/membresía de Apple Developer es un asunto independiente.
+
+Fuentes:
+https://vercel.com/docs/speed-insights/quickstart
+https://vercel.com/docs/speed-insights/limits-and-pricing
+https://vercel.com/docs/speed-insights/privacy-policy
+
+Se verifican compilación de producción y filtros de privacidad localmente.
+Queda pendiente desplegar en su Vercel y observar métricas reales allí.

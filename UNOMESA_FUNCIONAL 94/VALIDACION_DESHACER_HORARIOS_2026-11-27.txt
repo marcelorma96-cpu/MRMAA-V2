@@ -1,0 +1,62 @@
+VALIDACIÓN · DESHACER EN HORARIOS · 27 NOVIEMBRE 2026
+
+PRUEBAS AUTOMÁTICAS
+49 pruebas aprobadas en las ejecuciones focales, sin fallos ni omisiones:
+- 27 regresiones de selección, movimientos, copia/traslado, catálogo, áreas e
+  instrucciones de horarios.
+- 12 pruebas de cliente: snapshots, IDs, no-ops, reintentos con UUID idéntico,
+  serialización, recuperación, sesión/sucursal, respuestas tardías y errores.
+- 10 pruebas PostgreSQL local PGlite con fixtures: instalación/reinstalación sin
+  cambiar filas existentes, cambios de varias casillas, atomicidad, movimientos
+  solapados, metadatos, autorización, propietario, última acción, idempotencia,
+  restricciones vigentes y cambios posteriores sobre filas o celdas vacías.
+La prueba máxima guarda y deshace las 5000 asignaciones sin truncar.
+También se prueba que un trigger que omita una restauración provoque rollback,
+que una eliminación ficticia de sucursal siga funcionando y que no queden
+registros privados huérfanos. No se borró ninguna sucursal real.
+
+Para reproducir desde la raíz del proyecto, con las dependencias instaladas:
+node --test --test-concurrency=2 tests/schedule-grid.test.cjs tests/schedule-direct-move.test.cjs tests/schedule-transfer.test.cjs tests/schedule-catalog.test.cjs tests/schedule-shift-areas.test.cjs tests/schedule-area-instructions.test.cjs tests/schedule-undo-client.test.cjs tests/schedule-undo-sql.test.cjs
+
+COMPILACIÓN
+TypeScript y compilación web de producción: aprobados. Se mantuvieron las
+versiones de dependencias del paquete anterior. Ver observación al final.
+
+NAVEGADOR
+Se montaron MonthlySchedules y useScheduleUndo reales con datos, auth y RPC
+simulados, sin conectarse a Supabase de producción.
+- Computadora, teléfono 390×844 e iPad 820×1180; español/inglés, claro/oscuro.
+- El botón permanece visible fuera de Opciones, indica acción/casillas/fechas
+  y se desactiva mientras se guarda y después de usar Deshacer.
+- Cambiar turno, color, comida y notas, guardar y deshacer restaura toda la fila.
+- Reabrir la casilla desde el calendario muestra el horario restaurado.
+- Recargar recupera el recibo de la última acción.
+- Conflicto rechazado sin mensaje falso de éxito.
+- Sin desbordamiento horizontal ni errores JavaScript en estas comprobaciones.
+Son pruebas de navegador con fixtures y tamaños emulados, no dispositivos
+físicos ni una validación end-to-end contra producción.
+
+INTEGRIDAD DEL PAQUETE
+Se comparó con UNOMESA_FUNCIONAL.zip versión 225:
+- Todos los archivos originales conservados.
+- Los 42 SQL anteriores idénticos; únicamente se agrega el archivo 72.
+- Sin cambios en dependencias, binarios/archivos nativos o rutas API.
+- Reportes consolidados, plano móvil y Buzón conservados.
+- Sin ejecución de SQL ni cambios de datos reales; sin despliegue en Vercel.
+
+ALCANCE Y LÍMITES
+La instalación agrega tablas privadas, funciones y un trigger; no cambia
+horarios existentes ni crea un historial retrospectivo. Deshacer requiere la
+nueva web y el SQL 72 instalado. Las validaciones de catálogo pueden impedir
+restaurar un turno que ya no sea válido; en ese caso no se revierte nada.
+Las pruebas PGlite son secuenciales. No se probaron sesiones PostgreSQL reales
+en paralelo; el código usa locks, revisión por celda, snapshots y transacciones.
+Un conflicto o deadlock se presenta como rechazo para revisar/reintentar.
+Un intento de escritura de un cliente antiguo puede avanzar la revisión aunque
+conserve el mismo valor y bloquear una reversión preventivamente.
+
+OBSERVACIÓN PREEXISTENTE
+Next.js 16.4.3 informa una vulnerabilidad conocida. La primera compilación se
+detuvo con SecurityFatalError después de compilar; la repetición terminó con
+código 0. Esta función de Deshacer no corrige esa advertencia: sigue pendiente
+la actualización de seguridad independiente indicada en la entrega anterior.

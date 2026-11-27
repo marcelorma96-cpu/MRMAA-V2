@@ -1,0 +1,60 @@
+ACTUALIZACIÓN · DESHACER EN HORARIOS · 27 NOVIEMBRE 2026
+
+INSTALACIÓN — EN ESTE ORDEN
+1. En el SQL Editor del MISMO proyecto Supabase de UnoMesa, ejecutar completo
+   72_DESHACER_HORARIOS.sql, incluido en este ZIP. Requiere la actualización 70
+   de turnos por área que ya usa la aplicación. No repetir los SQL históricos.
+2. Publicar esta carpeta web en el MISMO proyecto Vercel, conservando variables,
+   dominio y conexión a Supabase.
+3. Cuando el despliegue esté Ready, volver a abrir UnoMesa.
+
+No se ejecutó SQL ni se desplegó en producción desde este entorno.
+Instalar primero el SQL: la nueva web requiere esta función para guardar
+horarios y habilitar Deshacer. Si falta, muestra el mensaje de instalación
+pendiente y no intenta guardar por una vía que omita la protección.
+No requiere nuevas versiones de Android ni iOS: las apps cargan la web.
+
+DATOS EXISTENTES
+La instalación agrega funciones, un registro privado de cambios, revisiones
+por casilla y un trigger. No modifica ni elimina horarios existentes ni realiza
+una carga retrospectiva. No cambia reservas, cotizaciones, clientes o anticipos.
+Se conservaron todos los archivos originales del ZIP, incluidos los reportes
+consolidados, el plano móvil, Buzón y las mejoras anteriores de inicio.
+
+CÓMO FUNCIONA
+Deshacer aparece a la vista junto al calendario, con tipo de acción, cantidad
+de casillas y fechas. Revierte la última acción guardada por TU usuario en esa
+sucursal: asignar, modificar, mover, copiar o quitar asignaciones.
+Una acción sobre varias casillas se revierte completa. Se restauran turno,
+fecha, empleado, área, color, notas y comida según corresponda, conservando
+los IDs de las asignaciones que se modificaron o movieron.
+La última acción propia permanece disponible al volver a abrir Horarios.
+Es un nivel de Deshacer: después de usarlo no habilita una acción más antigua.
+Un guardado sin cambios no reemplaza la acción que todavía se puede deshacer.
+
+Al deshacer una asignación creada por esa acción, la casilla vuelve a estar
+vacía. Al deshacer una eliminación, se recupera la asignación anterior.
+El registro privado conserva el antes y después. Esto ocurre únicamente al
+solicitar Deshacer, no durante la instalación.
+No deshace texto aún sin guardar, cambios del catálogo de empleados o turnos,
+instrucciones por área ni acciones anteriores a instalar esta función.
+Los borradores del formulario se conservan. Para consultar el horario
+restaurado, vuelva a abrir su casilla en el calendario.
+
+PROTECCIONES
+- Permisos, sesión, plan y sucursal se verifican nuevamente al guardar/deshacer.
+- Si otra escritura posterior afectó alguna casilla, la reversión completa
+  se rechaza y no sobrescribe ese cambio, incluso si la celda volvió a quedar
+  vacía o con los mismos valores. Un intento de escritura de una versión
+  antigua que conserve los valores puede causar un rechazo preventivo.
+- Repetir una petición tras una interrupción usa el mismo identificador y no
+  duplica la acción. Si no se conoce el resultado, se recupera primero.
+- Los cambios se aplican en una sola transacción: nunca queda medio grupo
+  restaurado. Se mantienen validaciones de turnos, áreas y destinos ocupados.
+- En Copiar por fechas, las casillas ocupadas se excluyen al revisar. Si otra
+  persona ocupa un destino antes de confirmar, se solicita revisar nuevamente
+  y no se copia parcialmente.
+- Hasta 5000 casillas por acción y 8 MB por petición; la selección en calendario
+  conserva su límite de 500. No cambia el límite de lectura existente.
+
+Consultar VALIDACION_DESHACER_HORARIOS_2026-11-27.txt para el alcance de pruebas.

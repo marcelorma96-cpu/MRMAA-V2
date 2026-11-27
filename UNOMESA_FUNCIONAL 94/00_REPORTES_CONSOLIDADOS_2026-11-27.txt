@@ -1,0 +1,68 @@
+ACTUALIZACIÓN · REPORTES CONSOLIDADOS · 27 NOVIEMBRE 2026
+
+PUBLICACIÓN
+Publicar el proyecto web completo en el MISMO proyecto Vercel de UnoMesa,
+conservando variables, dominio y conexión a Supabase. Volver a abrir UnoMesa
+cuando el despliegue esté Ready. Esta actualización de reportes no necesita
+SQL, migraciones, nuevas variables ni recompilar iOS/Android que cargan la web.
+No se publicó en Vercel desde este entorno.
+
+DATOS EXISTENTES
+Los cambios calculan resúmenes de consultas de lectura existentes. No eliminan,
+reemplazan, restauran ni editan reservas, clientes, cotizaciones, anticipos,
+horarios o tablas. Los SQL históricos se conservan; no ejecutarlos por esta
+actualización. Continúan los permisos existentes y el registro de actividad
+que ya se realizaba al exportar o imprimir.
+El paquete conserva los cambios anteriores de plano móvil, Buzón, mesas
+reservadas, carga e inicio. Esta entrega no verifica un nuevo estado de la
+revisión de Apple ni modifica los binarios nativos.
+
+QUÉ CAMBIA
+1. Cada reporte abre con un resumen del período y conserva un detalle consultable.
+2. Conversión: cotizaciones, convertidas y tasa global. Desglose por mes o área.
+   Se divide la suma de convertidas entre la suma de cotizaciones; nunca se
+   promedian porcentajes de grupos de distintos tamaños. Se conserva el detalle.
+3. Cancelaciones: total de reservas, canceladas, tasa global y no canceladas.
+4. Demanda: reservas no canceladas, invitados reservados, promedio por día
+   calendario y día de semana con más reservas. Desglose lunes–domingo, hora
+   de inicio o área. Incluye días sin reservas; no supone días de apertura.
+5. Anticipación: total, reservas con anticipación interpretable, rango más
+   frecuente y porcentaje registrado con hasta 7 días. Distribución por rangos.
+   Se conservan registros posteriores o sin fecha en el total. No se inventa
+   un promedio ni una mediana a partir de intervalos.
+6. Anticipos: importe total y desglose por método, con acceso al detalle de origen.
+   Son importes registrados por fecha del evento, no un historial de cobros.
+7. Cotizaciones: cantidades, valores cotizados/aprobados, anticipos y saldos
+   registrados. Pendientes muestra además cuántas tienen fecha de evento pasada.
+8. Clientes: frecuencia y repetición dentro del rango. No equivale a asistencia.
+9. Empleados: días de empleado, horas netas calculadas y días sin cálculo.
+10. Comparación: período anterior de igual duración; se conservan unidades y
+    diferencias en puntos porcentuales para conversión. No se infieren
+    unidades para indicadores desconocidos.
+
+BÚSQUEDA, EXCEL E IMPRESIÓN
+La búsqueda filtra el desglose. No cambia los indicadores ni la gráfica del
+período completo; la pantalla lo indica. Cambiar de página tampoco cambia
+los totales. Excel tiene Resumen, Desglose y Criterios. Excel e impresión
+incluyen todas las filas filtradas del desglose elegido, no solamente la página
+visible. Los números siguen siendo números en Excel; los porcentajes conservan
+su valor sin multiplicarse por 100 al darles formato.
+
+INTERPRETACIÓN Y LÍMITES
+Las fechas corresponden al evento salvo Horarios, que usa la fecha programada.
+Conversión refleja el estado actual: cotización con reserva vinculada no
+cancelada; no es una cohorte histórica por fecha de creación de la cotización.
+Cada reporte incluye sus criterios y exclusiones. No se equiparan cotizaciones
+con dinero cobrado ni personas reservadas con asistencia real.
+Si falta un dato necesario, el indicador afectado se muestra sin calcular.
+La lectura completa se limita a 10,000 filas de origen y 20 MB por conjunto.
+Un rango que supera el límite se rechaza con indicación de reducir las fechas;
+no se presenta un total parcial. Búsqueda no reduce esa lectura inicial.
+Impresión admite hasta 2,000 filas del desglose ya agrupado/filtrado; Excel 10,000.
+Los reportes operativos y de seguimiento conservan el máximo de 366 días.
+Se mantienen las consultas y reglas de acceso existentes. Sus definiciones
+SQL desplegadas no están incluidas en el proyecto; las pruebas usan fixtures,
+no una conexión al restaurante real.
+
+VALIDACIÓN
+Consultar VALIDACION_REPORTES_2026-11-27.txt para el alcance de las pruebas.

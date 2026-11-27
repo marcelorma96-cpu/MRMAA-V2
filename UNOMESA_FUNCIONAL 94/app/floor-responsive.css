@@ -1,0 +1,118 @@
+/* One responsive floor workspace for native web views, browsers and installed web apps. */
+.floorTouchMode .touchDateControls{display:flex;flex-direction:column;gap:6px;flex:none;min-width:0}
+.floorTouchMode .touchAllReservations{margin:0;min-height:44px}
+.floorTouchMode>.touchFloorHeader{height:auto;min-height:44px;gap:6px}
+.floorTouchMode .touchFloorHeader button{min-width:44px;min-height:44px;flex-shrink:0}
+.floorTouchMode .touchFloorHeader h2{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.floorTouchMode .floorExpandToggle{gap:6px;font-size:12px;font-weight:650}
+.floorTouchMode .overviewSelectors{display:grid;grid-template-columns:minmax(0,1fr) minmax(100px,45%);align-items:center;gap:6px 8px;min-width:0;flex:none}
+.floorTouchMode .overviewTouchZoom{grid-column:1/-1;justify-self:end;min-width:0}
+.floorTouchMode .overviewLevelBar{min-width:0;max-width:100%}
+.floorTouchMode .overviewLevelBar>div{padding:0}
+.floorTouchMode .overviewLevelBar button,.floorTouchMode .floorAreaBar button{min-height:44px}
+.floorTouchMode .touchAreaPicker{margin:0;padding:0;min-width:0;width:100%}
+.floorTouchMode .touchAreaPicker>select{min-height:44px}
+.floorTouchMode .floorWarning{margin:0;padding:6px 9px;max-height:54px;overflow:auto;font-size:11px;line-height:1.4}
+/* A dedicated control row keeps zoom buttons off the tables, even on small phones. */
+.floorTouchMode .overviewMapTools,.floorTouchMode .floorAreaZoom{position:static;flex:none;min-height:44px;padding:4px 0 0;margin:0;pointer-events:auto;display:flex;justify-content:flex-end;align-items:center;gap:6px}
+.floorTouchMode .overviewMapActions{width:auto;max-width:100%}
+.floorTouchMode .touchMapNavigation{flex-wrap:nowrap;gap:6px}
+.floorTouchMode .touchMapNavigation button{min-width:44px;min-height:44px;height:44px;padding:8px 10px;box-shadow:none;touch-action:manipulation}
+.floorTouchMode .touchMapNavigation button:disabled{opacity:.35}
+.floorTouchMode .mapViewport{min-height:80px!important}
+/* Full-size view stays inside the app; it does not require the browser Fullscreen API. */
+.floorPlan.floorMapExpanded{position:fixed!important;inset:var(--app-notice-height,0px) 0 0!important;z-index:40;--touch-app-bottom:0px;box-sizing:border-box;padding:max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))!important}
+.floorMapExpanded .floorExpandedHeader{flex:none;min-width:0}
+.floorExpandedHeader>.floorExpandedDate{flex:1;min-width:0;justify-content:center;gap:8px}
+.floorExpandedHeader .floorExpandedDate span{min-width:0}
+.floorExpandedHeader .floorExpandedDate strong{font-size:14px;white-space:nowrap}
+.floorExpandedHeader .floorExpandedDate small{margin:0;font-size:10px}
+.floorExpandedHeader>.floorExpandToggle{flex:none}
+.floorMapExpanded .floorDemoBanner{max-height:60px;overflow:auto;flex:none}
+.floorTouchMode .floorStableContent>.floorEmpty{overflow:auto}
+@media(min-width:560px){
+ .floorTouchMode .overviewSelectors{grid-template-columns:minmax(0,1fr) minmax(140px,30%) auto;gap:8px}
+ .floorTouchMode .overviewTouchZoom{grid-column:3}
+}
+@media(min-width:900px){
+ .floorTouchMode .touchDateControls{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:stretch}
+ .floorTouchMode .touchAllReservations{width:auto;justify-content:center;padding:8px 12px;gap:6px}
+ .floorTouchMode .touchAllReservations>b{display:none}
+}
+@media(max-width:559px){
+ .floorTouchMode .touchFloorHeader:not(.floorExpandedHeader) .floorExpandToggle>span,.floorTouchMode .touchBackToList>span{display:none}
+ .floorTouchMode .touchFloorHeader h2{font-size:16px}
+ .floorTouchMode .touchFloorHeader small{font-size:10px}
+ .floorTouchMode .touchAreaPicker>span{display:none}
+ .floorMapExpanded .floorExpandedHeader .floorExpandToggle>span{display:none}
+}
+@media(max-height:520px) and (min-width:560px){
+ .floorTouchMode{gap:4px}
+ .floorTouchMode .touchDateControls{gap:4px}
+ .floorTouchMode .touchAllReservations{display:none} /* Also available under Time & filters. */
+ .floorTouchMode .floorWarning{max-height:32px;padding:5px 8px}
+}
+@media print{
+ .floorExpandedHeader,.touchDateControls{display:none!important}
+ .floorPlan.floorMapExpanded{position:static!important;inset:auto!important;padding:0!important;overflow:visible}
+}
+
+/* Touch floor, November 2026: clear destinations and more room for the map. */
+.floorTouchMode{--fp-panel:var(--fp-soft);--fp-selected:#eaf4ef;--fp-accent:#80b5a2}
+html[data-theme=dark] .floorTouchMode{--fp-selected:#203a37;--fp-accent:#4b8474}
+.floorTouchMode .touchViewBar{display:flex;align-items:center;gap:8px;min-width:0;flex:none}
+.floorTouchMode .touchViewBar:empty{display:none}
+.floorTouchMode .touchViewBar .floorViewSwitch{display:flex;flex:1;min-width:0;gap:3px;margin:0;padding:2px;border:1px solid var(--fp-line);border-radius:14px;background:var(--fp-panel)}
+.floorTouchMode .touchViewBar .floorViewSwitch button{display:flex;align-items:center;justify-content:center;gap:6px;flex:1;min-width:0;min-height:44px;margin:0;padding:7px 9px;border:0;border-radius:10px;font-size:12px;font-weight:600;background:transparent;color:var(--fp-muted);box-shadow:none}
+.floorTouchMode .touchViewBar .floorViewSwitch button.active{background:var(--fp-bg);color:var(--fp-text);box-shadow:0 1px 5px #173a421a}
+.floorTouchMode .touchViewBar .floorViewSwitch button.active svg{color:#ea580c}
+.floorTouchMode .touchViewBar .touchAllReservations{display:flex;width:auto;min-height:50px;gap:6px;padding:8px 10px;justify-content:center;border-radius:14px;font-size:12px}
+.touchToggleTrack{position:relative;display:block;flex:none!important;width:24px;height:14px;border-radius:20px;background:var(--fp-line)}
+.touchToggleTrack::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:var(--fp-bg)}
+[aria-pressed=true]>.touchToggleTrack{background:#16855b}
+[aria-pressed=true]>.touchToggleTrack::after{left:12px;background:#fff}
+.floorTouchMode .touchDateControls{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:stretch;gap:8px}
+.floorTouchMode .touchTimeFilters{display:flex;align-items:center;justify-content:center;gap:8px;min-width:88px;min-height:56px;padding:7px 12px;border:1px solid var(--fp-line);border-radius:16px;color:var(--fp-text);background:var(--fp-panel);font-family:inherit}
+.touchTimeFilters>span{display:grid;gap:1px;text-align:left}.touchTimeFilters strong{font-size:12px;font-weight:650;white-space:nowrap}.touchTimeFilters small{font-size:10px;color:var(--fp-muted)}
+.floorTouchMode .overviewSelectors{grid-template-columns:minmax(0,1fr) minmax(110px,40%);gap:8px}
+.floorTouchMode .overviewLevelBar button{border-radius:12px;box-shadow:none}
+.floorTouchMode .overviewLevelBar button[aria-pressed=true]{background:var(--fp-selected);border-color:var(--fp-accent);box-shadow:none}
+.floorTouchMode .touchAreaPicker>span{display:none}
+.floorTouchMode .touchAreaPicker>select{font-size:14px;border-radius:12px}
+.floorTouchMode .overviewTouchZoom,.floorTouchMode .floorAreaZoom{position:absolute;right:10px;bottom:10px;z-index:7;display:flex;min-height:0;padding:0;margin:0;border:0;pointer-events:none}
+.floorTouchMode .touchMapNavigation{display:flex;gap:0;pointer-events:auto;padding:3px;border:1px solid var(--fp-line);border-radius:16px;background:var(--fp-bg);box-shadow:0 3px 14px #173a421a}
+.floorTouchMode .touchMapNavigation button{width:44px;min-width:44px;height:44px;min-height:44px;justify-content:center;margin:0;padding:9px;border:0;border-radius:12px;background:transparent;box-shadow:none}
+.floorTouchMode .touchMapNavigation button+button{border-left:1px solid var(--fp-line);border-radius:0 12px 12px 0}
+.floorTouchMode .overviewMapColumn,.floorTouchMode .floorMapColumn{border-radius:20px}
+.floorTouchMode .floorReviewNotice{margin:0;border:1px solid #dca94b50;border-radius:12px;background:#f4b73d0d;color:#976015;font-size:11px}
+.floorReviewNotice summary{display:flex;align-items:center;gap:10px;justify-content:space-between;min-height:42px;padding:8px 12px;cursor:pointer;list-style:none}
+.floorReviewNotice summary::-webkit-details-marker{display:none}
+.floorReviewNotice summary>span:first-child{font-weight:600}
+.floorReviewNotice summary>span:last-child{font-size:10px;white-space:nowrap;text-decoration:underline;text-underline-offset:2px}
+.floorReviewNotice p{margin:0;padding:0 12px 10px;line-height:1.5;max-height:70px;overflow:auto}
+html[data-theme=dark] .floorReviewNotice{color:#f5c06c}
+.floorTouchMode .floorReviewNotice summary:focus-visible,.floorTouchMode .touchViewBar button:focus-visible,.floorTouchMode .touchTimeFilters:focus-visible{outline:2px solid #e48d40;outline-offset:2px}
+@media(min-width:700px){
+ .floorTouchMode .touchViewBar .floorViewSwitch{flex:0 1 280px}
+ .floorTouchMode .touchDateControls{grid-template-columns:minmax(200px,1fr) auto}
+ .floorTouchMode .touchTimeFilters{min-width:130px}
+ .floorTouchMode .touchViewBar{position:relative}
+ .floorTouchMode .touchViewBar .touchAllReservations{margin-left:auto}
+}
+@media(max-width:359px){
+ .floorTouchMode .touchViewBar{gap:5px}.floorTouchMode .touchViewBar .floorViewSwitch button{padding:7px 6px;gap:4px}
+ .floorTouchMode .touchViewBar .touchAllReservations{padding:8px;font-size:11px}.floorTouchMode .touchAllReservations>svg{display:none}
+ .floorTouchMode .touchTimeFilters{gap:5px;min-width:78px;padding:7px 8px}
+}
+@media(max-height:520px) and (min-width:560px){
+ .floorTouchMode:not(.floorMapExpanded):not(:has(>.touchSelectionBar,>.floorError,>.floorEmpty,>.floorDemoBanner)){display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,1fr);grid-template-rows:auto auto minmax(0,1fr);align-content:stretch}
+ .floorTouchMode:not(.floorMapExpanded):not(:has(>.touchSelectionBar,>.floorError,>.floorEmpty,>.floorDemoBanner))>.touchFloorHeader{grid-column:1;grid-row:1}
+ .floorTouchMode:not(.floorMapExpanded):not(:has(>.touchSelectionBar,>.floorError,>.floorEmpty,>.floorDemoBanner))>.touchViewBar{grid-column:1;grid-row:2}
+ .floorTouchMode:not(.floorMapExpanded):not(:has(>.touchSelectionBar,>.floorError,>.floorEmpty,>.floorDemoBanner))>.touchDateControls{grid-column:2;grid-row:1/3;align-self:center}
+ .floorTouchMode:not(.floorMapExpanded):not(:has(>.touchSelectionBar,>.floorError,>.floorEmpty,>.floorDemoBanner))>.floorStableView{grid-column:1/-1;grid-row:3}
+}
+@media print{.touchViewBar,.overviewTouchZoom,.floorReviewNotice{display:none!important}}
+@media(max-height:520px) and (min-width:560px){
+ .floorTouchMode .touchDateControls{grid-template-columns:minmax(0,1fr) auto;gap:6px}
+ .floorTouchMode .touchTimeFilters{min-width:78px;padding:7px 8px;gap:5px}
+}

@@ -1,0 +1,58 @@
+VALIDACIÓN · REPORTES CONSOLIDADOS · 27 NOVIEMBRE 2026
+
+PRUEBAS REPRODUCIBLES
+node --test tests/reports.test.cjs tests/report-consolidation.test.cjs tests/report-export.test.cjs
+Resultado: 28 pruebas aprobadas, 0 fallos y 0 omitidas.
+Incluyen consultas simuladas, un PostgreSQL local PGlite con datos ficticios,
+cálculos puros y un harness de exportación del componente real con mocks.
+- Tasas ponderadas: grupos de tamaño desigual, cero y datos incompletos.
+- Fechas: días calendario UTC, cambios de horario estacional y fechas inválidas.
+- Demanda: lunes–domingo, días sin reservas, franjas de inicio y áreas.
+- Anticipación: grupos repetidos, porcentajes globales, fechas desconocidas y
+  rangos no reconocidos conservados sin inventar promedios.
+- Importes faltantes no se convierten en cero. Métodos sin especificar se conservan.
+- Aislamiento por restaurante, fechas, papelera, permisos y plan.
+- Paginación con límites de servicio inferiores a los solicitados; rechazo de
+  consultas incompletas, conteos inconsistentes y cancelación de solicitudes.
+- Excel/impresión exportan el desglose completo filtrado, no la página visible.
+- Resumen global independiente de búsqueda y página, porcentajes numéricos,
+  diferencias en puntos porcentuales, HTML escapado y permisos revalidados.
+- Límite de impresión aplicado después de agrupar, sin truncar silenciosamente.
+
+COMPILACIÓN
+TypeScript: aprobado.
+Compilación web de producción: aprobada al repetir el comando, conservando
+la advertencia previa de seguridad descrita abajo.
+
+NAVEGADOR AISLADO
+Componente EnhancedReports real, AppOptions/AppRecord y CSS del proyecto.
+Datos, permisos y sincronización simulados; sin conectar al restaurante real.
+Chromium con Playwright:
+- Computadora 1440×1050.
+- Teléfono 390×844, español, tema claro.
+- iPad 820×1180, inglés, tema oscuro.
+Sin desbordamiento horizontal ni errores JavaScript en esas configuraciones.
+Opciones y detalle abren y cierran; agrupación y búsqueda conservan el resumen.
+21 convertidas / 101 cotizaciones = 20.79%; cambiar agrupación no repite la lectura.
+62 filas: página 1 muestra 50 y página 2 muestra 12; Excel/impresión desde la segunda
+página incluyen 62. Excel conserva Resumen, Desglose y Criterios.
+Demanda y anticipación verificadas con fixtures de resultados conocidos.
+No son pruebas físicas en iPhone/iPad/Android ni validación end-to-end de producción.
+
+INTEGRIDAD
+Comparación con UNOMESA_FUNCIONAL.zip versión 224:
+- Ningún archivo original eliminado.
+- Los 42 archivos SQL son idénticos.
+- Sin cambios en dependencias, archivos nativos ni API del servidor.
+- Se conservan los ajustes anteriores de plano móvil, Buzón, mesas e inicio.
+No se accedió a datos de producción ni se desplegó en Vercel.
+Las definiciones SQL de los RPC de reportes desplegados no están en el proyecto;
+se mantienen sus contratos actuales. La validación de resultados reales deberá
+hacerse al abrir los reportes después del despliegue, sin editar registros.
+
+OBSERVACIÓN PREEXISTENTE
+Next.js 16.4.3 informa una vulnerabilidad conocida. La primera compilación se
+detuvo con SecurityFatalError tras compilar; la repetición terminó correctamente
+con la advertencia. Se conservaron package.json y package-lock.json. Esta mejora
+de reportes no resuelve esa advertencia: requiere una actualización de seguridad
+independiente con sus comprobaciones de compatibilidad.

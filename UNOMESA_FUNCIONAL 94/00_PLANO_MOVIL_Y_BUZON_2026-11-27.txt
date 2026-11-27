@@ -1,0 +1,33 @@
+UNOMESA · PLANO MÓVIL Y BUZÓN
+27 de noviembre de 2026
+
+CAMBIOS
+- Navegación principal de la app: Reservas, Cotizaciones, Buzón y Más.
+  Buzón conserva el contador de solicitudes pendientes y los permisos existentes.
+  Clientes sigue disponible desde Más.
+- Selector visible Listado / Mapa en ambas vistas de reservaciones.
+- Fecha compacta: tocar la fecha abre el mismo calendario; flechas y gesto
+  horizontal siguen cambiando de día. Hora y filtros quedan al lado.
+- Todo el día sigue disponible como interruptor visible.
+- El aviso de asignaciones por revisar se resume sin ocultar el aviso;
+  Ver detalle despliega la explicación.
+- Se retiran los botones Mover mapa (manita) y Ajustar de la vista táctil.
+  Se conserva el desplazamiento directo, zoom con dos dedos y botones +/−.
+  Para ver el plano completo, alejar con − hasta el mínimo.
+- El mapa ocupa el espacio liberado y abre con un acercamiento de 135 % en
+  teléfono / ventanas estrechas y 115 % en tablet. Esto sólo cambia la vista.
+- Cambiar de fecha o refrescar datos no restablece el zoom elegido.
+- Se conservan niveles, áreas, agenda, edición, impresión, PDF y asignaciones.
+  El plano de escritorio conserva su navegación habitual.
+
+PUBLICACIÓN
+Publicar el contenido actualizado en el MISMO proyecto de Vercel, conservando
+las variables, dominio y proyecto Supabase. Al abrir de nuevo la app se carga
+la interfaz publicada. Este cambio no necesita una nueva versión iOS/Android.
+Este paquete fue preparado y probado localmente; no se desplegó desde aquí.
+
+DATOS
+No se hicieron cambios a la base de datos, reservas, cotizaciones, clientes,
+usuarios ni posiciones guardadas. No se ejecutaron migraciones.
+NO ejecutar nuevamente los SQL históricos incluidos en el paquete.
+
